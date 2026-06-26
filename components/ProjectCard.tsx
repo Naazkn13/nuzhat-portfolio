@@ -51,7 +51,7 @@ export default function ProjectCard({ project, i, inView }: { project: any, i: n
           rotateY,
           transformStyle: 'preserve-3d',
         }}
-        className="group p-7 rounded-2xl border border-teal-border bg-navy-2/50 hover:border-teal/40 hover:bg-navy-2 transition-colors duration-300 h-full relative"
+        className="group p-7 rounded-2xl glass hover:bg-teal/5 transition-colors duration-300 h-full relative"
       >
         <div style={{ transform: 'translateZ(20px)' }} className="flex flex-col h-full pointer-events-none">
           <div className="flex flex-wrap items-start justify-between gap-4 mb-4 pointer-events-auto">
@@ -69,7 +69,7 @@ export default function ProjectCard({ project, i, inView }: { project: any, i: n
                   key={j}
                   href={link.url}
                   target="_blank"
-                  className="flex items-center gap-1.5 text-teal border border-teal-border px-4 py-1.5 rounded-full text-xs hover:bg-teal-dim transition-all"
+                  className="flex items-center gap-1.5 text-teal border border-teal/20 px-4 py-1.5 rounded-full text-xs hover:bg-teal/10 transition-all"
                 >
                   <link.icon size={12} />
                   {link.label}
@@ -89,7 +89,7 @@ export default function ProjectCard({ project, i, inView }: { project: any, i: n
             {project.stack.map((tech: string) => (
               <span
                 key={tech}
-                className="text-xs text-grey border border-white/10 rounded-full px-3 py-1 bg-white/5 font-mono"
+                className="text-xs text-grey border border-white/10 rounded-full px-3 py-1 glass-subtle font-mono"
               >
                 {tech}
               </span>

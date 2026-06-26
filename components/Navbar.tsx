@@ -24,13 +24,7 @@ export default function Navbar() {
         scrolled ? 'bg-navy/80 backdrop-blur-md border-b border-teal-dim' : 'bg-transparent'
       }`}
     >
-      <motion.span
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        className="font-grotesk font-bold text-white-soft tracking-tight"
-      >
-        NK<span className="text-teal">.</span>
-      </motion.span>
+      <div />
 
       <div className="hidden md:flex items-center gap-8">
         {links.map((link, i) => (

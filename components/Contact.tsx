@@ -51,7 +51,7 @@ export default function Contact() {
             <a
               href="https://github.com/Naazkn13"
               target="_blank"
-              className="flex items-center justify-center gap-2 border border-teal-border text-teal px-8 py-3.5 rounded-full font-grotesk font-semibold hover:bg-teal-dim transition-all"
+              className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-3.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
             >
               <Github size={16} />
               GitHub — Naazkn13

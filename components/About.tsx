@@ -48,7 +48,7 @@ export default function About() {
           initial={{ opacity: 0, x: -30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="space-y-5 text-grey font-inter leading-relaxed"
+          className="glass rounded-2xl p-8 space-y-5 text-grey font-inter leading-relaxed"
         >
           <p>
             I'm a <span className="text-white-soft">fullstack developer</span> based in Mumbai,
@@ -68,7 +68,7 @@ export default function About() {
             <a
               href="https://github.com/Naazkn13"
               target="_blank"
-              className="border border-teal-border text-teal px-5 py-2 rounded-full text-sm hover:bg-teal-dim transition-all font-inter"
+              className="border border-teal/30 text-teal px-5 py-2 rounded-full text-sm hover:bg-teal/10 transition-all font-inter"
             >
               GitHub →
             </a>
@@ -89,9 +89,9 @@ export default function About() {
               initial={{ opacity: 0, x: 30 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 + i * 0.15 }}
-              className="flex gap-4 p-5 rounded-xl border border-teal-border bg-navy-2/50 hover:border-teal/40 transition-all group"
+              className="flex gap-4 p-5 rounded-xl glass hover:bg-teal/5 transition-all group"
             >
-              <div className="w-10 h-10 rounded-lg bg-teal-dim border border-teal-border flex items-center justify-center flex-shrink-0 group-hover:bg-teal/20 transition-all">
+              <div className="w-10 h-10 rounded-lg bg-teal/10 border border-teal/20 flex items-center justify-center flex-shrink-0 group-hover:bg-teal/20 transition-all">
                 <item.icon size={18} className="text-teal" />
               </div>
               <div>

@@ -35,7 +35,7 @@ export default function Skills() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="p-6 rounded-xl border border-teal-border bg-navy-2/50 hover:border-teal/40 transition-all group"
+            className="p-6 rounded-xl glass hover:bg-teal/5 transition-all group"
           >
             <h4 className="font-grotesk font-semibold text-teal text-sm mb-4 tracking-wide">
               {category}
@@ -44,7 +44,7 @@ export default function Skills() {
               {items.map((skill) => (
                 <span
                   key={skill}
-                  className="text-xs text-grey border border-white/10 rounded-full px-3 py-1 bg-white/5 font-mono hover:text-white-soft hover:border-teal/30 transition-all"
+                  className="text-xs text-grey border border-white/10 rounded-full px-3 py-1 glass-subtle font-mono hover:text-white-soft hover:border-teal/30 transition-all"
                 >
                   {skill}
                 </span>
