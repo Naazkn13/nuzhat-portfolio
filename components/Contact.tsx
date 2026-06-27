@@ -11,7 +11,7 @@ export default function Contact() {
   const inView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="contact" ref={ref} className="relative py-32 px-6">
+    <section id="contact" ref={ref} className="relative py-32 px-6 max-w-5xl mx-auto">
       {/* Background glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-teal/5 rounded-full blur-[100px] pointer-events-none" />
 

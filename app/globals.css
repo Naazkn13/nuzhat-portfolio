@@ -28,11 +28,6 @@
   };
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 html {
   scroll-behavior: smooth;
@@ -47,6 +42,18 @@ body {
 
 h1, h2, h3, h4 {
   font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Section centering — explicit rules to override Tailwind v4 layer specificity */
+#about,
+#projects,
+#skills,
+#contact {
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 /* Scrollbar */
@@ -94,4 +101,16 @@ body::before {
   pointer-events: none;
   z-index: 0;
   opacity: 0.4;
+}
+
+/* Video mask for blending */
+.video-mask {
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+@media (min-width: 768px) {
+  .video-mask {
+    -webkit-mask-image: linear-gradient(to right, black 50%, transparent 100%);
+    mask-image: linear-gradient(to right, black 50%, transparent 100%);
+  }
 }

@@ -11,6 +11,13 @@ export default function BootLoader() {
     document.body.style.overflow = 'hidden'
     const timer = setTimeout(() => {
       setIsLoading(false)
+      
+      // Auto-enter after a small delay to show completion
+      setTimeout(() => {
+        window.dispatchEvent(new Event('portfolio-start'))
+        setIsVisible(false)
+        document.body.style.overflow = ''
+      }, 600)
     }, 2000)
     
     return () => {
@@ -18,13 +25,6 @@ export default function BootLoader() {
       document.body.style.overflow = ''
     }
   }, [])
-
-  const handleEnter = () => {
-    // Dispatch event to Hero to start video unmuted
-    window.dispatchEvent(new Event('portfolio-start'))
-    setIsVisible(false)
-    document.body.style.overflow = ''
-  }
 
   return (
     <AnimatePresence>
@@ -60,31 +60,16 @@ export default function BootLoader() {
             
             <div className="h-10 flex items-center justify-center">
               <AnimatePresence mode="wait">
-                {isLoading ? (
-                  <motion.div
-                    key="loading-text"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="text-grey text-[10px] font-mono uppercase tracking-widest flex items-center gap-2"
-                  >
-                    <span className="w-1.5 h-1.5 bg-teal rounded-full animate-pulse" />
-                    Boot Sequence Initiated
-                  </motion.div>
-                ) : (
-                  <motion.button
-                    key="enter-btn"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleEnter}
-                    className="text-teal text-xs font-mono uppercase tracking-widest border border-teal-border px-6 py-2 rounded-full hover:bg-teal-dim transition-colors relative group"
-                  >
-                    <span className="absolute inset-0 rounded-full teal-glow opacity-0 group-hover:opacity-100 transition-opacity" />
-                    Enter Experience
-                  </motion.button>
-                )}
+                <motion.div
+                  key="loading-text"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="text-grey text-[10px] font-mono uppercase tracking-widest flex items-center gap-2"
+                >
+                  <span className="w-1.5 h-1.5 bg-teal rounded-full animate-pulse" />
+                  {isLoading ? "Boot Sequence Initiated" : "Sequence Complete"}
+                </motion.div>
               </AnimatePresence>
             </div>
           </motion.div>
