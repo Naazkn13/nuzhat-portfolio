@@ -103,14 +103,14 @@ body::before {
   opacity: 0.4;
 }
 
-/* Video mask for blending */
-.video-mask {
-  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+/* Hero video mask — fades right edge into navy on desktop, no mask on mobile */
+.hero-video-mask {
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 @media (min-width: 768px) {
-  .video-mask {
-    -webkit-mask-image: linear-gradient(to right, black 50%, transparent 100%);
-    mask-image: linear-gradient(to right, black 50%, transparent 100%);
+  .hero-video-mask {
+    -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%);
+    mask-image: linear-gradient(to right, black 70%, transparent 100%);
   }
 }
