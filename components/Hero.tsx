@@ -4,24 +4,90 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import MagneticButton from './MagneticButton'
 import { GithubIcon } from './icons/GithubIcon'
 
-const typewriterLines = [
-  "I graduated in 2024.",
-  "Enterprise software.",
-  "Live. Deployed.",
-  "I find the problem.",
-  "I build the solution.",
-  "I make sure it ships."
+type WordTimestamp = { start: number; end: number; text: string }
+type Phrase = { start: number; end: number; words: WordTimestamp[] }
+
+const scriptData: Phrase[] = [
+  {
+    start: 0.00, end: 2.36,
+    words: [
+      { start: 0.00, end: 0.80, text: "I" },
+      { start: 0.80, end: 1.20, text: " graduated" },
+      { start: 1.20, end: 1.60, text: " in" },
+      { start: 1.60, end: 2.36, text: " 2024." }
+    ]
+  },
+  {
+    start: 3.56, end: 11.80,
+    words: [
+      { start: 3.56, end: 4.32, text: "By" },
+      { start: 4.32, end: 5.06, text: " 2025," },
+      { start: 5.14, end: 5.62, text: " I" },
+      { start: 5.62, end: 5.74, text: " was" },
+      { start: 5.74, end: 6.12, text: " already" },
+      { start: 6.12, end: 6.50, text: " building" },
+      { start: 6.50, end: 6.90, text: " enterprise" },
+      { start: 6.90, end: 7.46, text: " software" },
+      { start: 7.46, end: 7.68, text: " at" },
+      { start: 7.68, end: 7.76, text: " a" },
+      { start: 7.76, end: 7.98, text: " product" },
+      { start: 7.98, end: 8.40, text: " company" },
+      { start: 8.40, end: 8.60, text: " in" },
+      { start: 8.60, end: 8.88, text: " Mumbai," },
+      { start: 9.28, end: 9.64, text: " compliance" },
+      { start: 9.64, end: 10.14, text: " platforms" },
+      { start: 10.14, end: 10.54, text: " used" },
+      { start: 10.54, end: 10.74, text: " by" },
+      { start: 10.74, end: 10.86, text: " the" },
+      { start: 10.86, end: 11.44, text: " BFSI" },
+      { start: 11.44, end: 11.80, text: " sector." }
+    ]
+  },
+  {
+    start: 12.46, end: 15.40,
+    words: [
+      { start: 12.46, end: 13.10, text: "I'm" },
+      { start: 13.10, end: 13.70, text: " Nuzhat Khan," },
+      { start: 14.56, end: 14.64, text: " full" },
+      { start: 14.64, end: 14.90, text: "-stack" },
+      { start: 14.90, end: 15.40, text: " developer." }
+    ]
+  },
+  {
+    start: 17.66, end: 22.92,
+    words: [
+      { start: 17.66, end: 18.42, text: "I" },
+      { start: 18.42, end: 18.66, text: " find" },
+      { start: 18.66, end: 18.80, text: " the" },
+      { start: 18.80, end: 19.18, text: " problem," },
+      { start: 19.66, end: 19.84, text: " I" },
+      { start: 19.84, end: 20.08, text: " build" },
+      { start: 20.08, end: 20.24, text: " the" },
+      { start: 20.24, end: 20.72, text: " solution," },
+      { start: 21.08, end: 21.90, text: " and" },
+      { start: 21.90, end: 22.00, text: " I" },
+      { start: 22.00, end: 22.18, text: " make" },
+      { start: 22.18, end: 22.44, text: " sure" },
+      { start: 22.44, end: 22.58, text: " it" },
+      { start: 22.58, end: 22.92, text: " ships." }
+    ]
+  },
+  {
+    start: 24.58, end: 25.64,
+    words: [
+      { start: 24.58, end: 25.10, text: "Here's" },
+      { start: 25.10, end: 25.20, text: " what" },
+      { start: 25.20, end: 25.40, text: " I've" },
+      { start: 25.40, end: 25.64, text: " built." }
+    ]
+  }
 ]
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [hasStarted, setHasStarted] = useState(false)
   const [videoEnded, setVideoEnded] = useState(false)
-
-  // Typewriter state
-  const [currentLineIndex, setCurrentLineIndex] = useState(0)
   const [displayedText, setDisplayedText] = useState("")
-  const [isTyping, setIsTyping] = useState(true)
   const [typewriterActive, setTypewriterActive] = useState(false)
 
   // Listen for video end
@@ -45,40 +111,64 @@ export default function Hero() {
     }
   }, [])
 
-  // Typewriter effect
+  // Sync Typewriter to Video currentTime
   useEffect(() => {
-    if (!typewriterActive) return
+    if (!typewriterActive || !videoRef.current) return
 
-    let timeout: NodeJS.Timeout
-    const currentFullText = typewriterLines[currentLineIndex]
+    let animationFrameId: number
 
-    if (isTyping) {
-      if (displayedText.length < currentFullText.length) {
-        timeout = setTimeout(() => {
-          setDisplayedText(currentFullText.slice(0, displayedText.length + 1))
-        }, 80)
-      } else {
-        // Finished typing, pause 2.5s then move to next
-        timeout = setTimeout(() => {
-          if (currentLineIndex < typewriterLines.length - 1) {
-            setIsTyping(false)
+    const updateTypewriter = () => {
+      const time = videoRef.current!.currentTime
+      let newText = ""
+
+      for (let i = 0; i < scriptData.length; i++) {
+        const phrase = scriptData[i]
+        const nextPhraseStart = i + 1 < scriptData.length ? scriptData[i + 1].start : time + 10
+
+        // If we are before this phrase even starts deleting, or during it
+        if (time >= phrase.start && time < nextPhraseStart) {
+          
+          if (time <= phrase.end) {
+            // TYPING PHASE
+            let builtString = ""
+            for (const word of phrase.words) {
+              if (time >= word.end) {
+                builtString += word.text
+              } else if (time >= word.start) {
+                const progress = (time - word.start) / (word.end - word.start)
+                const charsToShow = Math.floor(progress * word.text.length)
+                builtString += word.text.slice(0, charsToShow)
+              }
+            }
+            newText = builtString
+          } else {
+            // DELETING PHASE
+            // Hold for 10% of the gap, then delete linearly over the rest
+            const gap = nextPhraseStart - phrase.end
+            const holdEnd = phrase.end + (gap * 0.1)
+            
+            if (time <= holdEnd) {
+              // Holding full text
+              newText = phrase.words.map(w => w.text).join('')
+            } else {
+              // Deleting
+              const deleteProgress = (time - holdEnd) / (nextPhraseStart - holdEnd)
+              const fullText = phrase.words.map(w => w.text).join('')
+              const charsToKeep = Math.max(0, Math.floor(fullText.length * (1 - deleteProgress)))
+              newText = fullText.slice(0, charsToKeep)
+            }
           }
-        }, 2500)
+          break
+        }
       }
-    } else {
-      // Deleting
-      if (displayedText.length > 0) {
-        timeout = setTimeout(() => {
-          setDisplayedText(displayedText.slice(0, -1))
-        }, 30)
-      } else {
-        setCurrentLineIndex(prev => prev + 1)
-        setIsTyping(true)
-      }
+
+      setDisplayedText(newText)
+      animationFrameId = requestAnimationFrame(updateTypewriter)
     }
 
-    return () => clearTimeout(timeout)
-  }, [displayedText, isTyping, typewriterActive, currentLineIndex])
+    animationFrameId = requestAnimationFrame(updateTypewriter)
+    return () => cancelAnimationFrame(animationFrameId)
+  }, [typewriterActive])
 
   return (
     <section className="relative h-screen flex flex-col md:flex-row overflow-hidden bg-[#080E1A]">
