@@ -5,10 +5,10 @@ import BootLoader from '@/components/BootLoader'
 
 export const metadata: Metadata = {
   title: 'Nuzhat Khan — Fullstack Developer',
-  description: 'Fullstack developer based in Mumbai. Building with AI.',
+  description: 'Nuzhat Khan — Fullstack Developer in Mumbai. Building enterprise compliance platforms, biometric attendance systems, and AI-powered tools with React, FastAPI, and Python.',
   openGraph: {
     title: 'Nuzhat Khan — Fullstack Developer',
-    description: 'Fullstack developer based in Mumbai. Building with AI.',
+    description: 'Nuzhat Khan — Fullstack Developer in Mumbai. Building enterprise compliance platforms, biometric attendance systems, and AI-powered tools with React, FastAPI, and Python.',
   }
 }
 

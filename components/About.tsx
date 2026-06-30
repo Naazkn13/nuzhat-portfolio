@@ -73,6 +73,13 @@ export default function About() {
               GitHub →
             </a>
             <a
+              href="https://www.linkedin.com/in/nuzhat-khan-dev/"
+              target="_blank"
+              className="border border-teal/30 text-teal px-5 py-2 rounded-full text-sm hover:bg-teal/10 transition-all font-inter"
+            >
+              LinkedIn →
+            </a>
+            <a
               href="#contact"
               className="bg-teal text-navy px-5 py-2 rounded-full text-sm font-semibold hover:bg-teal/90 transition-all font-inter"
             >

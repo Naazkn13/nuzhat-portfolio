@@ -2,7 +2,8 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Mail, ArrowRight } from 'lucide-react'
+import { Mail, ArrowRight, Download } from 'lucide-react'
+import { LinkedinIcon as Linkedin } from './icons/LinkedinIcon'
 import { GithubIcon as Github } from './icons/GithubIcon'
 import MagneticButton from './MagneticButton'
 
@@ -39,7 +40,7 @@ export default function Contact() {
         >
           <MagneticButton>
             <a
-              href="mailto:your@email.com"
+              href="mailto:knuzhat136@gmail.com"
               className="flex items-center justify-center gap-2 bg-teal text-navy px-8 py-3.5 rounded-full font-grotesk font-semibold hover:bg-teal/90 transition-all group"
             >
               <Mail size={16} />
@@ -49,12 +50,32 @@ export default function Contact() {
           </MagneticButton>
           <MagneticButton>
             <a
+              href="https://www.linkedin.com/in/nuzhat-khan-dev/"
+              target="_blank"
+              className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-3.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
+            >
+              <Linkedin size={16} />
+              LinkedIn
+            </a>
+          </MagneticButton>
+          <MagneticButton>
+            <a
+              href="/Nuzhat_Khan_Resume.pdf"
+              download
+              className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-3.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
+            >
+              <Download size={16} />
+              Resume
+            </a>
+          </MagneticButton>
+          <MagneticButton>
+            <a
               href="https://github.com/Naazkn13"
               target="_blank"
               className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-3.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
             >
               <Github size={16} />
-              GitHub — Naazkn13
+              GitHub
             </a>
           </MagneticButton>
         </motion.div>
@@ -66,7 +87,7 @@ export default function Contact() {
           transition={{ delay: 0.5 }}
           className="text-grey/40 text-xs font-inter mt-20"
         >
-          © 2025 Nuzhat Khan · Built with Next.js + Framer Motion
+          © 2026 Nuzhat Khan · Built with Next.js + Framer Motion
         </motion.p>
       </div>
     </section>

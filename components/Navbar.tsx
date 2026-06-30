@@ -1,6 +1,7 @@
 'use client'
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
 import { useState } from 'react'
+import { LinkedinIcon as Linkedin } from './icons/LinkedinIcon'
 import { GithubIcon as Github } from './icons/GithubIcon'
 
 const links = ['About', 'Projects', 'Skills', 'Contact']
@@ -49,6 +50,17 @@ export default function Navbar() {
         >
           <Github size={14} />
           GitHub
+        </motion.a>
+        <motion.a
+          href="https://www.linkedin.com/in/nuzhat-khan-dev/"
+          target="_blank"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="flex items-center gap-2 border border-teal-border text-teal px-4 py-1.5 rounded-full text-sm hover:bg-teal-dim transition-all"
+        >
+          <Linkedin size={14} />
+          LinkedIn
         </motion.a>
       </div>
     </motion.nav>

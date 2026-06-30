@@ -81,9 +81,9 @@ export default function ProjectCard({ project, i, inView }: { project: any, i: n
             </div>
           </div>
 
-          <p className="text-grey font-inter text-sm leading-relaxed mb-5 flex-grow pointer-events-auto">
+          <div className="text-grey font-inter text-sm leading-relaxed mb-5 flex-grow pointer-events-auto flex flex-col gap-2">
             {project.description}
-          </p>
+          </div>
 
           <div className="flex flex-wrap gap-2 pointer-events-auto">
             {project.stack.map((tech: string) => (
