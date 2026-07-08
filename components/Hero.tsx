@@ -216,9 +216,16 @@ export default function Hero() {
       <div className="relative w-full md:w-[20%] h-[45vh] md:h-full flex items-center z-[2]">
         <div className="flex flex-col items-center md:items-start text-center md:text-left w-full px-4 md:px-5 lg:px-6">
 
-          <div className="mb-4 flex items-center gap-1.5 rounded-full px-3 py-1 text-teal text-[10px] tracking-widest uppercase border border-teal/20 bg-teal/5">
+          <div className="mb-4 flex flex-wrap items-center gap-1.5 rounded-full px-3 py-1 text-teal text-[10px] tracking-widest uppercase border border-teal/20 bg-teal/5">
             <span className="w-1 h-1 bg-teal rounded-full animate-pulse" />
-            Fullstack Developer · Mumbai
+            <span>Fullstack Developer · Mumbai</span>
+          </div>
+          <div className="mb-5 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs tracking-wide border border-emerald-400/25 bg-emerald-400/5 text-emerald-300">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            Open to opportunities
           </div>
 
           <h1
