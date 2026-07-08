@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Mail, ArrowRight, Download } from 'lucide-react'
+import { Mail, ArrowRight, Download, MessageCircle } from 'lucide-react'
 import { LinkedinIcon as Linkedin } from './icons/LinkedinIcon'
 import { GithubIcon as Github } from './icons/GithubIcon'
 import MagneticButton from './MagneticButton'
@@ -29,6 +29,9 @@ export default function Contact() {
           <p className="text-grey font-inter text-lg mb-12 max-w-lg mx-auto">
             Looking for someone who ships real things?
             I'm open to opportunities, collaborations, and interesting problems.
+          </p>
+          <p className="text-grey/70 font-inter text-sm mb-10">
+            Usually respond within 24 hrs, IST.
           </p>
         </motion.div>
 
@@ -76,6 +79,17 @@ export default function Contact() {
             >
               <Github size={16} />
               GitHub
+            </a>
+          </MagneticButton>
+          <MagneticButton>
+            <a
+              href="https://wa.me/919769149366"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-2.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
+            >
+              <MessageCircle size={16} />
+              WhatsApp
             </a>
           </MagneticButton>
         </motion.div>
