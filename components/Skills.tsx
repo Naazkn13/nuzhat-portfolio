@@ -6,11 +6,11 @@ import { useRef } from 'react'
 const skills = {
   'Languages': ['Python', 'TypeScript', 'JavaScript', 'SQL', 'Java'],
   'Frontend': ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'Expo'],
-  'Backend': ['FastAPI', 'Node.js', 'REST APIs', 'WebSockets'],
-  'Data & DB': ['PostgreSQL', 'Supabase', 'MongoDB', 'Redis'],
-  'DevOps': ['Docker', 'Linux (Ubuntu/Fedora)', 'Railway', 'Vercel', 'Azure DevOps'],
-  'Data & Parsing': ['PyMuPDF', 'tabula-py', 'Pandas', 'PDF Processing'],
-  'AI / ML': ['LLM Integration', 'RAG', 'Pinecone', 'FAISS', 'Whisper', 'ElevenLabs', 'LatentSync'],
+  'Backend': ['FastAPI', 'Node.js', 'REST APIs'],
+  'Data & DB': ['PostgreSQL', 'Supabase', 'MongoDB', 'Pandas'],
+  'DevOps': ['Docker', 'Linux (Ubuntu/Fedora)', 'Railway', 'Vercel', 'Azure DevOps', 'CI/CD', 'Git', 'GitHub Actions'],
+  'Data & Parsing': ['PyMuPDF', 'tabula-py', 'PDF Processing'],
+  'Compliance': ['SEBI', 'PIT', 'UPSI', 'RegTech', 'Maker-Checker', 'RBAC', 'Audit Trail', 'ECAS/BENPOS'],
 }
 
 export default function Skills() {
