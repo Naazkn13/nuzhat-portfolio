@@ -89,6 +89,7 @@ export default function Hero() {
   const [videoEnded, setVideoEnded] = useState(false)
   const [displayedText, setDisplayedText] = useState("")
   const [typewriterActive, setTypewriterActive] = useState(false)
+  const [showResume, setShowResume] = useState(false)
 
   // Listen for video end
   useEffect(() => {
@@ -246,13 +247,13 @@ export default function Hero() {
             >
               View Projects
             </a>
-            <a
-              href="/Nuzhat_Khan_Resume.pdf"
-              download
+            <button
+              type="button"
+              onClick={() => setShowResume(true)}
               className="px-5 py-2.5 border border-teal/40 text-teal rounded-full text-xs hover:bg-teal/10 transition-colors"
             >
-              Download Resume
-            </a>
+              View Resume
+            </button>
           </div>
 
           <AnimatePresence>
@@ -283,6 +284,43 @@ export default function Hero() {
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Resume inline viewer */}
+      <AnimatePresence>
+        {showResume && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[90] bg-navy/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
+          >
+            <motion.div
+              initial={{ scale: 0.98, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.98, opacity: 0, y: 10 }}
+              transition={{ duration: 0.2 }}
+              className="w-full max-w-4xl h-[80vh] bg-[#0B1220] border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+            >
+              <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 bg-[#0B1220]">
+                <span className="text-white-soft font-grotesk text-sm">Nuzhat_Khan_Resume.pdf</span>
+                <button
+                  type="button"
+                  onClick={() => setShowResume(false)}
+                  className="text-grey hover:text-white-soft text-xs uppercase tracking-widest"
+                >
+                  Close
+                </button>
+              </div>
+              <iframe
+                src="/Nuzhat_Khan_Resume.pdf"
+                title="Resume"
+                className="w-full h-[calc(80vh-49px)] bg-white"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
