@@ -136,9 +136,9 @@ Upgrades score: ~0.2
 |---|---|---|---|
 || P1 | Case study routing + 4 pages | Completed — 6/6 pages built and passing; nav polish applied with breadcrumb pattern | 2–3 hrs (done) |
 || P1b | Nav polish / breadcrumbs | Completed — broke the orphaned back-link pattern; replaced with contextual breadcrumb nav on both case-study index and slug pages | Done |
-| P2 | What I Can Own section | Pending P1 | 1 hr |
-| P3 | Open to work badge | Pending P1 | 15 min |
-| P4 | Meta/SEO + OG tags | Pending content | 30 min |
-| P5 | NSA + CAS case study copy | Pending P1 pages | 1 hr |
+|| P2 | What I Can Own section | Completed — 2x2 capability card grid; wired between Skills and Contact | 1 hr (done) |
+|| P3 | Open to opportunities badge | Completed — emerald pill with animated pulse dot in hero, below role label | 15 min (done) |
+|| P4 | Meta/SEO + OG tags | Next | 30 min |
+|| P5 | NSA + CAS case study copy | Pending case study pages | 1 hr |
 
 **Total remaining:** ~5–7 hours to reach 9.0+ score.
