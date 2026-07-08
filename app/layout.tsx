@@ -11,6 +11,20 @@ export const metadata: Metadata = {
     description: 'Nuzhat Khan — Fullstack Developer in Mumbai. SEBI-compliant platforms, PIT/UPSI surveillance, biometric systems, and AI tooling.',
     url: 'https://nuzhat-portfolio.vercel.app',
     type: 'website',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Nuzhat Khan — Fullstack Developer',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Nuzhat Khan — Fullstack Developer',
+    description: 'Nuzhat Khan — Fullstack Developer in Mumbai.',
+    images: ['/og-image.png'],
   },
 }
 
