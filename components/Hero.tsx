@@ -217,8 +217,7 @@ export default function Hero() {
         <div className="flex flex-col items-center md:items-start text-center md:text-left w-full px-4 md:px-5 lg:px-6">
 
           <div className="mb-4 flex flex-wrap items-center gap-1.5 rounded-full px-3 py-1 text-teal text-[10px] tracking-widest uppercase border border-teal/20 bg-teal/5">
-            <span className="w-1 h-1 bg-teal rounded-full animate-pulse shrink-0" />
-            <span className="leading-none">Fullstack Developer · Mumbai</span>
+            <span className="leading-none whitespace-nowrap">• Fullstack Developer · Mumbai</span>
           </div>
           <div className="mb-5 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs tracking-wide border border-emerald-400/25 bg-emerald-400/5 text-emerald-300">
             <span className="relative flex h-2 w-2">
