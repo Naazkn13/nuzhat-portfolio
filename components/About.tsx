@@ -7,21 +7,21 @@ import { GraduationCap, Briefcase, Code2 } from 'lucide-react'
 const timeline = [
   {
     icon: GraduationCap,
-    year: '2024',
+    year: 'Jun 2024',
     title: 'BSc IT — Bhavan\'s College',
-    desc: 'Mumbai University. Graduated with a focus on software development.',
+    desc: 'Mumbai University. Focused on software development, databases, and systems design.',
   },
   {
     icon: Briefcase,
-    year: '2025',
-    title: 'Joined Infomatics Services',
-    desc: 'Working on enterprise compliance platforms for the BFSI sector. Compulse — currently in UAT with a leading financial institution.',
+    year: 'Jun 2025',
+    title: 'Started at Infomatics Services',
+    desc: 'Building BFSI compliance platforms: Novus Comply, Compulse, and PIT/UPSI governance tooling.',
   },
   {
     icon: Code2,
-    year: 'Now',
-    title: 'Building & Shipping',
-    desc: 'Biometric systems, sports platforms, AI pipelines. Real products, real deployments.',
+    year: 'Present',
+    title: 'Shipping Production Systems',
+    desc: 'CAS Parser, Biometric Attendance, NSA Sports — live deployments with measurable outcomes.',
   },
 ]
 
@@ -64,6 +64,11 @@ export default function About() {
             Outside of work, I build my own products — a biometric attendance system running live
             at a hospital in Mumbai, a sports management platform, and AI-powered pipelines.
           </p>
+          <div className="flex flex-wrap gap-3 pt-4 text-xs font-inter text-grey">
+            <span className="border border-white/10 rounded-full px-3 py-1">67+ SEBI reports automated</span>
+            <span className="border border-white/10 rounded-full px-3 py-1">8+ hospital staff onboarded</span>
+            <span className="border border-white/10 rounded-full px-3 py-1">50+ players managed live</span>
+          </div>
           <div className="flex gap-4 pt-4">
             <a
               href="https://github.com/Naazkn13"

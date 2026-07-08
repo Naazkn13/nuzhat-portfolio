@@ -7,42 +7,36 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const [isTouch, setIsTouch] = useState(false)
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
     if (window.matchMedia('(pointer: coarse)').matches) {
       setIsTouch(true)
-    }
-    const updateMousePosition = (e: MouseEvent) => {
-      if (!isVisible) setIsVisible(true)
-      setMousePosition({ x: e.clientX, y: e.clientY })
+      setReady(true)
+      return
     }
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      if (target.closest('a') || target.closest('button')) {
-        setIsHovering(true)
-      } else {
-        setIsHovering(false)
-      }
+    // Wait for BootLoader to finish before rendering the cursor
+    const onBootDone = () => {
+      // Persist state for visitor-initiated refreshes / back-navigations
+      window.sessionStorage.setItem('boot-sequence', '1')
+      setReady(true)
     }
-    
-    const handleMouseLeave = () => {
-      setIsVisible(false)
-    }
+    window.addEventListener('portfolio-start', onBootDone)
 
-    window.addEventListener('mousemove', updateMousePosition)
-    window.addEventListener('mouseover', handleMouseOver)
-    document.addEventListener('mouseleave', handleMouseLeave)
+    // If BootLoader already ran in this tab session, show immediately
+    if (window.sessionStorage.getItem('boot-sequence') === '1') {
+      setReady(true)
+    }
 
     return () => {
-      window.removeEventListener('mousemove', updateMousePosition)
-      window.removeEventListener('mouseover', handleMouseOver)
-      document.removeEventListener('mouseleave', handleMouseLeave)
+      window.removeEventListener('portfolio-start', onBootDone)
     }
-  }, [isVisible])
+  }, [])
 
-  if (isTouch) {
-    // Hide cursor on touch devices
+  const showCursor = ready && !isTouch
+
+  if (!showCursor) {
     return null
   }
 

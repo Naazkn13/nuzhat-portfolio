@@ -89,6 +89,7 @@ export default function Hero() {
   const [videoEnded, setVideoEnded] = useState(false)
   const [displayedText, setDisplayedText] = useState("")
   const [typewriterActive, setTypewriterActive] = useState(false)
+  const [showResume, setShowResume] = useState(false)
 
   // Listen for video end
   useEffect(() => {
@@ -118,7 +119,8 @@ export default function Hero() {
     let animationFrameId: number
 
     const updateTypewriter = () => {
-      const time = videoRef.current!.currentTime
+      if (!videoRef.current) return
+      const time = videoRef.current.currentTime
       let newText = ""
 
       for (let i = 0; i < scriptData.length; i++) {
@@ -143,7 +145,6 @@ export default function Hero() {
             newText = builtString
           } else {
             // DELETING PHASE
-            // Hold for 10% of the gap, then delete linearly over the rest
             const gap = nextPhraseStart - phrase.end
             const holdEnd = phrase.end + (gap * 0.1)
             
@@ -173,10 +174,10 @@ export default function Hero() {
   return (
     <section className="relative h-screen flex flex-col md:flex-row overflow-hidden bg-[#080E1A]">
 
-      {/* Background grid — spans entire section */}
+      {/* Background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#00D4C808_1px,transparent_1px),linear-gradient(to_bottom,#00D4C808_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none z-[1]" />
 
-      {/* ──────── LEFT COLUMN — VIDEO (80%) ──────── */}
+      {/* LEFT COLUMN — VIDEO */}
       <div className="relative w-full md:w-[80%] h-[55vh] md:h-full flex-shrink-0 z-[2]">
         <video
           ref={videoRef}
@@ -186,7 +187,7 @@ export default function Hero() {
           preload="auto"
         />
 
-        {/* Click overlay — shown before first click */}
+        {/* Click overlay */}
         <AnimatePresence>
           {!hasStarted && (
             <motion.div
@@ -211,17 +212,21 @@ export default function Hero() {
         </AnimatePresence>
       </div>
 
-      {/* ──────── RIGHT COLUMN — TEXT (20%) ──────── */}
+      {/* RIGHT COLUMN — TEXT */}
       <div className="relative w-full md:w-[20%] h-[45vh] md:h-full flex items-center z-[2]">
         <div className="flex flex-col items-center md:items-start text-center md:text-left w-full px-4 md:px-5 lg:px-6">
 
-          {/* Badge */}
-          <div className="mb-4 flex items-center gap-1.5 rounded-full px-3 py-1 text-teal text-[10px] tracking-widest uppercase border border-teal/20 bg-teal/5">
-            <span className="w-1 h-1 bg-teal rounded-full animate-pulse" />
-            Fullstack Developer · Mumbai
+          <div className="mb-4 flex flex-wrap items-center gap-1.5 rounded-full px-3 py-1 text-teal text-[10px] tracking-widest uppercase border border-teal/20 bg-teal/5">
+            <span className="leading-none whitespace-nowrap">• Fullstack Developer · Mumbai</span>
+          </div>
+          <div className="mb-5 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs tracking-wide border border-emerald-400/25 bg-emerald-400/5 text-emerald-300">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            Open to opportunities
           </div>
 
-          {/* Name */}
           <h1
             className="font-grotesk font-bold text-white-soft leading-tight mb-6"
             style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
@@ -229,7 +234,6 @@ export default function Hero() {
             Nuzhat Khan
           </h1>
 
-          {/* Typewriter area */}
           <div className="h-16 mb-6 w-full">
             {typewriterActive && (
               <p
@@ -242,41 +246,87 @@ export default function Hero() {
             )}
           </div>
 
-          {/* Buttons — appear after video ends */}
+          <div className="flex flex-wrap gap-3 mb-4">
+            <a
+              href="#projects"
+              className="px-5 py-2.5 bg-teal text-navy rounded-full font-mono uppercase tracking-widest text-xs hover:bg-teal/90 transition-colors"
+            >
+              View Projects
+            </a>
+            <button
+              type="button"
+              onClick={() => setShowResume(true)}
+              className="px-5 py-2.5 border border-teal/40 text-teal rounded-full text-xs hover:bg-teal/10 transition-colors"
+            >
+              View Resume
+            </button>
+          </div>
+
           <AnimatePresence>
             {videoEnded && (
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="flex flex-col sm:flex-row md:flex-col gap-3 w-full"
+                className="flex flex-wrap gap-3 w-full md:w-auto"
               >
-                <MagneticButton>
-                  <a
-                    href="#contact"
-                    className="group relative px-5 py-2.5 bg-teal text-navy font-mono uppercase tracking-widest text-xs rounded-full overflow-hidden block text-center"
-                  >
-                    <span className="relative z-10 font-bold">Contact</span>
-                    <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity" />
-                  </a>
-                </MagneticButton>
-
-                <MagneticButton>
-                  <a
-                    href="https://github.com/Naazkn13"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-center md:justify-start gap-2 text-grey hover:text-teal transition-colors"
-                  >
-                    <GithubIcon className="w-4 h-4" />
-                    <span className="font-mono uppercase tracking-widest text-xs">GitHub</span>
-                  </a>
-                </MagneticButton>
+                <a
+                  href="#contact"
+                  className="px-5 py-2.5 border border-teal/40 text-teal rounded-full text-xs hover:bg-teal/10 transition-colors"
+                >
+                  Contact
+                </a>
+                <a
+                  href="https://github.com/Naazkn13"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-1.5 border border-teal/40 text-teal px-5 py-2.5 rounded-full text-xs hover:bg-teal/10 transition-colors"
+                >
+                  <GithubIcon className="w-3.5 h-3.5" />
+                  GitHub
+                </a>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Resume inline viewer */}
+      <AnimatePresence>
+        {showResume && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[90] bg-navy/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
+          >
+            <motion.div
+              initial={{ scale: 0.98, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.98, opacity: 0, y: 10 }}
+              transition={{ duration: 0.2 }}
+              className="w-full max-w-4xl h-[80vh] bg-[#0B1220] border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+            >
+              <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 bg-[#0B1220]">
+                <span className="text-white-soft font-grotesk text-sm">Nuzhat_Khan_Resume.pdf</span>
+                <button
+                  type="button"
+                  onClick={() => setShowResume(false)}
+                  className="text-grey hover:text-white-soft text-xs uppercase tracking-widest"
+                >
+                  Close
+                </button>
+              </div>
+              <iframe
+                src="/Nuzhat_Khan_Resume.pdf"
+                title="Resume"
+                className="w-full h-[calc(80vh-49px)] bg-white"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

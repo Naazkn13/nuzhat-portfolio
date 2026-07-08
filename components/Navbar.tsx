@@ -1,10 +1,17 @@
 'use client'
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
 import { useState } from 'react'
+import Link from 'next/link'
 import { LinkedinIcon as Linkedin } from './icons/LinkedinIcon'
 import { GithubIcon as Github } from './icons/GithubIcon'
 
-const links = ['About', 'Projects', 'Skills', 'Contact']
+const internalLinks = [
+  { label: 'About', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Case Studies', href: '/case-study' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Contact', href: '#contact' },
+]
 
 export default function Navbar() {
   const [hidden, setHidden] = useState(false)
@@ -28,17 +35,20 @@ export default function Navbar() {
       <div />
 
       <div className="hidden md:flex items-center gap-8">
-        {links.map((link, i) => (
-          <motion.a
-            key={link}
-            href={`#${link.toLowerCase()}`}
+        {internalLinks.map((link, i) => (
+          <motion.div
+            key={link.label}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="text-grey hover:text-teal transition-colors text-sm font-inter tracking-wide"
           >
-            {link}
-          </motion.a>
+            <Link
+              href={link.href}
+              className="text-grey hover:text-teal transition-colors text-sm font-inter tracking-wide"
+            >
+              {link.label}
+            </Link>
+          </motion.div>
         ))}
         <motion.a
           href="https://github.com/Naazkn13"

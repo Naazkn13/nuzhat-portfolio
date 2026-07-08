@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Mail, ArrowRight, Download } from 'lucide-react'
+import { Mail, ArrowRight, Download, MessageCircle } from 'lucide-react'
 import { LinkedinIcon as Linkedin } from './icons/LinkedinIcon'
 import { GithubIcon as Github } from './icons/GithubIcon'
 import MagneticButton from './MagneticButton'
@@ -30,18 +30,23 @@ export default function Contact() {
             Looking for someone who ships real things?
             I'm open to opportunities, collaborations, and interesting problems.
           </p>
+          <p className="text-grey/70 font-inter text-sm mb-10">
+            Usually respond within 24 hrs, IST.
+          </p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-wrap gap-3 justify-center w-full"
         >
           <MagneticButton>
             <a
-              href="mailto:knuzhat136@gmail.com"
-              className="flex items-center justify-center gap-2 bg-teal text-navy px-8 py-3.5 rounded-full font-grotesk font-semibold hover:bg-teal/90 transition-all group"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=knuzhat136@gmail.com"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-center gap-2 bg-teal text-navy px-8 py-2.5 rounded-full font-grotesk font-semibold hover:bg-teal/90 transition-all group"
             >
               <Mail size={16} />
               Say Hello
@@ -52,7 +57,7 @@ export default function Contact() {
             <a
               href="https://www.linkedin.com/in/nuzhat-khan-dev/"
               target="_blank"
-              className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-3.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
+              className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-2.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
             >
               <Linkedin size={16} />
               LinkedIn
@@ -62,7 +67,7 @@ export default function Contact() {
             <a
               href="/Nuzhat_Khan_Resume.pdf"
               download
-              className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-3.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
+              className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-2.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
             >
               <Download size={16} />
               Resume
@@ -72,10 +77,21 @@ export default function Contact() {
             <a
               href="https://github.com/Naazkn13"
               target="_blank"
-              className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-3.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
+              className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-2.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
             >
               <Github size={16} />
               GitHub
+            </a>
+          </MagneticButton>
+          <MagneticButton>
+            <a
+              href="https://wa.me/919769149366"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-2.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
+            >
+              <MessageCircle size={16} />
+              WhatsApp
             </a>
           </MagneticButton>
         </motion.div>
