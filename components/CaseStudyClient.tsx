@@ -17,6 +17,7 @@ type Project = {
   stack: string[]
   links: LinkItem[]
   note?: string
+  caseStudy?: string
 }
 
 const projects: Record<string, Project> = {
@@ -122,11 +123,14 @@ const projects: Record<string, Project> = {
       'Chose document DB to avoid repeating migration rewrites per season',
       'Built role-aware dashboards instead of one admin dashboard to reduce support tickets',
     ],
-    result: 'Live in production, managing 50+ active players seamlessly.',
+    result: 'Live in production, managing 50+ active players across seasons with zero downtime since launch.',
     stack: ['React', 'Node.js', 'MongoDB'],
     links: [
       { label: 'Live Site', url: 'https://nsasports.co.in/', icon: Globe },
+      { label: 'Case Study', url: '/case-study/nsa-sports-platform', icon: ExternalLink },
     ],
+    caseStudy: 'nsa-sports-platform',
+    note: 'Production system — registration and league management in active use.',
   },
   'hospital-sop-portal': {
     title: 'HospitalSop Portal',
