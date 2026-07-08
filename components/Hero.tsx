@@ -118,7 +118,8 @@ export default function Hero() {
     let animationFrameId: number
 
     const updateTypewriter = () => {
-      const time = videoRef.current!.currentTime
+      if (!videoRef.current) return
+      const time = videoRef.current.currentTime
       let newText = ""
 
       for (let i = 0; i < scriptData.length; i++) {
@@ -143,7 +144,6 @@ export default function Hero() {
             newText = builtString
           } else {
             // DELETING PHASE
-            // Hold for 10% of the gap, then delete linearly over the rest
             const gap = nextPhraseStart - phrase.end
             const holdEnd = phrase.end + (gap * 0.1)
             
@@ -173,10 +173,10 @@ export default function Hero() {
   return (
     <section className="relative h-screen flex flex-col md:flex-row overflow-hidden bg-[#080E1A]">
 
-      {/* Background grid — spans entire section */}
+      {/* Background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#00D4C808_1px,transparent_1px),linear-gradient(to_bottom,#00D4C808_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none z-[1]" />
 
-      {/* ──────── LEFT COLUMN — VIDEO (80%) ──────── */}
+      {/* LEFT COLUMN — VIDEO */}
       <div className="relative w-full md:w-[80%] h-[55vh] md:h-full flex-shrink-0 z-[2]">
         <video
           ref={videoRef}
@@ -186,7 +186,7 @@ export default function Hero() {
           preload="auto"
         />
 
-        {/* Click overlay — shown before first click */}
+        {/* Click overlay */}
         <AnimatePresence>
           {!hasStarted && (
             <motion.div
@@ -211,17 +211,15 @@ export default function Hero() {
         </AnimatePresence>
       </div>
 
-      {/* ──────── RIGHT COLUMN — TEXT (20%) ──────── */}
+      {/* RIGHT COLUMN — TEXT */}
       <div className="relative w-full md:w-[20%] h-[45vh] md:h-full flex items-center z-[2]">
         <div className="flex flex-col items-center md:items-start text-center md:text-left w-full px-4 md:px-5 lg:px-6">
 
-          {/* Badge */}
           <div className="mb-4 flex items-center gap-1.5 rounded-full px-3 py-1 text-teal text-[10px] tracking-widest uppercase border border-teal/20 bg-teal/5">
             <span className="w-1 h-1 bg-teal rounded-full animate-pulse" />
             Fullstack Developer · Mumbai
           </div>
 
-          {/* Name */}
           <h1
             className="font-grotesk font-bold text-white-soft leading-tight mb-6"
             style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
@@ -229,7 +227,6 @@ export default function Hero() {
             Nuzhat Khan
           </h1>
 
-          {/* Typewriter area */}
           <div className="h-16 mb-6 w-full">
             {typewriterActive && (
               <p
@@ -242,36 +239,45 @@ export default function Hero() {
             )}
           </div>
 
-          {/* Buttons — appear after video ends */}
+          <div className="flex flex-wrap gap-3 mb-4">
+            <a
+              href="#projects"
+              className="px-5 py-2.5 bg-teal text-navy rounded-full font-mono uppercase tracking-widest text-xs hover:bg-teal/90 transition-colors"
+            >
+              View Projects
+            </a>
+            <a
+              href="/Nuzhat_Khan_Resume.pdf"
+              download
+              className="px-5 py-2.5 border border-teal/40 text-teal rounded-full text-xs hover:bg-teal/10 transition-colors"
+            >
+              Download Resume
+            </a>
+          </div>
+
           <AnimatePresence>
             {videoEnded && (
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="flex flex-col sm:flex-row md:flex-col gap-3 w-full"
+                className="flex flex-wrap gap-3 w-full md:w-auto"
               >
-                <MagneticButton>
-                  <a
-                    href="#contact"
-                    className="group relative px-5 py-2.5 bg-teal text-navy font-mono uppercase tracking-widest text-xs rounded-full overflow-hidden block text-center"
-                  >
-                    <span className="relative z-10 font-bold">Contact</span>
-                    <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity" />
-                  </a>
-                </MagneticButton>
-
-                <MagneticButton>
-                  <a
-                    href="https://github.com/Naazkn13"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-center md:justify-start gap-2 text-grey hover:text-teal transition-colors"
-                  >
-                    <GithubIcon className="w-4 h-4" />
-                    <span className="font-mono uppercase tracking-widest text-xs">GitHub</span>
-                  </a>
-                </MagneticButton>
+                <a
+                  href="#contact"
+                  className="px-5 py-2.5 border border-teal/40 text-teal rounded-full text-xs hover:bg-teal/10 transition-colors"
+                >
+                  Contact
+                </a>
+                <a
+                  href="https://github.com/Naazkn13"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-1.5 border border-teal/40 text-teal px-5 py-2.5 rounded-full text-xs hover:bg-teal/10 transition-colors"
+                >
+                  <GithubIcon className="w-3.5 h-3.5" />
+                  GitHub
+                </a>
               </motion.div>
             )}
           </AnimatePresence>

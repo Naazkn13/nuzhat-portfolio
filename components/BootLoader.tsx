@@ -1,25 +1,31 @@
 'use client'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 export default function BootLoader() {
   const [isLoading, setIsLoading] = useState(true)
-  const [isVisible, setIsVisible] = useState(true)
+  const [visible, setVisible] = useState(false)         // hidden until useEffect says go
+  const initiatedRef = useRef(false)                    // guards sessionStorage read
 
   useEffect(() => {
-    // Prevent scrolling while loading
+    if (initiatedRef.current) return
+    initiatedRef.current = true
+
+    const alreadyRan = sessionStorage.getItem('boot-sequence') === '1'
+    if (alreadyRan) { setVisible(false); return }
+
+    setVisible(true)
     document.body.style.overflow = 'hidden'
     const timer = setTimeout(() => {
       setIsLoading(false)
-      
-      // Auto-enter after a small delay to show completion
       setTimeout(() => {
         window.dispatchEvent(new Event('portfolio-start'))
-        setIsVisible(false)
+        setVisible(false)
+        sessionStorage.setItem('boot-sequence', '1')
         document.body.style.overflow = ''
       }, 600)
     }, 2000)
-    
+
     return () => {
       clearTimeout(timer)
       document.body.style.overflow = ''
@@ -28,13 +34,14 @@ export default function BootLoader() {
 
   return (
     <AnimatePresence>
-      {isVisible && (
+      {visible && (
         <motion.div
           key="loader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
           className="fixed inset-0 z-[999] bg-navy flex flex-col items-center justify-center overflow-hidden"
+          suppressHydrationWarning
         >
           {/* Background grid */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#00D4C808_1px,transparent_1px),linear-gradient(to_bottom,#00D4C808_1px,transparent_1px)] bg-[size:64px_64px]" />

@@ -11,94 +11,175 @@ const projects = [
     title: 'Novus Comply & Novus UPSI',
     tag: 'Enterprise · Production',
     tagColor: 'text-yellow-400 border-yellow-400/30 bg-yellow-400/10',
-    description: (
-      <>
-        <div><strong className="text-white-soft">Challenge:</strong> BFSI sector required strict SEBI compliance for insider trading and UPSI access governance.</div>
-        <div><strong className="text-white-soft">Solution:</strong> Built a comprehensive platform handling trade pre-clearance, multi-tier approvals, and ECAS/BENPOS reconciliation.</div>
-        <div><strong className="text-white-soft">Result:</strong> Enabled secure structural digital database for UPSI access governance in a live enterprise deployment.</div>
-      </>
-    ),
+    problem: 'BFSI sector required a regulated pathway for trade pre-clearance and UPSI access governance without relying on spreadsheets.',
+    constraints: [
+      'Multiple SEBI/UPSI workflows with maker-checker stages',
+      'Strict audit trail for approval history and access grants',
+      'Existing enterprise datasets and downstream ECAS/BENPOS reconciliation',
+      'Browser-based usage with no desktop client',
+    ],
+    architecture: [
+      'FastAPI async services with PostgreSQL',
+      'React admin/workflow frontends',
+      'Dockerized services with Azure DevOps pipelines',
+      'RBAC models separating trader/approver/compliance views',
+      'Event-style audit logs for access grants and exceptions',
+    ],
+    keyDecisions: [
+      'Chose explicit role gates over open ACLs to reduce reviewer mistakes',
+      'Built normalized export formats instead of per-report PDF generators',
+    ],
+    result: 'Production platform for insider-trading governance and structured digital database for UPSI access at a live enterprise deployment.',
     stack: ['FastAPI', 'React', 'PostgreSQL', 'Docker', 'Azure DevOps'],
-    links: [],
+    links: [
+      { label: 'Case Study', url: '/case-study/novus-comply-upsi', icon: ExternalLink },
+    ],
     note: 'Client confidential — enterprise deployment',
+    caseStudy: 'novus-comply-upsi',
   },
   {
     title: 'Compulse',
     tag: 'Enterprise · UAT',
     tagColor: 'text-yellow-400 border-yellow-400/30 bg-yellow-400/10',
-    description: (
-      <>
-        <div><strong className="text-white-soft">Challenge:</strong> Need for automated compliance reporting to handle multiple SEBI report types.</div>
-        <div><strong className="text-white-soft">Solution:</strong> Co-built an enterprise compliance reporting platform automating 67+ SEBI report types across 43 maker-checker workflows.</div>
-        <div><strong className="text-white-soft">Result:</strong> Currently in successful UAT with a leading financial institution.</div>
-      </>
-    ),
+    problem: 'Compliance teams manually prepared periodic SEBI reports across heterogeneous source systems.',
+    constraints: [
+      '67+ report variants in scope',
+      'Maker-checker workflow with no single-step approvals',
+      'UAT environment with strict change review',
+      'Need for traceable corrections and re-submission history',
+    ],
+    architecture: [
+      'FastAPI backend with typed validation layers',
+      'React form/report composer with reusable base components',
+      'PostgreSQL document store for submissions and versions',
+      'Dockerized runtime for dev/qa parity',
+    ],
+    keyDecisions: [
+      'Built shared validation contracts across similar reports to reduce code duplication',
+      'Made reviewer queue explicit so UAT sign-off was auditable',
+    ],
+    result: 'Co-built platform automating 67+ SEBI report types through 43 maker-checker workflows. Currently in successful UAT with a leading financial institution.',
     stack: ['FastAPI', 'React', 'Docker', 'Ubuntu 22', 'PostgreSQL'],
-    links: [],
+    links: [
+      { label: 'Case Study', url: '/case-study/compulse', icon: ExternalLink },
+    ],
     note: 'Client confidential — not publicly accessible',
+    caseStudy: 'compulse',
   },
   {
     title: 'CAS Parser',
     tag: 'Desktop App · Client Deployed',
     tagColor: 'text-purple-400 border-purple-400/30 bg-purple-400/10',
-    description: (
-      <>
-        <div><strong className="text-white-soft">Challenge:</strong> Unstructured CDSL PDF statements made Demat holding and mutual fund extraction tedious.</div>
-        <div><strong className="text-white-soft">Solution:</strong> Built a Python/Tauri desktop application using PyMuPDF and tabula-py to extract and process financial data into Pandas.</div>
-        <div><strong className="text-white-soft">Result:</strong> Desktop executable successfully deployed at the client, outputting clean Excel reports automatically.</div>
-      </>
-    ),
+    problem: 'Unstructured CDSL PDF statements made Demat holding and mutual fund extraction tedious and error-prone.',
+    constraints: [
+      'No API access to CDSL PDFs',
+      'Mixed layouts across statement variants',
+      'Process repeated by non-technical staff monthly',
+      'Output needed to be compatible with Excel automation',
+    ],
+    architecture: [
+      'Python parser using PyMuPDF and tabula-py',
+      'Tabular extraction normalized into typed records',
+      'Pandas transformations before Excel output',
+      'Packaged as Tauri desktop app for client deployment',
+    ],
+    keyDecisions: [
+      'Kept parsing deterministic to minimize hard-to-debug PDF drift',
+      'Built Excel export path first because client team sort/filter in spreadsheets',
+    ],
+    result: 'Desktop executable successfully deployed at the client, converting raw CDSL PDFs into structured Excel reports automatically.',
     stack: ['Python', 'Tauri', 'PyMuPDF', 'tabula-py', 'Pandas'],
-    links: [],
+    links: [
+      { label: 'Case Study', url: '/case-study/cas-parser', icon: ExternalLink },
+    ],
     note: 'Internal enterprise tool',
+    caseStudy: 'cas-parser',
   },
   {
     title: 'Biometric Attendance System',
     tag: 'Live · Deployed',
     tagColor: 'text-teal border-teal/30 bg-teal/10',
-    description: (
-      <>
-        <div><strong className="text-white-soft">Challenge:</strong> Eye hospital relied on manual staff logging of machine times into Excel and error-prone formula-based salary calculations.</div>
-        <div><strong className="text-white-soft">Solution:</strong> Built a solo end-to-end biometric system integrating ZKTeco hardware SDK, with web and Android apps.</div>
-        <div><strong className="text-white-soft">Result:</strong> Automated 30-day pay cycles, PL accrual, overtime, and deductions for 8+ employees with zero downtime since deployment.</div>
-      </>
-    ),
+    problem: 'Eye hospital relied on manual staff logging and Excel formulas for attendance, overtime, and salary calculations.',
+    constraints: [
+      'ZKTeco hardware deployment with SDK constraints',
+      'Web + Android access needed for hospital staff',
+      '30-day pay cycles with PL accrual rules',
+      'Maintenance coverage without an on-site IT team',
+    ],
+    architecture: [
+      'FastAPI backend with Supabase auth/storage',
+      'React admin portal with policy rules',
+      'Expo Android app for staff check-in/out',
+      'ZKTeco SDK integration for biometric events',
+      'Railway for worker processes, Vercel for admin web',
+    ],
+    keyDecisions: [
+      'Separated device event ingestion from payroll rules to keep hardware failures from breaking payroll',
+      'Used configurable policy rules instead of hard-coded formulas',
+    ],
+    result: 'Automated salary cycle tracking, PL accrual, overtime, and deductions for 8+ employees with zero downtime since deployment.',
     stack: ['FastAPI', 'React', 'Supabase', 'Railway', 'Vercel', 'Expo', 'Android APK'],
     links: [
       { label: 'Web App', url: 'https://attendance-sigma-one.vercel.app/', icon: Globe, note: 'Login required' },
+      { label: 'Case Study', url: '/case-study/biometric-attendance-system', icon: ExternalLink },
     ],
     note: 'Web + Android app. Login required.',
+    caseStudy: 'biometric-attendance-system',
   },
   {
     title: 'HospitalSop Portal',
     tag: 'Enterprise · Deployed',
     tagColor: 'text-teal border-teal/30 bg-teal/10',
-    description: (
-      <>
-        <div><strong className="text-white-soft">Challenge:</strong> Manual onboarding and lack of centralized staff training protocols.</div>
-        <div><strong className="text-white-soft">Solution:</strong> Developed a Next.js management portal hosting organized SOP video walkthroughs.</div>
-        <div><strong className="text-white-soft">Result:</strong> Enabled efficient staff training and compliance verification for hospital operations.</div>
-      </>
-    ),
+    problem: 'Manual onboarding and inconsistent staff training across shifts.',
+    constraints: [
+      'No existing structured training content',
+      'Hospital device mix with low-IP devices in use',
+      'Shared logins during shift handovers',
+    ],
+    architecture: [
+      'Next.js portal with role-aware course views',
+      'PostgreSQL for staff progress and SOP versioning',
+      'Tailwind UI optimized for low-connectivity access',
+    ],
+    keyDecisions: [
+      'Chose text + video SOPs instead of long PDFs because staff rarely completed PDF onboarding',
+      'Kept visitor/contractor access read-only to reduce support overhead',
+    ],
+    result: 'Enabled efficient staff training and compliance verification for hospital operations.',
     stack: ['Next.js', 'React', 'PostgreSQL', 'Tailwind CSS'],
-    links: [],
+    links: [
+      { label: 'Case Study', url: '/case-study/hospital-sop-portal', icon: ExternalLink },
+    ],
     note: 'Hospital internal system — login required',
+    caseStudy: 'hospital-sop-portal',
   },
   {
     title: 'NSA Sports Platform',
     tag: 'Live · Production',
     tagColor: 'text-teal border-teal/30 bg-teal/10',
-    description: (
-      <>
-        <div><strong className="text-white-soft">Challenge:</strong> Fragmented player registration and team management.</div>
-        <div><strong className="text-white-soft">Solution:</strong> Built a role-based sports operations platform with configurable CMS for automated approval workflows.</div>
-        <div><strong className="text-white-soft">Result:</strong> Live in production, managing 50+ active players seamlessly.</div>
-      </>
-    ),
+    problem: 'Fragmented player registration, team assignment, and coach approvals across spreadsheets.',
+    constraints: [
+      'Role-based access for coaches/players/admins',
+      'Configurable season/category rules',
+      'Public presence needed for registration',
+    ],
+    architecture: [
+      'React frontend with role-aware routing',
+      'Node.js backend with collection-based approval store',
+      'MongoDB for flexible seasonal schema changes',
+      'Configurable approval workflows using rule definitions',
+    ],
+    keyDecisions: [
+      'Chose document DB to avoid repeating migration rewrites per season',
+      'Built role-aware dashboards instead of one admin dashboard to reduce support tickets',
+    ],
+    result: 'Live in production, managing 50+ active players seamlessly.',
     stack: ['React', 'Node.js', 'MongoDB'],
     links: [
       { label: 'Live Site', url: 'https://nsasports.co.in/', icon: Globe },
+      { label: 'Case Study', url: '/case-study/nsa-sports-platform', icon: ExternalLink },
     ],
+    caseStudy: 'nsa-sports-platform',
   },
 ]
 

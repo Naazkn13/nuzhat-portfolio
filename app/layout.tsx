@@ -5,11 +5,13 @@ import BootLoader from '@/components/BootLoader'
 
 export const metadata: Metadata = {
   title: 'Nuzhat Khan — Fullstack Developer',
-  description: 'Nuzhat Khan — Fullstack Developer in Mumbai. Building enterprise compliance platforms, biometric attendance systems, and AI-powered tools with React, FastAPI, and Python.',
+  description: 'Nuzhat Khan — Fullstack Developer in Mumbai. SEBI-compliant platforms, PIT/UPSI surveillance, biometric systems, and AI tooling with React, Next.js, FastAPI, and Python.',
   openGraph: {
     title: 'Nuzhat Khan — Fullstack Developer',
-    description: 'Nuzhat Khan — Fullstack Developer in Mumbai. Building enterprise compliance platforms, biometric attendance systems, and AI-powered tools with React, FastAPI, and Python.',
-  }
+    description: 'Nuzhat Khan — Fullstack Developer in Mumbai. SEBI-compliant platforms, PIT/UPSI surveillance, biometric systems, and AI tooling.',
+    url: 'https://nuzhat-portfolio.vercel.app',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({
