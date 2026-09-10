@@ -9,79 +9,106 @@ type Phrase = { start: number; end: number; words: WordTimestamp[] }
 
 const scriptData: Phrase[] = [
   {
-    start: 0.00, end: 2.36,
+    start: 0.00, end: 2.00,
     words: [
-      { start: 0.00, end: 0.80, text: "I" },
-      { start: 0.80, end: 1.20, text: " graduated" },
-      { start: 1.20, end: 1.60, text: " in" },
-      { start: 1.60, end: 2.36, text: " 2024." }
+      { start: 0.00, end: 0.60, text: "I" },
+      { start: 0.60, end: 1.10, text: " graduated" },
+      { start: 1.10, end: 1.40, text: " in" },
+      { start: 1.40, end: 2.00, text: " 2024." }
     ]
   },
   {
-    start: 3.56, end: 11.80,
+    start: 2.50, end: 8.50,
     words: [
-      { start: 3.56, end: 4.32, text: "By" },
-      { start: 4.32, end: 5.06, text: " 2025," },
-      { start: 5.14, end: 5.62, text: " I" },
-      { start: 5.62, end: 5.74, text: " was" },
-      { start: 5.74, end: 6.12, text: " already" },
-      { start: 6.12, end: 6.50, text: " building" },
-      { start: 6.50, end: 6.90, text: " enterprise" },
-      { start: 6.90, end: 7.46, text: " software" },
-      { start: 7.46, end: 7.68, text: " at" },
-      { start: 7.68, end: 7.76, text: " a" },
-      { start: 7.76, end: 7.98, text: " product" },
-      { start: 7.98, end: 8.40, text: " company" },
-      { start: 8.40, end: 8.60, text: " in" },
-      { start: 8.60, end: 8.88, text: " Mumbai." },
+      { start: 2.50, end: 2.90, text: "By" },
+      { start: 2.90, end: 3.30, text: " 2025," },
+      { start: 3.40, end: 3.60, text: " I" },
+      { start: 3.60, end: 3.80, text: " was" },
+      { start: 3.80, end: 4.20, text: " already" },
+      { start: 4.20, end: 4.60, text: " building" },
+      { start: 4.60, end: 5.00, text: " enterprise" },
+      { start: 5.00, end: 5.50, text: " software" },
+      { start: 5.50, end: 5.70, text: " at" },
+      { start: 5.70, end: 5.80, text: " a" },
+      { start: 5.80, end: 6.10, text: " product" },
+      { start: 6.10, end: 6.50, text: " company" },
+      { start: 6.50, end: 6.70, text: " in" },
+      { start: 6.70, end: 7.20, text: " Mumbai." },
     ]
   },
   {
-    start: 12.46, end: 15.40,
+    start: 9.00, end: 11.50,
     words: [
-      { start: 12.46, end: 13.10, text: "I'm" },
-      { start: 13.10, end: 13.70, text: " Nuzhat Khan," },
-      { start: 14.56, end: 14.64, text: " software" },
-      { start: 14.64, end: 14.90, text: " developer." },
-      { start: 14.90, end: 15.40, text: " Python." },
+      { start: 9.00, end: 9.50, text: "I'm" },
+      { start: 9.50, end: 10.00, text: " Nuzhat Khan," },
+      { start: 10.30, end: 10.60, text: " software" },
+      { start: 10.60, end: 11.50, text: " developer." },
     ]
   },
   {
-    start: 15.80, end: 18.50,
+    start: 12.00, end: 15.00,
     words: [
-      { start: 15.80, end: 16.20, text: "I" },
-      { start: 16.20, end: 16.50, text: " build" },
-      { start: 16.50, end: 16.90, text: " AI/GenAI" },
-      { start: 16.90, end: 17.20, text: " apps" },
-      { start: 17.20, end: 17.50, text: " with" },
-      { start: 17.50, end: 17.90, text: " RAG" },
-      { start: 17.90, end: 18.20, text: " &" },
-      { start: 18.20, end: 18.50, text: " LLMs." },
+      { start: 12.00, end: 12.30, text: "I" },
+      { start: 12.30, end: 12.70, text: " build" },
+      { start: 12.70, end: 13.20, text: " AI/GenAI" },
+      { start: 13.20, end: 13.60, text: " apps" },
+      { start: 13.60, end: 13.90, text: " with" },
+      { start: 13.90, end: 14.30, text: " RAG" },
+      { start: 14.30, end: 14.60, text: " and" },
+      { start: 14.60, end: 15.00, text: " LLMs." },
     ]
   },
   {
-    start: 18.80, end: 22.92,
+    start: 15.50, end: 19.00,
     words: [
-      { start: 18.80, end: 19.18, text: "I" },
-      { start: 19.18, end: 19.50, text: " find" },
-      { start: 19.50, end: 19.70, text: " the" },
-      { start: 19.70, end: 20.00, text: " problem," },
-      { start: 20.30, end: 20.50, text: " I" },
-      { start: 20.50, end: 20.70, text: " build" },
-      { start: 20.70, end: 20.90, text: " the" },
-      { start: 20.90, end: 21.20, text: " solution." },
+      { start: 15.50, end: 15.80, text: "I" },
+      { start: 15.80, end: 16.20, text: " own" },
+      { start: 16.20, end: 16.60, text: " projects" },
+      { start: 16.60, end: 16.90, text: " end" },
+      { start: 16.90, end: 17.10, text: " to" },
+      { start: 17.10, end: 17.50, text: " end —" },
+      { start: 17.50, end: 17.80, text: " from" },
+      { start: 17.80, end: 18.20, text: " architecture" },
+      { start: 18.20, end: 18.50, text: " to" },
+      { start: 18.50, end: 19.00, text: " deployment." },
     ]
   },
   {
-    start: 23.50, end: 24.80,
+    start: 19.50, end: 22.50,
     words: [
-      { start: 23.50, end: 23.80, text: "Here's" },
-      { start: 23.80, end: 24.00, text: " what" },
-      { start: 24.00, end: 24.20, text: " I've" },
-      { start: 24.20, end: 24.50, text: " built." },
-      { start: 24.50, end: 24.80, text: " →" },
+      { start: 19.50, end: 19.80, text: "I" },
+      { start: 19.80, end: 20.20, text: " work" },
+      { start: 20.20, end: 20.60, text: " across" },
+      { start: 20.60, end: 21.00, text: " Python," },
+      { start: 21.00, end: 21.40, text: " FastAPI," },
+      { start: 21.40, end: 21.80, text: " React," },
+      { start: 21.80, end: 22.10, text: " and" },
+      { start: 22.10, end: 22.50, text: " Docker." },
     ]
-  }
+  },
+  {
+    start: 23.00, end: 25.50,
+    words: [
+      { start: 23.00, end: 23.30, text: "I" },
+      { start: 23.30, end: 23.60, text: " find" },
+      { start: 23.60, end: 23.80, text: " the" },
+      { start: 23.80, end: 24.20, text: " problem," },
+      { start: 24.50, end: 24.70, text: " I" },
+      { start: 24.70, end: 25.00, text: " build" },
+      { start: 25.00, end: 25.20, text: " the" },
+      { start: 25.20, end: 25.50, text: " solution." },
+    ]
+  },
+  {
+    start: 26.00, end: 27.50,
+    words: [
+      { start: 26.00, end: 26.40, text: "Here's" },
+      { start: 26.40, end: 26.60, text: " what" },
+      { start: 26.60, end: 26.80, text: " I've" },
+      { start: 26.80, end: 27.20, text: " built." },
+      { start: 27.20, end: 27.50, text: " →" },
+    ]
+  },
 ]
 
 export default function Hero() {
