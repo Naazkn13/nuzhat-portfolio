@@ -48,9 +48,9 @@ const scriptData: Phrase[] = [
     words: [
       { start: 12.46, end: 13.10, text: "I'm" },
       { start: 13.10, end: 13.70, text: " Nuzhat Khan," },
-      { start: 14.56, end: 14.64, text: " full" },
-      { start: 14.64, end: 14.90, text: "-stack" },
-      { start: 14.90, end: 15.40, text: " developer." }
+      { start: 14.56, end: 14.64, text: " software" },
+      { start: 14.64, end: 14.90, text: " developer." },
+      { start: 14.90, end: 15.40, text: " Python." },
     ]
   },
   {
@@ -204,7 +204,7 @@ export default function Hero() {
               >
                 <span className="text-4xl">▶</span>
                 <span className="text-teal font-inter uppercase tracking-widest text-xs">
-                  Click to watch
+                  Watch my 60-sec intro
                 </span>
               </motion.div>
             </motion.div>
@@ -217,7 +217,7 @@ export default function Hero() {
         <div className="flex flex-col items-center md:items-start text-center md:text-left w-full px-4 md:px-5 lg:px-6">
 
           <div className="mb-4 flex flex-wrap items-center gap-1.5 rounded-full px-3 py-1 text-teal text-[10px] tracking-widest uppercase border border-teal/20 bg-teal/5">
-            <span className="leading-none whitespace-nowrap">• Fullstack Developer · Mumbai</span>
+            <span className="leading-none whitespace-nowrap">• Software Developer · Python · FastAPI · AI/GenAI · React</span>
           </div>
           <div className="mb-5 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs tracking-wide border border-emerald-400/25 bg-emerald-400/5 text-emerald-300">
             <span className="relative flex h-2 w-2">

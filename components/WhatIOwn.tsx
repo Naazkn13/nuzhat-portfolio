@@ -5,28 +5,28 @@ import { ShieldCheck, Cpu, Fingerprint, FileText } from 'lucide-react'
 
 const capabilities = [
   {
-    icon: ShieldCheck,
-    label: 'Compliance Platforms',
-    metric: '67+ SEBI reports automated',
-    body: 'Regulatory tech for BFSI: maker-checker workflows, PIT/UPSI governance, RBAC, and live ECAS/BENPOS reconciliation.',
+    icon: Cpu,
+    label: 'AI/GenAI & RAG',
+    metric: 'LLM-backed applications',
+    body: 'RAG pipelines, semantic search, LLM integration, embeddings, vector search with Pinecone, FAISS, LangChain, and FastAPI.',
   },
   {
-    icon: Cpu,
-    label: 'AI Tooling & RAG',
-    metric: 'Multiple LLM-backed deployments',
-    body: 'RAG pipelines, semantic search, LLM integration, and document intelligence with Pinecone, FAISS, and FastAPI.',
+    icon: ShieldCheck,
+    label: 'Full-Stack Platforms',
+    metric: 'Production deployments',
+    body: 'End-to-end web applications with React, Next.js, Node.js, PostgreSQL, Docker, and CI/CD pipelines.',
   },
   {
     icon: Fingerprint,
-    label: 'Biometric & Identity Systems',
-    metric: 'Live hardware deployments',
-    body: 'Attendance and access control running at a Mumbai hospital — device SDK, enrollment, shift logic, and real-time counters.',
+    label: 'Hardware & Mobile Integration',
+    metric: 'Live deployments',
+    body: 'Biometric device SDK integration, Android APK distribution, real-time systems, and mobile-first applications.',
   },
   {
     icon: FileText,
     label: 'Document & Data Pipelines',
-    metric: 'Production-grade parsing layer',
-    body: 'PDF and tabular extraction, audit trails, and role-gated exports — powering regulated reporting without manual copy-paste.',
+    metric: 'Production-grade parsing',
+    body: 'PDF and tabular extraction, data transformation, automated reporting, and role-gated exports.',
   },
 ]
 

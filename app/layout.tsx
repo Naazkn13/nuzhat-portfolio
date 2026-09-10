@@ -4,12 +4,12 @@ import CustomCursor from '@/components/CustomCursor'
 import BootLoader from '@/components/BootLoader'
 
 export const metadata: Metadata = {
-  title: 'Nuzhat Khan — Fullstack Developer | FastAPI, React, Next.js, Mumbai',
-  description: 'Mumbai-based fullstack developer shipping BFSI compliance platforms, sports ops tools, hospital management systems, and desktop apps with Python, FastAPI, React, Next.js, and TypeScript.',
+  title: 'Nuzhat Khan — Software Developer | Python | FastAPI | AI/GenAI | RAG',
+  description: 'Software developer building AI/GenAI applications with RAG, LLMs, embeddings, and vector search. Python, FastAPI, React, Docker.',
   alternates: { canonical: 'https://nuzhat-portfolio-alpha.vercel.app' },
   openGraph: {
-    title: 'Nuzhat Khan — Fullstack Developer, Mumbai',
-    description: 'I build end-to-end platforms for compliance, operations, and payroll — the kind that ship and stay shipped.',
+    title: 'Nuzhat Khan — Software Developer | Python | FastAPI | AI/GenAI',
+    description: 'Software developer building AI/GenAI applications with RAG, LLMs, embeddings, and vector search.',
     url: 'https://nuzhat-portfolio-alpha.vercel.app',
     siteName: 'Nuzhat Khan',
     type: 'website',
@@ -19,14 +19,14 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Nuzhat Khan — Fullstack Developer',
+        alt: 'Nuzhat Khan — Software Developer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nuzhat Khan — Fullstack Developer, Mumbai',
-    description: 'I build end-to-end platforms for compliance, operations, and payroll — the kind that ship and stay shipped.',
+    title: 'Nuzhat Khan — Software Developer | Python | FastAPI | AI/GenAI',
+    description: 'Software developer building AI/GenAI applications with RAG, LLMs, embeddings, and vector search.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -40,7 +40,7 @@ const personLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Nuzhat Khan',
-  jobTitle: 'Fullstack Developer',
+  jobTitle: 'Software Developer',
   url: 'https://nuzhat-portfolio-alpha.vercel.app',
   sameAs: [
     'https://github.com/Naazkn13',
@@ -54,16 +54,12 @@ const personLd = {
     'TypeScript',
     'PostgreSQL',
     'Docker',
-    'Azure DevOps',
-    'SEBI Compliance',
     'RAG',
+    'LLM Integration',
     'Pinecone',
     'FAISS',
+    'LangChain',
   ],
-  worksFor: {
-    '@type': 'Organization',
-    name: 'Infomatics Services',
-  },
   alumniOf: {
     '@type': 'EducationalOrganization',
     name: "Bhavan's College, Mumbai University",

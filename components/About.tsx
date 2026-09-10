@@ -13,15 +13,15 @@ const timeline = [
   },
   {
     icon: Briefcase,
-    year: 'Jun 2025',
-    title: 'Started at Infomatics Services',
-    desc: 'Building BFSI compliance platforms: Novus Comply, Compulse, and PIT/UPSI governance tooling.',
+    year: 'Jun 2025 – Jul 2026',
+    title: 'Software Developer at Infomatics Services',
+    desc: 'Built enterprise software platforms — automation systems, compliance tools, and data pipelines serving real users.',
   },
   {
     icon: Code2,
     year: 'Present',
-    title: 'Shipping Production Systems',
-    desc: 'CAS Parser, Biometric Attendance, NSA Sports — live deployments with measurable outcomes.',
+    title: 'Building & Shipping',
+    desc: 'Biometric Attendance, NSA Sports, FashionGallery, AI/GenAI applications — live deployments with measurable outcomes.',
   },
 ]
 
@@ -51,9 +51,8 @@ export default function About() {
           className="glass rounded-2xl p-8 space-y-5 text-grey font-inter leading-relaxed"
         >
           <p>
-            I'm a <span className="text-white-soft">fullstack developer</span> based in Mumbai,
-            currently working at Infomatics Services where I build enterprise compliance software
-            for the BFSI sector.
+            I'm a <span className="text-white-soft">software developer</span> based in Mumbai,
+            with experience building enterprise software at a product company.
           </p>
           <p>
             I don't just write code — I own projects end to end. From architecture to deployment,
@@ -61,8 +60,8 @@ export default function About() {
             <span className="text-white-soft"> make sure things ship.</span>
           </p>
           <p>
-            Outside of work, I build my own products — a biometric attendance system running live
-            at a hospital in Mumbai, a sports management platform, and AI-powered pipelines.
+            I've built my own products — a biometric attendance system running live at a hospital
+            in Mumbai, a sports management platform, and AI-powered search applications.
           </p>
           <div className="flex flex-wrap gap-3 pt-4 text-xs font-inter text-grey">
             <span className="border border-white/10 rounded-full px-3 py-1">67+ SEBI reports automated</span>

@@ -7,10 +7,10 @@ const skills = {
   'Languages': ['Python', 'TypeScript', 'JavaScript', 'SQL', 'Java'],
   'Frontend': ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'Expo'],
   'Backend': ['FastAPI', 'Node.js', 'REST APIs'],
+  'AI / GenAI': ['RAG', 'Embeddings', 'Vector Search', 'LLM Integration', 'Prompt Engineering', 'Pinecone', 'FAISS', 'LangChain', 'OpenAI API', 'Gemini API'],
   'Data & DB': ['PostgreSQL', 'Supabase', 'MongoDB', 'Pandas'],
   'DevOps': ['Docker', 'Linux (Ubuntu/Fedora)', 'Railway', 'Vercel', 'Azure DevOps', 'CI/CD', 'Git', 'GitHub Actions'],
   'Data & Parsing': ['PyMuPDF', 'tabula-py', 'PDF Processing'],
-  'Compliance': ['SEBI', 'PIT', 'UPSI', 'RegTech', 'Maker-Checker', 'RBAC', 'Audit Trail', 'ECAS/BENPOS'],
 }
 
 export default function Skills() {

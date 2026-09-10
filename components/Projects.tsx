@@ -181,6 +181,60 @@ const projects = [
     ],
     caseStudy: 'nsa-sports-platform',
   },
+  {
+    title: 'FashionGallery',
+    tag: 'AI · In Progress',
+    tagColor: 'text-purple-400 border-purple-400/30 bg-purple-400/10',
+    problem: 'Fashion search requires understanding visual similarity, not just text matching.',
+    constraints: [
+      'Need both image and text-based search',
+      'Visual similarity requires embedding-based approach',
+      'Must be explainable — why did this item match?',
+    ],
+    architecture: [
+      'CLIP embeddings for image-based similarity',
+      'Qdrant vector database for fast retrieval',
+      'RAG-style retrieval over fashion content',
+      'FastAPI backend, React/Next.js frontend',
+    ],
+    keyDecisions: [
+      'Used CLIP for zero-shot fashion understanding without custom training',
+      'Added RAG to explain matches, not just return results',
+    ],
+    result: 'AI-powered fashion search demonstrating practical RAG + embeddings application.',
+    stack: ['Python', 'FastAPI', 'React', 'Next.js', 'CLIP', 'Qdrant', 'RAG', 'Docker'],
+    links: [
+      { label: 'GitHub', url: 'https://github.com/Naazkn13/FashionGallery', icon: Github },
+    ],
+    caseStudy: 'fashion-gallery',
+  },
+  {
+    title: 'Job Search System',
+    tag: 'Live · Full Stack',
+    tagColor: 'text-teal border-teal/30 bg-teal/10',
+    problem: 'Tracking MNC applications, tailoring resumes, and preparing for interviews across 30+ companies is chaotic.',
+    constraints: [
+      'Need role-specific resume versions (Python, AI, Java)',
+      'Must track full application lifecycle',
+      'Interview prep must link to actual projects',
+    ],
+    architecture: [
+      'Next.js frontend with 7 screens (dashboard, tracker, resume tailor, prep, showcase)',
+      'Python/FastAPI backend with resume generation',
+      'Supabase database for applications, companies, projects',
+      'Role-based resume tailoring with JD input',
+    ],
+    keyDecisions: [
+      'Built resume tailoring that reads JD and emphasizes matching skills',
+      'Linked interview prep directly to real project stories',
+    ],
+    result: 'Complete job search OS — tracker, resume generator, interview prep, project showcase.',
+    stack: ['Next.js', 'TypeScript', 'Python', 'FastAPI', 'Supabase', 'Tailwind CSS'],
+    links: [
+      { label: 'GitHub', url: 'https://github.com/Naazkn13/job-search', icon: Github },
+    ],
+    caseStudy: 'job-search-system',
+  },
 ]
 
 export default function Projects() {
