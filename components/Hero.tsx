@@ -11,14 +11,14 @@ const scriptData: Phrase[] = [
   {
     start: 0.00, end: 2.00,
     words: [
-      { start: 0.00, end: 0.60, text: "I" },
-      { start: 0.60, end: 1.10, text: " graduated" },
-      { start: 1.10, end: 1.40, text: " in" },
-      { start: 1.40, end: 2.00, text: " 2024." }
+      { start: 0.00, end: 0.50, text: "I" },
+      { start: 0.50, end: 1.00, text: " graduated" },
+      { start: 1.00, end: 1.30, text: " in" },
+      { start: 1.30, end: 2.00, text: " 2024." }
     ]
   },
   {
-    start: 2.50, end: 8.50,
+    start: 2.50, end: 8.00,
     words: [
       { start: 2.50, end: 2.90, text: "By" },
       { start: 2.90, end: 3.30, text: " 2025," },
@@ -37,76 +37,79 @@ const scriptData: Phrase[] = [
     ]
   },
   {
-    start: 9.00, end: 11.50,
+    start: 8.50, end: 11.00,
     words: [
-      { start: 9.00, end: 9.50, text: "I'm" },
-      { start: 9.50, end: 10.00, text: " Nuzhat Khan," },
-      { start: 10.30, end: 10.60, text: " software" },
-      { start: 10.60, end: 11.50, text: " developer." },
+      { start: 8.50, end: 9.00, text: "I'm" },
+      { start: 9.00, end: 9.60, text: " Nuzhat Khan," },
+      { start: 9.90, end: 10.20, text: " software" },
+      { start: 10.20, end: 11.00, text: " developer." },
     ]
   },
   {
-    start: 12.00, end: 15.00,
+    start: 11.50, end: 16.50,
     words: [
-      { start: 12.00, end: 12.30, text: "I" },
-      { start: 12.30, end: 12.70, text: " build" },
-      { start: 12.70, end: 13.20, text: " AI/GenAI" },
-      { start: 13.20, end: 13.60, text: " apps" },
+      { start: 11.50, end: 11.80, text: "I" },
+      { start: 11.80, end: 12.20, text: " build" },
+      { start: 12.20, end: 12.60, text: " AI" },
+      { start: 12.60, end: 12.90, text: " and" },
+      { start: 12.90, end: 13.30, text: " GenAI" },
+      { start: 13.30, end: 13.60, text: " apps" },
       { start: 13.60, end: 13.90, text: " with" },
-      { start: 13.90, end: 14.30, text: " RAG" },
-      { start: 14.30, end: 14.60, text: " and" },
-      { start: 14.60, end: 15.00, text: " LLMs." },
+      { start: 13.90, end: 14.30, text: " Retrieval" },
+      { start: 14.30, end: 14.70, text: " Augmented" },
+      { start: 14.70, end: 15.10, text: " Generation" },
+      { start: 15.10, end: 15.40, text: " and" },
+      { start: 15.40, end: 16.00, text: " LLMs." },
     ]
   },
   {
-    start: 15.50, end: 19.00,
+    start: 17.00, end: 20.50,
     words: [
-      { start: 15.50, end: 15.80, text: "I" },
-      { start: 15.80, end: 16.20, text: " own" },
-      { start: 16.20, end: 16.60, text: " projects" },
-      { start: 16.60, end: 16.90, text: " end" },
-      { start: 16.90, end: 17.10, text: " to" },
-      { start: 17.10, end: 17.50, text: " end —" },
-      { start: 17.50, end: 17.80, text: " from" },
-      { start: 17.80, end: 18.20, text: " architecture" },
-      { start: 18.20, end: 18.50, text: " to" },
-      { start: 18.50, end: 19.00, text: " deployment." },
+      { start: 17.00, end: 17.30, text: "I" },
+      { start: 17.30, end: 17.70, text: " own" },
+      { start: 17.70, end: 18.10, text: " projects" },
+      { start: 18.10, end: 18.40, text: " end" },
+      { start: 18.40, end: 18.60, text: " to" },
+      { start: 18.60, end: 19.00, text: " end," },
+      { start: 19.00, end: 19.30, text: " from" },
+      { start: 19.30, end: 19.70, text: " architecture" },
+      { start: 19.70, end: 20.00, text: " to" },
+      { start: 20.00, end: 20.50, text: " deployment." },
     ]
   },
   {
-    start: 19.50, end: 22.50,
+    start: 21.00, end: 24.00,
     words: [
-      { start: 19.50, end: 19.80, text: "I" },
-      { start: 19.80, end: 20.20, text: " work" },
-      { start: 20.20, end: 20.60, text: " across" },
-      { start: 20.60, end: 21.00, text: " Python," },
-      { start: 21.00, end: 21.40, text: " FastAPI," },
-      { start: 21.40, end: 21.80, text: " React," },
-      { start: 21.80, end: 22.10, text: " and" },
-      { start: 22.10, end: 22.50, text: " Docker." },
+      { start: 21.00, end: 21.30, text: "I" },
+      { start: 21.30, end: 21.70, text: " work" },
+      { start: 21.70, end: 22.10, text: " across" },
+      { start: 22.10, end: 22.50, text: " Python," },
+      { start: 22.50, end: 22.90, text: " FastAPI," },
+      { start: 22.90, end: 23.30, text: " React," },
+      { start: 23.30, end: 23.60, text: " and" },
+      { start: 23.60, end: 24.00, text: " Docker." },
     ]
   },
   {
-    start: 23.00, end: 25.50,
+    start: 24.50, end: 26.50,
     words: [
-      { start: 23.00, end: 23.30, text: "I" },
-      { start: 23.30, end: 23.60, text: " find" },
-      { start: 23.60, end: 23.80, text: " the" },
-      { start: 23.80, end: 24.20, text: " problem," },
-      { start: 24.50, end: 24.70, text: " I" },
-      { start: 24.70, end: 25.00, text: " build" },
-      { start: 25.00, end: 25.20, text: " the" },
-      { start: 25.20, end: 25.50, text: " solution." },
+      { start: 24.50, end: 24.80, text: "I" },
+      { start: 24.80, end: 25.10, text: " find" },
+      { start: 25.10, end: 25.30, text: " the" },
+      { start: 25.30, end: 25.70, text: " problem," },
+      { start: 25.90, end: 26.10, text: " I" },
+      { start: 26.10, end: 26.40, text: " build" },
+      { start: 26.40, end: 26.60, text: " the" },
+      { start: 26.60, end: 27.00, text: " solution." },
     ]
   },
   {
-    start: 26.00, end: 27.50,
+    start: 27.00, end: 28.00,
     words: [
-      { start: 26.00, end: 26.40, text: "Here's" },
-      { start: 26.40, end: 26.60, text: " what" },
-      { start: 26.60, end: 26.80, text: " I've" },
-      { start: 26.80, end: 27.20, text: " built." },
-      { start: 27.20, end: 27.50, text: " →" },
+      { start: 27.00, end: 27.40, text: "Here's" },
+      { start: 27.40, end: 27.60, text: " what" },
+      { start: 27.60, end: 27.80, text: " I've" },
+      { start: 27.80, end: 28.00, text: " built." },
     ]
   },
 ]
