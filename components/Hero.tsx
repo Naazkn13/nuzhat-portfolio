@@ -33,14 +33,7 @@ const scriptData: Phrase[] = [
       { start: 7.76, end: 7.98, text: " product" },
       { start: 7.98, end: 8.40, text: " company" },
       { start: 8.40, end: 8.60, text: " in" },
-      { start: 8.60, end: 8.88, text: " Mumbai," },
-      { start: 9.28, end: 9.64, text: " compliance" },
-      { start: 9.64, end: 10.14, text: " platforms" },
-      { start: 10.14, end: 10.54, text: " used" },
-      { start: 10.54, end: 10.74, text: " by" },
-      { start: 10.74, end: 10.86, text: " the" },
-      { start: 10.86, end: 11.44, text: " BFSI" },
-      { start: 11.44, end: 11.80, text: " sector." }
+      { start: 8.60, end: 8.88, text: " Mumbai." },
     ]
   },
   {
@@ -54,31 +47,39 @@ const scriptData: Phrase[] = [
     ]
   },
   {
-    start: 17.66, end: 22.92,
+    start: 15.80, end: 18.50,
     words: [
-      { start: 17.66, end: 18.42, text: "I" },
-      { start: 18.42, end: 18.66, text: " find" },
-      { start: 18.66, end: 18.80, text: " the" },
-      { start: 18.80, end: 19.18, text: " problem," },
-      { start: 19.66, end: 19.84, text: " I" },
-      { start: 19.84, end: 20.08, text: " build" },
-      { start: 20.08, end: 20.24, text: " the" },
-      { start: 20.24, end: 20.72, text: " solution," },
-      { start: 21.08, end: 21.90, text: " and" },
-      { start: 21.90, end: 22.00, text: " I" },
-      { start: 22.00, end: 22.18, text: " make" },
-      { start: 22.18, end: 22.44, text: " sure" },
-      { start: 22.44, end: 22.58, text: " it" },
-      { start: 22.58, end: 22.92, text: " ships." }
+      { start: 15.80, end: 16.20, text: "I" },
+      { start: 16.20, end: 16.50, text: " build" },
+      { start: 16.50, end: 16.90, text: " AI/GenAI" },
+      { start: 16.90, end: 17.20, text: " apps" },
+      { start: 17.20, end: 17.50, text: " with" },
+      { start: 17.50, end: 17.90, text: " RAG" },
+      { start: 17.90, end: 18.20, text: " &" },
+      { start: 18.20, end: 18.50, text: " LLMs." },
     ]
   },
   {
-    start: 24.58, end: 25.64,
+    start: 18.80, end: 22.92,
     words: [
-      { start: 24.58, end: 25.10, text: "Here's" },
-      { start: 25.10, end: 25.20, text: " what" },
-      { start: 25.20, end: 25.40, text: " I've" },
-      { start: 25.40, end: 25.64, text: " built." }
+      { start: 18.80, end: 19.18, text: "I" },
+      { start: 19.18, end: 19.50, text: " find" },
+      { start: 19.50, end: 19.70, text: " the" },
+      { start: 19.70, end: 20.00, text: " problem," },
+      { start: 20.30, end: 20.50, text: " I" },
+      { start: 20.50, end: 20.70, text: " build" },
+      { start: 20.70, end: 20.90, text: " the" },
+      { start: 20.90, end: 21.20, text: " solution." },
+    ]
+  },
+  {
+    start: 23.50, end: 24.80,
+    words: [
+      { start: 23.50, end: 23.80, text: "Here's" },
+      { start: 23.80, end: 24.00, text: " what" },
+      { start: 24.00, end: 24.20, text: " I've" },
+      { start: 24.20, end: 24.50, text: " built." },
+      { start: 24.50, end: 24.80, text: " →" },
     ]
   }
 ]
@@ -178,7 +179,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#00D4C808_1px,transparent_1px),linear-gradient(to_bottom,#00D4C808_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none z-[1]" />
 
       {/* LEFT COLUMN — VIDEO */}
-      <div className="relative w-full md:w-[80%] h-[55vh] md:h-full flex-shrink-0 z-[2]">
+      <div className="relative w-full md:w-[72%] h-[55vh] md:h-full flex-shrink-0 z-[2]">
         <video
           ref={videoRef}
           className="hero-video-mask w-full h-full object-cover"
@@ -213,11 +214,11 @@ export default function Hero() {
       </div>
 
       {/* RIGHT COLUMN — TEXT */}
-      <div className="relative w-full md:w-[20%] h-[45vh] md:h-full flex items-center z-[2]">
+      <div className="relative w-full md:w-[28%] h-[45vh] md:h-full flex items-center z-[2]">
         <div className="flex flex-col items-center md:items-start text-center md:text-left w-full px-4 md:px-5 lg:px-6">
 
           <div className="mb-4 flex flex-wrap items-center gap-1.5 rounded-full px-3 py-1 text-teal text-[10px] tracking-widest uppercase border border-teal/20 bg-teal/5">
-            <span className="leading-none whitespace-nowrap">• Software Developer · Python · FastAPI · AI/GenAI · React</span>
+            <span className="leading-none whitespace-nowrap">• Software Developer · Python · AI/GenAI</span>
           </div>
           <div className="mb-5 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs tracking-wide border border-emerald-400/25 bg-emerald-400/5 text-emerald-300">
             <span className="relative flex h-2 w-2">
@@ -234,11 +235,11 @@ export default function Hero() {
             Nuzhat Khan
           </h1>
 
-          <div className="h-16 mb-6 w-full">
+          <div className="h-20 mb-6 w-full">
             {typewriterActive && (
               <p
                 className="font-inter text-grey font-medium leading-relaxed"
-                style={{ fontSize: 'clamp(0.8rem, 1.2vw, 1rem)' }}
+                style={{ fontSize: 'clamp(0.85rem, 1.3vw, 1.05rem)' }}
               >
                 {displayedText}
                 <span className="inline-block w-2 h-4 ml-0.5 bg-teal animate-pulse align-middle" />
