@@ -154,14 +154,53 @@ export default function Hero() {
       const time = videoRef.current.currentTime
       let newText = ''
 
-      for (const word of scriptData) {
-        if (time >= word.end) {
-          newText += word.text
-        } else if (time >= word.start) {
-          const progress = (time - word.start) / (word.end - word.start)
-          const charsToShow = Math.floor(progress * word.text.length)
-          newText += word.text.slice(0, charsToShow)
+      // Find the current phrase being spoken
+      // A phrase is a group of words with gaps < 0.3s between them
+      let currentPhraseStart = -1
+      let currentPhraseEnd = -1
+      
+      for (let i = 0; i < scriptData.length; i++) {
+        const word = scriptData[i]
+        if (time >= word.start && time < word.end) {
+          // Found the current word, expand to find full phrase
+          currentPhraseStart = word.start
+          currentPhraseEnd = word.end
+          
+          // Look backward for the start of the phrase
+          for (let j = i - 1; j >= 0; j--) {
+            if (scriptData[j+1].start - scriptData[j].end < 0.3) {
+              currentPhraseStart = scriptData[j].start
+            } else {
+              break
+            }
+          }
+          
+          // Look forward for the end of the phrase
+          for (let j = i + 1; j < scriptData.length; j++) {
+            if (scriptData[j].start - scriptData[j-1].end < 0.3) {
+              currentPhraseEnd = scriptData[j].end
+            } else {
+              break
+            }
+          }
           break
+        }
+      }
+
+      // Build text for current phrase only
+      if (currentPhraseStart >= 0) {
+        for (const word of scriptData) {
+          if (word.start < currentPhraseStart) continue
+          if (word.end > currentPhraseEnd) break
+          
+          if (time >= word.end) {
+            newText += word.text
+          } else if (time >= word.start) {
+            const progress = (time - word.start) / (word.end - word.start)
+            const charsToShow = Math.floor(progress * word.text.length)
+            newText += word.text.slice(0, charsToShow)
+            break
+          }
         }
       }
 
