@@ -70,7 +70,7 @@ const scriptData: Word[] = [
   { start: 21.32, end: 21.58, text: '-end.' },
   { start: 21.96, end: 22.14, text: 'With' },
   { start: 22.14, end: 22.54, text: ' Python,' },
-  { start: 22.82, end: 22.98, text: ' FastAPI,' },
+  { start: 22.82, end: 22.98, text: ' Java,' },
   { start: 23.36, end: 23.52, text: ' React,' },
   { start: 23.82, end: 23.9, text: ' and' },
   { start: 23.9, end: 24.18, text: ' Docker,' },
