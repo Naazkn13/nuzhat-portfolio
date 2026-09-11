@@ -4,147 +4,30 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import MagneticButton from './MagneticButton'
 import { GithubIcon } from './icons/GithubIcon'
 
-type WordTimestamp = { start: number; end: number; text: string }
-type Phrase = { start: number; end: number; words: WordTimestamp[] }
+type Phrase = { start: number; end: number; text: string }
 
 const scriptData: Phrase[] = [
-  {
-    start: 0.00, end: 2.00,
-    words: [
-      { start: 0.00, end: 0.50, text: "I" },
-      { start: 0.50, end: 1.00, text: " graduated" },
-      { start: 1.00, end: 1.30, text: " in" },
-      { start: 1.30, end: 2.00, text: " 2024." }
-    ]
-  },
-  {
-    start: 2.50, end: 7.50,
-    words: [
-      { start: 2.50, end: 2.90, text: "Within" },
-      { start: 2.90, end: 3.30, text: " a" },
-      { start: 3.30, end: 3.70, text: " year" },
-      { start: 3.70, end: 3.90, text: " I" },
-      { start: 3.90, end: 4.10, text: " was" },
-      { start: 4.10, end: 4.50, text: " building" },
-      { start: 4.50, end: 5.00, text: " enterprise" },
-      { start: 5.00, end: 5.50, text: " software" },
-      { start: 5.50, end: 5.70, text: " at" },
-      { start: 5.70, end: 5.80, text: " a" },
-      { start: 5.80, end: 6.10, text: " product" },
-      { start: 6.10, end: 6.50, text: " company" },
-      { start: 6.50, end: 6.70, text: " in" },
-      { start: 6.70, end: 7.20, text: " Mumbai." },
-    ]
-  },
-  {
-    start: 8.50, end: 11.00,
-    words: [
-      { start: 8.50, end: 9.00, text: "I'm" },
-      { start: 9.00, end: 9.60, text: " Nuzhat Khan." },
-      { start: 9.90, end: 10.20, text: " I" },
-      { start: 10.20, end: 10.60, text: " build" },
-      { start: 10.60, end: 11.00, text: " with" },
-    ]
-  },
-  {
-    start: 11.00, end: 16.00,
-    words: [
-      { start: 11.00, end: 11.40, text: " Python" },
-      { start: 11.40, end: 11.80, text: " and" },
-      { start: 11.80, end: 12.20, text: " modern" },
-      { start: 12.20, end: 12.60, text: " AI." },
-      { start: 12.60, end: 13.00, text: " From" },
-      { start: 13.00, end: 13.40, text: " backend" },
-      { start: 13.40, end: 13.80, text: " systems" },
-      { start: 13.80, end: 14.20, text: " that" },
-      { start: 14.20, end: 14.60, text: " handle" },
-      { start: 14.60, end: 15.00, text: " real" },
-      { start: 15.00, end: 15.40, text: " users," },
-      { start: 15.40, end: 15.80, text: " to" },
-    ]
-  },
-  {
-    start: 16.00, end: 20.00,
-    words: [
-      { start: 16.00, end: 16.40, text: " RAG-powered" },
-      { start: 16.40, end: 16.80, text: " apps" },
-      { start: 16.80, end: 17.20, text: " with" },
-      { start: 17.20, end: 17.60, text: " LLMs." },
-      { start: 17.60, end: 18.00, text: " I" },
-      { start: 18.00, end: 18.40, text: " own" },
-      { start: 18.40, end: 18.80, text: " projects" },
-      { start: 18.80, end: 19.20, text: " end" },
-      { start: 19.20, end: 19.60, text: " to" },
-      { start: 19.60, end: 20.00, text: " end." },
-    ]
-  },
-  {
-    start: 20.50, end: 25.00,
-    words: [
-      { start: 20.50, end: 20.90, text: " I" },
-      { start: 20.90, end: 21.30, text: " manage" },
-      { start: 21.30, end: 21.70, text: " the" },
-      { start: 21.70, end: 22.10, text: " full" },
-      { start: 22.10, end: 22.50, text: " lifecycle" },
-      { start: 22.50, end: 22.90, text: " from" },
-      { start: 22.90, end: 23.30, text: " architecture" },
-      { start: 23.30, end: 23.70, text: " to" },
-      { start: 23.70, end: 24.10, text: " deployment." },
-      { start: 24.10, end: 24.50, text: " I" },
-      { start: 24.50, end: 25.00, text: " build" },
-    ]
-  },
-  {
-    start: 25.00, end: 29.00,
-    words: [
-      { start: 25.00, end: 25.40, text: " end" },
-      { start: 25.40, end: 25.80, text: " to" },
-      { start: 25.80, end: 26.20, text: " end" },
-      { start: 26.20, end: 26.60, text: " with" },
-      { start: 26.60, end: 27.00, text: " Python," },
-      { start: 27.00, end: 27.40, text: " FastAPI," },
-      { start: 27.40, end: 27.80, text: " React," },
-      { start: 27.80, end: 28.20, text: " and" },
-      { start: 28.20, end: 28.60, text: " Docker." },
-    ]
-  },
-  {
-    start: 29.50, end: 33.00,
-    words: [
-      { start: 29.50, end: 29.90, text: " I" },
-      { start: 29.90, end: 30.30, text: " find" },
-      { start: 30.30, end: 30.70, text: " the" },
-      { start: 30.70, end: 31.10, text: " problem." },
-      { start: 31.50, end: 31.90, text: " I" },
-      { start: 31.90, end: 32.30, text: " build" },
-      { start: 32.30, end: 32.70, text: " the" },
-      { start: 32.70, end: 33.00, text: " solution." },
-    ]
-  },
-  {
-    start: 33.50, end: 35.50,
-    words: [
-      { start: 33.50, end: 34.00, text: " Here's" },
-      { start: 34.00, end: 34.30, text: " what" },
-      { start: 34.30, end: 34.60, text: " I've" },
-      { start: 34.60, end: 35.00, text: " built." },
-    ]
-  },
+  { start: 0.0, end: 2.5, text: 'I graduated in 2024.' },
+  { start: 2.5, end: 7.5, text: 'Within a year, I was building enterprise software at a product company in Mumbai.' },
+  { start: 8.5, end: 12.0, text: "I'm Nuzhat Khan. I build with Python and modern AI." },
+  { start: 12.0, end: 16.5, text: 'From backend systems that handle real users, to RAG-powered apps with LLMs.' },
+  { start: 16.5, end: 20.5, text: 'I own projects end to end.' },
+  { start: 20.5, end: 25.0, text: 'I manage the full lifecycle from architecture to deployment.' },
+  { start: 25.0, end: 29.0, text: 'I build end to end with Python, FastAPI, React, and Docker.' },
+  { start: 29.5, end: 33.0, text: 'I find the problem. I build the solution.' },
+  { start: 33.5, end: 36.0, text: "Here's what I've built." },
 ]
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [hasStarted, setHasStarted] = useState(false)
   const [videoEnded, setVideoEnded] = useState(false)
-  const [displayedText, setDisplayedText] = useState("")
-  const [typewriterActive, setTypewriterActive] = useState(false)
+  const [currentText, setCurrentText] = useState('')
   const [showResume, setShowResume] = useState(false)
 
-  // Listen for video end
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
-
     const onEnded = () => setVideoEnded(true)
     video.addEventListener('ended', onEnded)
     return () => video.removeEventListener('ended', onEnded)
@@ -156,75 +39,30 @@ export default function Hero() {
       videoRef.current.currentTime = 0
       videoRef.current.play().then(() => {
         setHasStarted(true)
-        setTypewriterActive(true)
-      }).catch(err => console.error("Playback failed:", err))
+      }).catch(err => console.error('Playback failed:', err))
     }
   }, [])
 
-  // Sync Typewriter to Video currentTime
   useEffect(() => {
-    if (!typewriterActive || !videoRef.current) return
+    if (!hasStarted || !videoRef.current) return
 
     let animationFrameId: number
 
-    const updateTypewriter = () => {
+    const updateText = () => {
       if (!videoRef.current) return
       const time = videoRef.current.currentTime
-      let newText = ""
-
-      for (let i = 0; i < scriptData.length; i++) {
-        const phrase = scriptData[i]
-        const nextPhraseStart = i + 1 < scriptData.length ? scriptData[i + 1].start : time + 10
-
-        // If we are before this phrase even starts deleting, or during it
-        if (time >= phrase.start && time < nextPhraseStart) {
-          
-          if (time <= phrase.end) {
-            // TYPING PHASE
-            let builtString = ""
-            for (const word of phrase.words) {
-              if (time >= word.end) {
-                builtString += word.text
-              } else if (time >= word.start) {
-                const progress = (time - word.start) / (word.end - word.start)
-                const charsToShow = Math.floor(progress * word.text.length)
-                builtString += word.text.slice(0, charsToShow)
-              }
-            }
-            newText = builtString
-          } else {
-            // DELETING PHASE
-            const gap = nextPhraseStart - phrase.end
-            const holdEnd = phrase.end + (gap * 0.1)
-            
-            if (time <= holdEnd) {
-              // Holding full text
-              newText = phrase.words.map(w => w.text).join('')
-            } else {
-              // Deleting
-              const deleteProgress = (time - holdEnd) / (nextPhraseStart - holdEnd)
-              const fullText = phrase.words.map(w => w.text).join('')
-              const charsToKeep = Math.max(0, Math.floor(fullText.length * (1 - deleteProgress)))
-              newText = fullText.slice(0, charsToKeep)
-            }
-          }
-          break
-        }
-      }
-
-      setDisplayedText(newText)
-      animationFrameId = requestAnimationFrame(updateTypewriter)
+      const phrase = scriptData.find(p => time >= p.start && time < p.end)
+      setCurrentText(phrase ? phrase.text : '')
+      animationFrameId = requestAnimationFrame(updateText)
     }
 
-    animationFrameId = requestAnimationFrame(updateTypewriter)
+    animationFrameId = requestAnimationFrame(updateText)
     return () => cancelAnimationFrame(animationFrameId)
-  }, [typewriterActive])
+  }, [hasStarted])
 
   return (
     <section className="relative h-screen flex flex-col md:flex-row overflow-hidden bg-[#080E1A]">
-
-      {/* Background grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00D4C808_1px,transparent_1px),linear-gradient(to_bottom,#00D4C808_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none z-[1]" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00D4C808_1px,transparent_1px),linear-gradient(to_bottom,#00D4C808_1px,transparent_1px)] bg-[size:64px 64px] pointer-events-none z-[1]" />
 
       {/* LEFT COLUMN — VIDEO */}
       <div className="relative w-full md:w-[72%] h-[55vh] md:h-full flex-shrink-0 z-[2]">
@@ -236,7 +74,6 @@ export default function Hero() {
           preload="auto"
         />
 
-        {/* Click overlay */}
         <AnimatePresence>
           {!hasStarted && (
             <motion.div
@@ -248,7 +85,7 @@ export default function Hero() {
             >
               <motion.div
                 animate={{ opacity: [0.6, 1, 0.6] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
                 className="flex flex-col items-center gap-3 select-none"
               >
                 <span className="text-4xl">▶</span>
@@ -283,16 +120,22 @@ export default function Hero() {
             Nuzhat Khan
           </h1>
 
-          <div className="h-20 mb-6 w-full">
-            {typewriterActive && (
-              <p
-                className="font-inter text-grey font-medium leading-relaxed"
-                style={{ fontSize: 'clamp(0.85rem, 1.3vw, 1.05rem)' }}
-              >
-                {displayedText}
-                <span className="inline-block w-2 h-4 ml-0.5 bg-teal animate-pulse align-middle" />
-              </p>
-            )}
+          <div className="h-24 mb-6 w-full">
+            <AnimatePresence mode="wait">
+              {currentText && (
+                <motion.p
+                  key={currentText}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3 }}
+                  className="font-inter text-grey font-medium leading-relaxed"
+                  style={{ fontSize: 'clamp(0.85rem, 1.3vw, 1.05rem)' }}
+                >
+                  {currentText}
+                </motion.p>
+              )}
+            </AnimatePresence>
           </div>
 
           <div className="flex flex-wrap gap-3 mb-4">
