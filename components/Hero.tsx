@@ -4,20 +4,92 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import MagneticButton from './MagneticButton'
 import { GithubIcon } from './icons/GithubIcon'
 
-type Phrase = { start: number; end: number; text: string }
+type Word = { start: number; end: number; text: string }
 
-const scriptData: Phrase[] = [
-  { start: 0.0, end: 2.5, text: 'I graduated in 2024.' },
-  { start: 2.5, end: 7.5, text: 'Within a year, I was building enterprise software at a product company in Mumbai.' },
-  { start: 7.5, end: 10.0, text: "I'm Nuzhat Khan." },
-  { start: 10.0, end: 13.0, text: 'I build with Python and modern AI.' },
-  { start: 13.0, end: 16.5, text: 'From backend systems that handle real users, to RAG-powered apps with LLMs.' },
-  { start: 16.5, end: 19.5, text: 'I own projects end to end.' },
-  { start: 19.5, end: 23.0, text: 'I manage the full lifecycle from architecture to deployment.' },
-  { start: 23.0, end: 26.0, text: 'I build end to end with Python, FastAPI, React, and Docker.' },
-  { start: 26.0, end: 29.0, text: 'Seamlessly creating robust solutions.' },
-  { start: 29.5, end: 32.0, text: 'I find the problem. I build the solution.' },
-  { start: 32.0, end: 35.0, text: "Here's what I've built." },
+const scriptData: Word[] = [
+  { start: 0.0, end: 0.76, text: 'I' },
+  { start: 0.76, end: 1.18, text: ' graduated' },
+  { start: 1.18, end: 1.5, text: ' in' },
+  { start: 1.5, end: 2.24, text: ' 2024.' },
+  { start: 2.96, end: 3.14, text: 'Within' },
+  { start: 3.14, end: 3.3, text: ' a' },
+  { start: 3.3, end: 3.52, text: ' year,' },
+  { start: 3.88, end: 4.06, text: ' I' },
+  { start: 4.06, end: 4.2, text: ' was' },
+  { start: 4.2, end: 4.52, text: ' building' },
+  { start: 4.52, end: 4.98, text: ' enterprise' },
+  { start: 4.98, end: 5.6, text: ' software' },
+  { start: 5.6, end: 5.94, text: ' at' },
+  { start: 5.94, end: 6.02, text: ' a' },
+  { start: 6.02, end: 6.3, text: ' product' },
+  { start: 6.3, end: 6.8, text: ' company' },
+  { start: 6.8, end: 7.08, text: ' in' },
+  { start: 7.08, end: 7.34, text: ' Mumbai.' },
+  { start: 7.8, end: 7.98, text: "I'm" },
+  { start: 7.98, end: 8.26, text: ' Nuzhat' },
+  { start: 8.26, end: 8.46, text: ' Khan.' },
+  { start: 8.8, end: 8.88, text: ' I' },
+  { start: 8.88, end: 9.1, text: ' build' },
+  { start: 9.1, end: 9.3, text: ' with' },
+  { start: 9.3, end: 9.6, text: ' Python' },
+  { start: 9.6, end: 9.88, text: ' and' },
+  { start: 9.88, end: 10.18, text: ' modern' },
+  { start: 10.18, end: 10.52, text: ' AI.' },
+  { start: 11.04, end: 11.18, text: 'From' },
+  { start: 11.18, end: 11.46, text: ' backend' },
+  { start: 11.46, end: 11.84, text: ' systems' },
+  { start: 11.84, end: 12.12, text: ' that' },
+  { start: 12.12, end: 12.4, text: ' handle' },
+  { start: 12.4, end: 12.66, text: ' real' },
+  { start: 12.66, end: 13.1, text: ' users' },
+  { start: 13.1, end: 13.62, text: ' to' },
+  { start: 13.62, end: 13.88, text: ' RAG' },
+  { start: 13.88, end: 14.22, text: '-powered' },
+  { start: 14.22, end: 14.48, text: ' apps' },
+  { start: 14.48, end: 14.8, text: ' with' },
+  { start: 14.8, end: 15.26, text: ' LLMs,' },
+  { start: 15.62, end: 15.78, text: ' I' },
+  { start: 15.78, end: 15.98, text: ' own' },
+  { start: 15.98, end: 16.4, text: ' projects' },
+  { start: 16.4, end: 16.74, text: ' end' },
+  { start: 16.74, end: 16.94, text: '-to' },
+  { start: 16.94, end: 17.14, text: '-end.' },
+  { start: 17.48, end: 17.64, text: ' I' },
+  { start: 17.64, end: 17.92, text: ' manage' },
+  { start: 17.92, end: 18.12, text: ' the' },
+  { start: 18.12, end: 18.28, text: ' full' },
+  { start: 18.28, end: 18.68, text: ' lifecycle.' },
+  { start: 19.02, end: 19.12, text: 'From' },
+  { start: 19.12, end: 19.56, text: ' architecture' },
+  { start: 19.56, end: 19.88, text: ' to' },
+  { start: 19.88, end: 20.26, text: ' deployment,' },
+  { start: 20.58, end: 20.68, text: ' I' },
+  { start: 20.68, end: 20.92, text: ' build' },
+  { start: 20.92, end: 21.16, text: ' end' },
+  { start: 21.16, end: 21.32, text: '-to' },
+  { start: 21.32, end: 21.58, text: '-end.' },
+  { start: 21.96, end: 22.14, text: 'With' },
+  { start: 22.14, end: 22.54, text: ' Python,' },
+  { start: 22.82, end: 22.98, text: ' FastAPI,' },
+  { start: 23.36, end: 23.52, text: ' React,' },
+  { start: 23.82, end: 23.9, text: ' and' },
+  { start: 23.9, end: 24.18, text: ' Docker,' },
+  { start: 24.72, end: 24.96, text: ' seamlessly' },
+  { start: 24.96, end: 25.56, text: ' creating' },
+  { start: 25.56, end: 25.86, text: ' robust' },
+  { start: 25.86, end: 26.4, text: ' solutions.' },
+  { start: 26.4, end: 27.24, text: ' I' },
+  { start: 27.24, end: 27.46, text: ' find' },
+  { start: 27.46, end: 27.66, text: ' the' },
+  { start: 27.66, end: 28.04, text: ' problem,' },
+  { start: 28.28, end: 28.72, text: ' I' },
+  { start: 28.72, end: 28.96, text: ' build' },
+  { start: 28.96, end: 29.1, text: ' the' },
+  { start: 29.1, end: 29.58, text: ' solution.' },
+  { start: 30.42, end: 30.9, text: "Here's" },
+  { start: 30.9, end: 31.0, text: ' what' },
+  { start: 31.0, end: 31.22, text: "I've" },
+  { start: 31.22, end: 31.46, text: ' built.' },
 ]
 
 export default function Hero() {
@@ -25,7 +97,7 @@ export default function Hero() {
   const [hasStarted, setHasStarted] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [videoEnded, setVideoEnded] = useState(false)
-  const [currentText, setCurrentText] = useState('')
+  const [displayedText, setDisplayedText] = useState('')
   const [showResume, setShowResume] = useState(false)
 
   useEffect(() => {
@@ -80,8 +152,20 @@ export default function Hero() {
     const updateText = () => {
       if (!videoRef.current) return
       const time = videoRef.current.currentTime
-      const phrase = scriptData.find(p => time >= p.start && time < p.end)
-      setCurrentText(phrase ? phrase.text : '')
+      let newText = ''
+
+      for (const word of scriptData) {
+        if (time >= word.end) {
+          newText += word.text
+        } else if (time >= word.start) {
+          const progress = (time - word.start) / (word.end - word.start)
+          const charsToShow = Math.floor(progress * word.text.length)
+          newText += word.text.slice(0, charsToShow)
+          break
+        }
+      }
+
+      setDisplayedText(newText)
       animationFrameId = requestAnimationFrame(updateText)
     }
 
@@ -199,21 +283,15 @@ export default function Hero() {
           </h1>
 
           <div className="h-24 mb-6 w-full">
-            <AnimatePresence mode="wait">
-              {currentText && (
-                <motion.p
-                  key={currentText}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.3 }}
-                  className="font-inter text-grey font-medium leading-relaxed"
-                  style={{ fontSize: 'clamp(0.85rem, 1.3vw, 1.05rem)' }}
-                >
-                  {currentText}
-                </motion.p>
-              )}
-            </AnimatePresence>
+            {displayedText && (
+              <p
+                className="font-inter text-grey font-medium leading-relaxed"
+                style={{ fontSize: 'clamp(0.85rem, 1.3vw, 1.05rem)' }}
+              >
+                {displayedText}
+                <span className="inline-block w-2 h-4 ml-0.5 bg-teal animate-pulse align-middle" />
+              </p>
+            )}
           </div>
 
           <div className="flex flex-wrap gap-3 mb-4">
