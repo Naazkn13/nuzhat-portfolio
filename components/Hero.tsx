@@ -9,18 +9,21 @@ type Phrase = { start: number; end: number; text: string }
 const scriptData: Phrase[] = [
   { start: 0.0, end: 2.5, text: 'I graduated in 2024.' },
   { start: 2.5, end: 7.5, text: 'Within a year, I was building enterprise software at a product company in Mumbai.' },
-  { start: 8.5, end: 12.0, text: "I'm Nuzhat Khan. I build with Python and modern AI." },
-  { start: 12.0, end: 16.5, text: 'From backend systems that handle real users, to RAG-powered apps with LLMs.' },
-  { start: 16.5, end: 20.5, text: 'I own projects end to end.' },
-  { start: 20.5, end: 25.0, text: 'I manage the full lifecycle from architecture to deployment.' },
-  { start: 25.0, end: 29.0, text: 'I build end to end with Python, FastAPI, React, and Docker.' },
-  { start: 29.5, end: 33.0, text: 'I find the problem. I build the solution.' },
-  { start: 33.5, end: 36.0, text: "Here's what I've built." },
+  { start: 7.5, end: 10.0, text: "I'm Nuzhat Khan." },
+  { start: 10.0, end: 13.0, text: 'I build with Python and modern AI.' },
+  { start: 13.0, end: 16.5, text: 'From backend systems that handle real users, to RAG-powered apps with LLMs.' },
+  { start: 16.5, end: 19.5, text: 'I own projects end to end.' },
+  { start: 19.5, end: 23.0, text: 'I manage the full lifecycle from architecture to deployment.' },
+  { start: 23.0, end: 26.0, text: 'I build end to end with Python, FastAPI, React, and Docker.' },
+  { start: 26.0, end: 29.0, text: 'Seamlessly creating robust solutions.' },
+  { start: 29.5, end: 32.0, text: 'I find the problem. I build the solution.' },
+  { start: 32.0, end: 35.0, text: "Here's what I've built." },
 ]
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [hasStarted, setHasStarted] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
   const [videoEnded, setVideoEnded] = useState(false)
   const [currentText, setCurrentText] = useState('')
   const [showResume, setShowResume] = useState(false)
@@ -28,7 +31,10 @@ export default function Hero() {
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
-    const onEnded = () => setVideoEnded(true)
+    const onEnded = () => {
+      setVideoEnded(true)
+      setIsPaused(false)
+    }
     video.addEventListener('ended', onEnded)
     return () => video.removeEventListener('ended', onEnded)
   }, [])
@@ -39,7 +45,30 @@ export default function Hero() {
       videoRef.current.currentTime = 0
       videoRef.current.play().then(() => {
         setHasStarted(true)
+        setVideoEnded(false)
+        setIsPaused(false)
       }).catch(err => console.error('Playback failed:', err))
+    }
+  }, [])
+
+  const handleVideoClick = useCallback(() => {
+    if (!videoRef.current || !hasStarted || videoEnded) return
+    if (videoRef.current.paused) {
+      videoRef.current.play()
+      setIsPaused(false)
+    } else {
+      videoRef.current.pause()
+      setIsPaused(true)
+    }
+  }, [hasStarted, videoEnded])
+
+  const handleReplay = useCallback(() => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0
+      videoRef.current.play().then(() => {
+        setVideoEnded(false)
+        setIsPaused(false)
+      })
     }
   }, [])
 
@@ -62,18 +91,20 @@ export default function Hero() {
 
   return (
     <section className="relative h-screen flex flex-col md:flex-row overflow-hidden bg-[#080E1A]">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00D4C808_1px,transparent_1px),linear-gradient(to_bottom,#00D4C808_1px,transparent_1px)] bg-[size:64px 64px] pointer-events-none z-[1]" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00D4C808_1px,transparent_1px),linear-gradient(to_bottom,#00D4C808_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none z-[1]" />
 
       {/* LEFT COLUMN — VIDEO */}
       <div className="relative w-full md:w-[72%] h-[55vh] md:h-full flex-shrink-0 z-[2]">
         <video
           ref={videoRef}
-          className="hero-video-mask w-full h-full object-cover"
+          className="hero-video-mask w-full h-full object-cover cursor-pointer"
           src="/portfolio-intro.mp4"
           playsInline
           preload="auto"
+          onClick={handleVideoClick}
         />
 
+        {/* Click overlay - Play */}
         <AnimatePresence>
           {!hasStarted && (
             <motion.div
@@ -91,6 +122,53 @@ export default function Hero() {
                 <span className="text-4xl">▶</span>
                 <span className="text-teal font-inter uppercase tracking-widest text-xs">
                   Watch my 60-sec intro
+                </span>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Pause indicator */}
+        <AnimatePresence>
+          {hasStarted && isPaused && !videoEnded && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 z-20 flex items-center justify-center bg-[#080E1A]/40 pointer-events-none"
+            >
+              <div className="flex flex-col items-center gap-3">
+                <div className="flex gap-2">
+                  <span className="w-3 h-12 bg-teal rounded-full" />
+                  <span className="w-3 h-12 bg-teal rounded-full" />
+                </div>
+                <span className="text-teal font-inter uppercase tracking-widest text-xs">
+                  Paused
+                </span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Replay button */}
+        <AnimatePresence>
+          {videoEnded && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0 z-20 flex items-center justify-center bg-[#080E1A]/40 cursor-pointer"
+              onClick={handleReplay}
+            >
+              <motion.div
+                animate={{ opacity: [0.6, 1, 0.6] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+                className="flex flex-col items-center gap-3 select-none"
+              >
+                <span className="text-4xl">↻</span>
+                <span className="text-teal font-inter uppercase tracking-widest text-xs">
+                  Replay
                 </span>
               </motion.div>
             </motion.div>
