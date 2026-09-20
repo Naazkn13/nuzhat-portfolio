@@ -61,9 +61,9 @@ const projects = [
     result: 'Co-built platform automating 67+ SEBI report types through 43 maker-checker workflows. Currently in successful UAT with a leading financial institution.',
     stack: ['FastAPI', 'React', 'Docker', 'Ubuntu 22', 'PostgreSQL'],
     links: [
-      { label: 'Case Study', url: '/case-study/compulse', icon: ExternalLink },
+      { label: 'Case Study + Live Demo', url: '/case-study/compulse#simulation', icon: ExternalLink },
     ],
-    note: 'Client confidential — not publicly accessible',
+    note: 'Enterprise UAT deployment — interactive sandbox available',
     caseStudy: 'compulse',
   },
   {

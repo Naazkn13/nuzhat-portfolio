@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { ExternalLink, Globe, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
 import NovusSimulator from './NovusSimulator'
+import CompulseSimulator from './CompulseSimulator'
 
 type LinkItem = { label: string; url: string; icon: React.ComponentType<{ size?: number; className?: string }>; note?: string }
 type Project = {
@@ -45,8 +46,11 @@ const projects: Record<string, Project> = {
     ],
     result: 'Co-built platform automating 67+ SEBI report types through 43 maker-checker workflows. Currently in successful UAT with a leading financial institution.',
     stack: ['FastAPI', 'React', 'Docker', 'Ubuntu 22', 'PostgreSQL'],
-    links: [],
-    note: 'Client confidential — not publicly accessible',
+    links: [
+      { label: 'Interactive Sandbox', url: '#simulation', icon: ShieldCheck, note: 'Calendar & Maker-Checker' },
+      { label: 'Live Enterprise UAT', url: 'https://webapps.cloud-infomatics.co.in/compulse/', icon: Globe, note: 'Enterprise Restricted / Client SSO' },
+    ],
+    note: 'Enterprise UAT deployment — explore full workflows in the interactive sandbox below.',
   },
   'biometric-attendance-system': {
     title: 'Biometric Attendance System',
@@ -224,14 +228,18 @@ export default function CaseStudyClient({ slug }: { slug: string }) {
         <h1 className="font-grotesk text-5xl md:text-6xl font-bold text-white-soft mt-4 leading-tight">
           {project.title}
         </h1>
-        {slug === 'novus-comply-upsi' && (
+        {(slug === 'novus-comply-upsi' || slug === 'compulse') && (
           <div className="mt-5 flex items-center gap-3">
             <a
               href="#simulation"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal/15 border border-teal/40 text-teal text-xs font-mono font-medium hover:bg-teal/25 transition-all shadow-sm group"
             >
               <span className="flex h-2 w-2 rounded-full bg-teal animate-pulse" />
-              <span>Interactive RegTech Sandbox Available</span>
+              <span>
+                {slug === 'novus-comply-upsi'
+                  ? 'Interactive RegTech Sandbox Available'
+                  : 'Interactive Compliance Calendar Sandbox Available'}
+              </span>
               <span className="group-hover:translate-y-0.5 transition-transform">↓</span>
             </a>
           </div>
@@ -276,6 +284,12 @@ export default function CaseStudyClient({ slug }: { slug: string }) {
         {slug === 'novus-comply-upsi' && (
           <div id="simulation" className="scroll-mt-20">
             <NovusSimulator />
+          </div>
+        )}
+
+        {slug === 'compulse' && (
+          <div id="simulation" className="scroll-mt-20">
+            <CompulseSimulator />
           </div>
         )}
 
