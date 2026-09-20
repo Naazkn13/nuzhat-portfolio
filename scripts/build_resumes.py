@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """
 Resume Generator for Nuzhat Khan using WeasyPrint.
-Generates 3 ATS-optimized, single-page, hyperlinked PDF resumes:
-1. Python Backend & RegTech Specialist (also saved as main Nuzhat_Khan_Resume.pdf)
-2. AI / GenAI & Application Developer
-3. Java Fullstack & Spring Boot Developer
+Generates 4 ATS-optimized, single-page, hyperlinked PDF resumes:
+1. General Full Stack Developer (Nuzhat_Khan_Resume.pdf) — displayed on portfolio
+   (Features 1 project from each domain: Python/Biometric, AI/FashionGallery, Java/QR Attendance)
+2. Python Backend Specialist (Nuzhat_Khan_Resume_Python.pdf) — for Python job applications
+3. AI / GenAI Specialist (Nuzhat_Khan_Resume_AI_ML.pdf) — for AI/ML job applications
+4. Java Full Stack Specialist (Nuzhat_Khan_Resume_Java.pdf) — for Java job applications
 """
 
 import os
@@ -19,7 +21,7 @@ PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
 CSS_TEMPLATE = """
 @page {
     size: A4;
-    margin: 8mm 12mm 8mm 12mm;
+    margin: 7mm 11mm 7mm 11mm;
 }
 
 * {
@@ -31,20 +33,20 @@ CSS_TEMPLATE = """
 body {
     font-family: 'Carlito', 'Calibri', 'Helvetica Neue', Arial, sans-serif;
     color: #1a1a1a;
-    font-size: 8.7pt;
-    line-height: 1.32;
+    font-size: 8.5pt;
+    line-height: 1.28;
     background-color: #ffffff;
 }
 
 header {
     text-align: center;
-    margin-bottom: 7px;
+    margin-bottom: 6px;
     border-bottom: 1.5px solid #111827;
-    padding-bottom: 5px;
+    padding-bottom: 4px;
 }
 
 h1 {
-    font-size: 19pt;
+    font-size: 18.5pt;
     font-weight: 700;
     letter-spacing: 0.8px;
     color: #0f172a;
@@ -53,16 +55,16 @@ h1 {
 }
 
 .headline {
-    font-size: 9pt;
+    font-size: 8.8pt;
     font-weight: 600;
     color: #0d9488;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 3px;
+    margin-bottom: 2.5px;
 }
 
 .contact-line {
-    font-size: 8.3pt;
+    font-size: 8.2pt;
     color: #475569;
 }
 
@@ -81,35 +83,35 @@ h1 {
 }
 
 section {
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 
 h2 {
-    font-size: 9.7pt;
+    font-size: 9.3pt;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.6px;
     color: #0f172a;
     border-bottom: 1px solid #cbd5e1;
     padding-bottom: 1.5px;
-    margin-bottom: 3.5px;
+    margin-bottom: 3px;
 }
 
 .summary-text {
-    font-size: 8.6pt;
+    font-size: 8.4pt;
     color: #334155;
     text-align: justify;
-    line-height: 1.3;
+    line-height: 1.28;
 }
 
 .skills-container {
-    font-size: 8.4pt;
-    line-height: 1.35;
+    font-size: 8.3pt;
+    line-height: 1.3;
     color: #334155;
 }
 
 .skills-row {
-    margin-bottom: 1.5px;
+    margin-bottom: 1.2px;
 }
 
 .skills-label {
@@ -125,7 +127,7 @@ h2 {
 }
 
 .job-title, .project-title {
-    font-size: 9.2pt;
+    font-size: 9pt;
     font-weight: 700;
     color: #0f172a;
 }
@@ -136,30 +138,30 @@ h2 {
 }
 
 .job-date, .project-tag {
-    font-size: 8.2pt;
+    font-size: 8pt;
     font-weight: 600;
     color: #64748b;
 }
 
 .sub-project-title {
-    font-size: 8.7pt;
+    font-size: 8.5pt;
     font-weight: 700;
     color: #0f766e;
-    margin-top: 2px;
+    margin-top: 1.5px;
     margin-bottom: 1px;
 }
 
 ul {
     list-style-type: disc;
-    margin-left: 14px;
-    margin-bottom: 2px;
+    margin-left: 13px;
+    margin-bottom: 1.5px;
 }
 
 li {
-    margin-bottom: 1.2px;
-    font-size: 8.5pt;
+    margin-bottom: 1px;
+    font-size: 8.3pt;
     color: #334155;
-    line-height: 1.28;
+    line-height: 1.25;
     text-align: justify;
 }
 
@@ -171,7 +173,7 @@ li strong {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-size: 8.6pt;
+    font-size: 8.4pt;
     color: #334155;
 }
 
@@ -189,7 +191,7 @@ li strong {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-size: 8.5pt;
+    font-size: 8.3pt;
     color: #334155;
 }
 
@@ -200,7 +202,7 @@ li strong {
 
 .cert-meta {
     color: #64748b;
-    font-size: 8.2pt;
+    font-size: 8pt;
 }
 
 a.inline-link {
@@ -234,9 +236,114 @@ def generate_header(headline: str) -> str:
     </header>
     """
 
-# -----------------------------------------------------------------------------
-# 1. PYTHON BACKEND & REGTECH RESUME
-# -----------------------------------------------------------------------------
+# =============================================================================
+# 1. GENERAL FULL-STACK DEVELOPER RESUME (Displayed on Portfolio)
+#    Features 1 project from each domain: Python, AI/ML, and Java
+# =============================================================================
+HTML_GENERAL = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Nuzhat Khan — Full Stack Developer Resume</title>
+    <style>{CSS_TEMPLATE}</style>
+</head>
+<body>
+    {generate_header("Full Stack Developer | Python · React · Java · AI/GenAI · PostgreSQL · Docker")}
+
+    <section>
+        <h2>Professional Summary</h2>
+        <p class="summary-text">
+            Full Stack Software Developer with 14 months of enterprise product engineering experience delivering 4 production RegTech platforms. Proven ability building end-to-end applications across Python, React, Java, and modern Generative AI (RAG, vector retrieval). Experienced from relational schema design (PostgreSQL) and RESTful API architecture to mobile distribution (Expo), containerization (Docker), and Azure DevOps CI/CD deployment.
+        </p>
+    </section>
+
+    <section>
+        <h2>Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skills-row"><span class="skills-label">Languages:</span> Python, Java (17/21), TypeScript, JavaScript, SQL</div>
+            <div class="skills-row"><span class="skills-label">Frontend & Mobile:</span> React, Next.js, Tailwind CSS, Framer Motion, Expo (React Native), HTML5/CSS3</div>
+            <div class="skills-row"><span class="skills-label">Backend & APIs:</span> FastAPI, REST APIs, Node.js, Spring Boot, Pydantic, SQLAlchemy, PyTest, Microservices</div>
+            <div class="skills-row"><span class="skills-label">AI & Data Engineering:</span> RAG, Vector Search, Qdrant, Pinecone, CLIP Embeddings, Pandas, PyMuPDF, Tabula-py</div>
+            <div class="skills-row"><span class="skills-label">Databases & DevOps:</span> PostgreSQL, MySQL, Supabase, Redis, Docker, Azure DevOps, Git, GitHub Actions, Linux</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Professional Experience</h2>
+        <div class="job-header">
+            <div><span class="job-company">Infomatics Services Pvt. Ltd.</span> &mdash; <span class="job-title">Software Developer</span></div>
+            <div class="job-date">Mumbai | June 2025 – 24 July 2026</div>
+        </div>
+        <ul>
+            <li><strong>Novus Comply & Novus UPSI:</strong> Engineered multi-tier trade pre-clearance engine automating reconciliation across 4 financial data feeds (ECAS/BENPOS/KFin/CAMS) and flagging 100% of restricted insider trades; implemented granular RBAC and audit logging for SEBI PIT compliance.</li>
+            <li><strong>Compulse Compliance Platform:</strong> Co-developed enterprise platform automating 67+ SEBI reporting types across 43 maker-checker workflow stages and 32+ automated email notifications; successfully transitioned into institutional client UAT.</li>
+            <li><strong>CAS Statement Parser:</strong> Developed automated desktop application (Python, Tauri, PyInstaller) extracting Demat holdings and mutual funds from unstructured CDSL statements at 98% accuracy (500+ statements/month), saving 10+ hours/week.</li>
+            <li><strong>Employee Operations Portal:</strong> Built operational management platform for 50+ employees with real-time balance dashboards and configurable approval workflows, cutting HR processing overhead by 60%.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Featured Projects (Python · AI/ML · Java)</h2>
+        
+        <!-- 1. PYTHON / HARDWARE / FULL STACK -->
+        <div class="project-header">
+            <div>
+                <span class="project-title">Biometric Attendance & Payroll Engine (Python Full Stack)</span> &mdash; 
+                <a class="inline-link" href="https://attendance-sigma-one.vercel.app">attendance-sigma-one.vercel.app</a>
+            </div>
+            <div class="project-tag">FastAPI · React · Supabase · Expo · ZKTeco SDK</div>
+        </div>
+        <ul>
+            <li>Deployed hardware-integrated biometric tracking system for 8+ eye hospital staff with real-time ZKTeco SDK sync, automating 30-day payroll cycles, overtime, leave accruals, and PDF payslips; reduced monthly processing time from 2+ hours to under 30 minutes.</li>
+        </ul>
+
+        <!-- 2. AI / ML -->
+        <div class="project-header" style="margin-top: 2px;">
+            <div>
+                <span class="project-title">FashionGallery — Multimodal Semantic Search (AI / GenAI)</span> &mdash; 
+                <a class="inline-link" href="https://github.com/Naazkn13/FashionGallery">github.com/Naazkn13/FashionGallery</a>
+            </div>
+            <div class="project-tag">Python · FastAPI · CLIP · Qdrant · RAG · Docker</div>
+        </div>
+        <ul>
+            <li>Built an AI visual/textual discovery engine utilizing OpenAI CLIP embeddings to generate joint image-text similarity vectors indexed in Qdrant vector database; added explainable RAG layer to communicate match confidence scores via asynchronous FastAPI endpoints.</li>
+        </ul>
+
+        <!-- 3. JAVA -->
+        <div class="project-header" style="margin-top: 2px;">
+            <div>
+                <span class="project-title">Java QR Attendance & Management Platform (Java Full Stack)</span> &mdash; 
+                <a class="inline-link" href="https://github.com/Naazkn13/java-qr-attendance-system">github.com/Naazkn13/java-qr-attendance-system</a>
+            </div>
+            <div class="project-tag">Java · Swing · MySQL · JDBC · QR Processing</div>
+        </div>
+        <ul>
+            <li>Engineered an attendance tracking desktop application using Java Swing and MySQL with JDBC connection pooling, generating dynamic QR tokens for touchless identity verification and exportable attendance reports.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Education</h2>
+        <div class="edu-row">
+            <div><span class="edu-institution">BSc in Information Technology</span> &mdash; Bhavan's College, Mumbai University</div>
+            <div class="edu-year">2021 – 2024</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Certifications</h2>
+        <div class="cert-row">
+            <div><span class="cert-title">Advanced Program in Java Full Stack Development</span> &mdash; DVOC Institute (Skill India / NSDC)</div>
+            <div class="cert-meta">Dec 2025 | ID: CERT_3243029_5</div>
+        </div>
+    </section>
+</body>
+</html>
+"""
+
+# =============================================================================
+# 2. PYTHON BACKEND & REGTECH SPECIALIST RESUME (For Python Job Applications)
+# =============================================================================
 HTML_PYTHON = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -344,9 +451,9 @@ HTML_PYTHON = f"""<!DOCTYPE html>
 </html>
 """
 
-# -----------------------------------------------------------------------------
-# 2. AI / GENAI & APPLICATION DEVELOPER RESUME
-# -----------------------------------------------------------------------------
+# =============================================================================
+# 3. AI / GENAI & APPLICATION DEVELOPER RESUME (For AI/ML Job Applications)
+# =============================================================================
 HTML_AI = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -448,9 +555,9 @@ HTML_AI = f"""<!DOCTYPE html>
 </html>
 """
 
-# -----------------------------------------------------------------------------
-# 3. JAVA FULLSTACK & SPRING BOOT RESUME
-# -----------------------------------------------------------------------------
+# =============================================================================
+# 4. JAVA FULLSTACK & SPRING BOOT SPECIALIST RESUME (For Java Job Applications)
+# =============================================================================
 HTML_JAVA = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -560,16 +667,17 @@ HTML_JAVA = f"""<!DOCTYPE html>
 
 def compile_resumes():
     resumes = [
-        ("Nuzhat_Khan_Resume.pdf", HTML_PYTHON, "Primary (Python & RegTech)"),
-        ("Nuzhat_Khan_Resume_Python.pdf", HTML_PYTHON, "Python Backend Specialist"),
-        ("Nuzhat_Khan_Resume_AI_ML.pdf", HTML_AI, "AI / GenAI Specialist"),
-        ("Nuzhat_Khan_Resume_Java.pdf", HTML_JAVA, "Java & Spring Boot Specialist"),
+        ("Nuzhat_Khan_Resume.pdf", HTML_GENERAL, "1. General Full Stack (Displayed on Portfolio)"),
+        ("Nuzhat_Khan_Resume_Python.pdf", HTML_PYTHON, "2. Python Backend Specialist"),
+        ("Nuzhat_Khan_Resume_AI_ML.pdf", HTML_AI, "3. AI / GenAI Specialist"),
+        ("Nuzhat_Khan_Resume_Java.pdf", HTML_JAVA, "4. Java Full Stack Specialist"),
     ]
 
-    print("=" * 60)
-    print("COMPILING RESUMES WITH WEASYPRINT")
-    print("=" * 60)
+    print("=" * 65)
+    print("COMPILING 4 ATS-OPTIMIZED RESUMES WITH WEASYPRINT")
+    print("=" * 65)
 
+    all_passed = True
     for filename, html_content, label in resumes:
         out_path = PUBLIC_DIR / filename
         html = HTML(string=html_content)
@@ -578,11 +686,16 @@ def compile_resumes():
         doc.write_pdf(target=str(out_path))
         file_size = os.path.getsize(out_path)
         
-        status = "✓ 1 PAGE (PERFECT)" if page_count == 1 else f"⚠ {page_count} PAGES (NEEDS ADJUSTMENT)"
+        status = "✓ 1 PAGE (PERFECT)" if page_count == 1 else f"⚠ {page_count} PAGES (OVERFLOW)"
+        if page_count != 1:
+            all_passed = False
         print(f"[{label}] -> {filename}")
         print(f"    Pages: {page_count} {status} | Size: {file_size:,} bytes")
         print(f"    Saved to: {out_path}")
-        print("-" * 60)
+        print("-" * 65)
+
+    if all_passed:
+        print("\nALL 4 RESUMES COMPILED ON EXACTLY 1 PAGE EACH!")
 
 if __name__ == "__main__":
     compile_resumes()
