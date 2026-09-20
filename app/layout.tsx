@@ -4,6 +4,7 @@ import CustomCursor from '@/components/CustomCursor'
 import BootLoader from '@/components/BootLoader'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://nuzhat-portfolio-alpha.vercel.app'),
   title: 'Nuzhat Khan — Software Developer | Python | FastAPI | AI/GenAI | RAG',
   description: 'Software developer building AI/GenAI applications with RAG, LLMs, embeddings, and vector search. Python, FastAPI, React, Docker.',
   alternates: { canonical: 'https://nuzhat-portfolio-alpha.vercel.app' },
