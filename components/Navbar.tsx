@@ -7,11 +7,11 @@ import { LinkedinIcon as Linkedin } from './icons/LinkedinIcon'
 import { GithubIcon as Github } from './icons/GithubIcon'
 
 const internalLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
+  { label: 'About', href: '/#about' },
+  { label: 'Projects', href: '/#projects' },
   { label: 'Case Studies', href: '/case-study' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Skills', href: '/#skills' },
+  { label: 'Contact', href: '/#contact' },
 ]
 
 export default function Navbar() {
