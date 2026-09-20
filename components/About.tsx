@@ -13,9 +13,9 @@ const timeline = [
   },
   {
     icon: Briefcase,
-    year: 'Jun 2025 – Jul 2026',
+    year: 'Jun 2025 – 24 Jul 2026',
     title: 'Software Developer at Infomatics Services',
-    desc: 'Built enterprise software platforms — automation systems, compliance tools, and data pipelines serving real users.',
+    desc: 'Completed tenure (LWD: 24 July 2026) building enterprise RegTech platforms, compliance automation, and financial data pipelines.',
   },
   {
     icon: Code2,
