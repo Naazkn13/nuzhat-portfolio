@@ -1,9 +1,8 @@
 'use client'
 import React, { useState, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
   ShieldCheck,
-  AlertTriangle,
   CheckCircle2,
   Lock,
   Unlock,
@@ -12,7 +11,6 @@ import {
   UserCheck,
   ArrowRight,
   Hash,
-  Clock,
   ShieldAlert,
   Building2,
   Check,
@@ -771,21 +769,33 @@ export default function NovusSimulator() {
 
                       {/* Approval / Rejection Actions */}
                       {makerCheckerStatus === 'PENDING' && (
-                        <div className="grid grid-cols-2 gap-2 pt-2">
-                          <button
-                            onClick={() => handleMakerCheckerAction('APPROVE')}
-                            className="py-2 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-inter text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow"
-                          >
-                            <Check size={14} />
-                            Approve Mandate
-                          </button>
-                          <button
-                            onClick={() => handleMakerCheckerAction('REJECT')}
-                            className="py-2 px-3 rounded-lg bg-rose-600/30 hover:bg-rose-600/50 text-rose-300 border border-rose-500/30 font-inter text-xs font-semibold flex items-center justify-center gap-1.5 transition-all"
-                          >
-                            <X size={14} />
-                            Reject
-                          </button>
+                        <div className="space-y-2 pt-2">
+                          <div>
+                            <label className="text-[11px] text-grey block mb-1">Checker Notes / Review Remarks</label>
+                            <input
+                              type="text"
+                              value={checkerNotes}
+                              onChange={(e) => setCheckerNotes(e.target.value)}
+                              placeholder="Remarks..."
+                              className="w-full bg-black/40 border border-white/10 rounded-lg p-2 text-xs text-white-soft focus:border-teal outline-none font-mono"
+                            />
+                          </div>
+                          <div className="grid grid-cols-2 gap-2">
+                            <button
+                              onClick={() => handleMakerCheckerAction('APPROVE')}
+                              className="py-2 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-inter text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow"
+                            >
+                              <Check size={14} />
+                              Approve Mandate
+                            </button>
+                            <button
+                              onClick={() => handleMakerCheckerAction('REJECT')}
+                              className="py-2 px-3 rounded-lg bg-rose-600/30 hover:bg-rose-600/50 text-rose-300 border border-rose-500/30 font-inter text-xs font-semibold flex items-center justify-center gap-1.5 transition-all"
+                            >
+                              <X size={14} />
+                              Reject
+                            </button>
+                          </div>
                         </div>
                       )}
 
@@ -884,7 +894,14 @@ export default function NovusSimulator() {
                 <label className="text-xs font-inter text-grey block mb-1 font-medium">Matter / Deal Name</label>
                 <select
                   value={sddMatter}
-                  onChange={(e) => setSddMatter(e.target.value)}
+                  onChange={(e) => {
+                    const val = e.target.value
+                    setSddMatter(val)
+                    if (val.includes('M&A')) setSddNature('Acquisition / Restructuring')
+                    else if (val.includes('Financial Results')) setSddNature('Financial Performance')
+                    else if (val.includes('Dividend')) setSddNature('Dividends & Capital Allocation')
+                    else setSddNature('Capital Structure & Expansion')
+                  }}
                   className="w-full bg-black/40 border border-white/10 rounded-lg p-2.5 text-xs text-white-soft focus:border-teal outline-none"
                 >
                   <option value="Project Falcon (Strategic M&A)">Project Falcon (Strategic M&A)</option>

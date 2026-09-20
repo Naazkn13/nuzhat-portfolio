@@ -1,11 +1,11 @@
 'use client'
-import React, { useRef, useState } from 'react'
-import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion'
-import { ChevronDown, ExternalLink, Globe, ShieldCheck } from 'lucide-react'
+import React, { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { ExternalLink, Globe, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
 import NovusSimulator from './NovusSimulator'
 
-type LinkItem = { label: string; url: string; icon: any; note?: string }
+type LinkItem = { label: string; url: string; icon: React.ComponentType<{ size?: number; className?: string }>; note?: string }
 type Project = {
   title: string
   tag: string
