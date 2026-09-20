@@ -244,16 +244,16 @@ HTML_GENERAL = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Nuzhat Khan — Full Stack Developer Resume</title>
+    <title>Nuzhat Khan — Software Developer Resume</title>
     <style>{CSS_TEMPLATE}</style>
 </head>
 <body>
-    {generate_header("Full Stack Developer | Python · React · Java · AI/GenAI · PostgreSQL · Docker")}
+    {generate_header("Software Developer | Python · React · Java · AI/GenAI · PostgreSQL · Docker")}
 
     <section>
         <h2>Professional Summary</h2>
         <p class="summary-text">
-            Full Stack Software Developer with 14 months of enterprise product engineering experience delivering 4 production RegTech platforms. Proven ability building end-to-end applications across Python, React, Java, and modern Generative AI (RAG, vector retrieval). Experienced from relational schema design (PostgreSQL) and RESTful API architecture to mobile distribution (Expo), containerization (Docker), and Azure DevOps CI/CD deployment.
+            Software Developer with 14 months of enterprise product engineering experience delivering 4 production RegTech platforms. Proven ability building end-to-end applications across Python, React, Java, and modern Generative AI (RAG, vector retrieval). Experienced from relational schema design (PostgreSQL) and RESTful API architecture to mobile distribution (Expo), containerization (Docker), and Azure DevOps CI/CD deployment.
         </p>
     </section>
 
@@ -285,10 +285,10 @@ HTML_GENERAL = f"""<!DOCTYPE html>
     <section>
         <h2>Featured Projects (Python · AI/ML · Java)</h2>
         
-        <!-- 1. PYTHON / HARDWARE / FULL STACK -->
+        <!-- 1. PYTHON / HARDWARE -->
         <div class="project-header">
             <div>
-                <span class="project-title">Biometric Attendance & Payroll Engine (Python Full Stack)</span> &mdash; 
+                <span class="project-title">Biometric Attendance & Payroll Engine</span> &mdash; 
                 <a class="inline-link" href="https://attendance-sigma-one.vercel.app">attendance-sigma-one.vercel.app</a>
             </div>
             <div class="project-tag">FastAPI · React · Supabase · Expo · ZKTeco SDK</div>
@@ -300,7 +300,7 @@ HTML_GENERAL = f"""<!DOCTYPE html>
         <!-- 2. AI / ML -->
         <div class="project-header" style="margin-top: 2px;">
             <div>
-                <span class="project-title">FashionGallery — Multimodal Semantic Search (AI / GenAI)</span> &mdash; 
+                <span class="project-title">FashionGallery — Multimodal Semantic Search</span> &mdash; 
                 <a class="inline-link" href="https://github.com/Naazkn13/FashionGallery">github.com/Naazkn13/FashionGallery</a>
             </div>
             <div class="project-tag">Python · FastAPI · CLIP · Qdrant · RAG · Docker</div>
@@ -312,7 +312,7 @@ HTML_GENERAL = f"""<!DOCTYPE html>
         <!-- 3. JAVA -->
         <div class="project-header" style="margin-top: 2px;">
             <div>
-                <span class="project-title">Java QR Attendance & Management Platform (Java Full Stack)</span> &mdash; 
+                <span class="project-title">Java QR Attendance & Management Platform</span> &mdash; 
                 <a class="inline-link" href="https://github.com/Naazkn13/java-qr-attendance-system">github.com/Naazkn13/java-qr-attendance-system</a>
             </div>
             <div class="project-tag">Java · Swing · MySQL · JDBC · QR Processing</div>
