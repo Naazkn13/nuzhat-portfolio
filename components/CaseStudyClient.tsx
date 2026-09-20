@@ -1,8 +1,9 @@
 'use client'
 import React, { useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion'
-import { ChevronDown, ExternalLink, Globe } from 'lucide-react'
+import { ChevronDown, ExternalLink, Globe, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
+import NovusSimulator from './NovusSimulator'
 
 type LinkItem = { label: string; url: string; icon: any; note?: string }
 type Project = {
@@ -100,7 +101,9 @@ const projects: Record<string, Project> = {
     ],
     result: 'Production platform for insider-trading governance and structured digital database for UPSI access at a live enterprise deployment.',
     stack: ['FastAPI', 'React', 'PostgreSQL', 'Docker', 'Azure DevOps'],
-    links: [],
+    links: [
+      { label: 'Interactive Sandbox', url: '#simulation', icon: ShieldCheck, note: 'Pre-Clearance & SDD Prototype' },
+    ],
     note: 'Client confidential — enterprise deployment',
   },
   'nsa-sports-platform': {
@@ -221,6 +224,18 @@ export default function CaseStudyClient({ slug }: { slug: string }) {
         <h1 className="font-grotesk text-5xl md:text-6xl font-bold text-white-soft mt-4 leading-tight">
           {project.title}
         </h1>
+        {slug === 'novus-comply-upsi' && (
+          <div className="mt-5 flex items-center gap-3">
+            <a
+              href="#simulation"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal/15 border border-teal/40 text-teal text-xs font-mono font-medium hover:bg-teal/25 transition-all shadow-sm group"
+            >
+              <span className="flex h-2 w-2 rounded-full bg-teal animate-pulse" />
+              <span>Interactive RegTech Sandbox Available</span>
+              <span className="group-hover:translate-y-0.5 transition-transform">↓</span>
+            </a>
+          </div>
+        )}
       </motion.div>
 
       <motion.div
@@ -258,6 +273,12 @@ export default function CaseStudyClient({ slug }: { slug: string }) {
           </ul>
         </section>
 
+        {slug === 'novus-comply-upsi' && (
+          <div id="simulation" className="scroll-mt-20">
+            <NovusSimulator />
+          </div>
+        )}
+
         <section className="glass rounded-2xl p-8">
           <h3 className="font-grotesk text-teal text-sm uppercase tracking-widest mb-4">Key Decisions</h3>
           <ul className="list-none space-y-2">
@@ -282,19 +303,22 @@ export default function CaseStudyClient({ slug }: { slug: string }) {
           <section className="glass rounded-2xl p-8">
             <h3 className="font-grotesk text-teal text-sm uppercase tracking-widest mb-4">Links</h3>
             <div className="flex flex-wrap gap-3">
-              {project.links.map((link: LinkItem, i: number) => (
-                <a
-                  key={i}
-                  href={link.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-2 border border-teal/30 text-teal px-5 py-2.5 rounded-full text-sm hover:bg-teal/10 transition-all font-inter"
-                >
-                  <link.icon size={14} />
-                  {link.label}
-                  {link.note && <span className="text-grey ml-1 text-xs">({link.note})</span>}
-                </a>
-              ))}
+              {project.links.map((link: LinkItem, i: number) => {
+                const isAnchor = link.url.startsWith('#')
+                return (
+                  <a
+                    key={i}
+                    href={link.url}
+                    target={isAnchor ? undefined : '_blank'}
+                    rel={isAnchor ? undefined : 'noreferrer'}
+                    className="flex items-center gap-2 border border-teal/30 text-teal px-5 py-2.5 rounded-full text-sm hover:bg-teal/10 transition-all font-inter"
+                  >
+                    <link.icon size={14} />
+                    {link.label}
+                    {link.note && <span className="text-grey ml-1 text-xs">({link.note})</span>}
+                  </a>
+                )
+              })}
             </div>
           </section>
         )}

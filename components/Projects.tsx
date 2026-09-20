@@ -32,7 +32,7 @@ const projects = [
     result: 'Production platform for insider-trading governance and structured digital database for UPSI access at a live enterprise deployment.',
     stack: ['FastAPI', 'React', 'PostgreSQL', 'Docker', 'Azure DevOps'],
     links: [
-      { label: 'Case Study', url: '/case-study/novus-comply-upsi', icon: ExternalLink },
+      { label: 'Case Study + Live Demo', url: '/case-study/novus-comply-upsi', icon: ExternalLink },
     ],
     note: 'Client confidential — enterprise deployment',
     caseStudy: 'novus-comply-upsi',

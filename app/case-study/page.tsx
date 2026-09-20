@@ -26,7 +26,7 @@ const caseStudies = [
     title: 'Novus Comply & Novus UPSI',
     tag: 'Enterprise · Production',
     tagColor: 'text-yellow-400 border-yellow-400/30 bg-yellow-400/10',
-    description: 'Production insider-trading governance and UPSI access platform with maker-checker RBAC and Azure DevOps CI/CD.',
+    description: 'Production insider-trading governance and UPSI access platform with maker-checker RBAC and Azure DevOps CI/CD. Features interactive simulation sandbox.',
     stack: ['FastAPI', 'React', 'PostgreSQL', 'Docker', 'Azure DevOps'],
   },
   {
