@@ -208,33 +208,6 @@ const projects = [
     ],
     caseStudy: 'fashion-gallery',
   },
-  {
-    title: 'Job Search System',
-    tag: 'Live · Full Stack',
-    tagColor: 'text-teal border-teal/30 bg-teal/10',
-    problem: 'Tracking MNC applications, tailoring resumes, and preparing for interviews across 30+ companies is chaotic.',
-    constraints: [
-      'Need role-specific resume versions (Python, AI, Java)',
-      'Must track full application lifecycle',
-      'Interview prep must link to actual projects',
-    ],
-    architecture: [
-      'Next.js frontend with 7 screens (dashboard, tracker, resume tailor, prep, showcase)',
-      'Python/FastAPI backend with resume generation',
-      'Supabase database for applications, companies, projects',
-      'Role-based resume tailoring with JD input',
-    ],
-    keyDecisions: [
-      'Built resume tailoring that reads JD and emphasizes matching skills',
-      'Linked interview prep directly to real project stories',
-    ],
-    result: 'Complete job search OS — tracker, resume generator, interview prep, project showcase.',
-    stack: ['Next.js', 'TypeScript', 'Python', 'FastAPI', 'Supabase', 'Tailwind CSS'],
-    links: [
-      { label: 'GitHub', url: 'https://github.com/Naazkn13/job-search', icon: Github },
-    ],
-    caseStudy: 'job-search-system',
-  },
 ]
 
 export default function Projects() {
@@ -249,7 +222,7 @@ export default function Projects() {
         transition={{ duration: 0.6 }}
         className="mb-16"
       >
-        <span className="text-teal text-xs tracking-widest uppercase font-inter">What I've built</span>
+        <span className="text-teal text-xs tracking-widest uppercase font-inter">What I&apos;ve built</span>
         <h2 className="font-grotesk text-4xl md:text-5xl font-bold mt-2">Projects</h2>
       </motion.div>
 
