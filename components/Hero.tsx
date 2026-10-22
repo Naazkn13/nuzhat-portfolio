@@ -1,9 +1,8 @@
 'use client'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useRef, useState, useCallback } from 'react'
-import MagneticButton from './MagneticButton'
 import { GithubIcon } from './icons/GithubIcon'
-import { Download } from 'lucide-react'
+import { Download, FileText, ExternalLink, Play, Pause, RotateCcw, Eye } from 'lucide-react'
 
 type Word = { start: number; end: number; text: string }
 
@@ -71,7 +70,7 @@ const scriptData: Word[] = [
   { start: 21.32, end: 21.58, text: '-end.' },
   { start: 21.96, end: 22.14, text: 'With' },
   { start: 22.14, end: 22.54, text: ' Python,' },
-  { start: 22.82, end: 22.98, text: ' Java,' },
+  { start: 22.82, end: 22.98, text: ' FastAPI,' },
   { start: 23.36, end: 23.52, text: ' React,' },
   { start: 23.82, end: 23.9, text: ' and' },
   { start: 23.9, end: 24.18, text: ' Docker,' },
@@ -100,7 +99,8 @@ export default function Hero() {
   const [isPaused, setIsPaused] = useState(false)
   const [videoEnded, setVideoEnded] = useState(false)
   const [displayedText, setDisplayedText] = useState('')
-  const [showResume, setShowResume] = useState(false)
+  const [showResumeModal, setShowResumeModal] = useState(false)
+  const [activeResumeTab, setActiveResumeTab] = useState<'PYTHON' | 'AI'>('PYTHON')
 
   useEffect(() => {
     const video = videoRef.current
@@ -182,17 +182,18 @@ export default function Hero() {
   }, [hasStarted])
 
   return (
-    <section className="relative min-h-screen md:h-screen flex flex-col md:flex-row md:overflow-hidden bg-[#080E1A] pt-14 md:pt-0">
+    <section className="relative min-h-screen md:h-screen flex flex-col md:flex-row md:overflow-hidden bg-[#080E1A] pt-16 md:pt-0">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#00D4C808_1px,transparent_1px),linear-gradient(to_bottom,#00D4C808_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none z-[1]" />
 
-      {/* LEFT COLUMN — VIDEO */}
-      <div className="relative w-full md:w-[70%] lg:w-[72%] h-[40vh] sm:h-[48vh] md:h-full flex-shrink-0 z-[2]">
+      {/* LEFT COLUMN — VIDEO WITH POSTER */}
+      <div className="relative w-full md:w-[65%] lg:w-[68%] h-[38vh] sm:h-[46vh] md:h-full flex-shrink-0 z-[2] bg-navy/60">
         <video
           ref={videoRef}
           className="hero-video-mask w-full h-full object-cover cursor-pointer"
           src="/portfolio-intro.mp4"
+          poster="/frame-30.jpg"
           playsInline
-          preload="auto"
+          preload="metadata"
           onClick={handleVideoClick}
         />
 
@@ -202,20 +203,18 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0 z-20 flex items-center justify-center bg-[#080E1A]/40 cursor-pointer"
+              transition={{ duration: 0.4 }}
+              className="absolute inset-0 z-20 flex items-center justify-center bg-[#080E1A]/40 backdrop-blur-[2px] cursor-pointer group"
               onClick={handlePlayClick}
             >
-              <motion.div
-                animate={{ opacity: [0.6, 1, 0.6] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-                className="flex flex-col items-center gap-3 select-none"
-              >
-                <span className="text-4xl">▶</span>
-                <span className="text-teal font-inter uppercase tracking-widest text-xs">
-                  Watch my 60-sec intro
+              <div className="flex flex-col items-center gap-3 select-none">
+                <span className="w-14 h-14 rounded-full bg-teal/20 border border-teal/50 text-teal flex items-center justify-center text-xl group-hover:scale-110 group-hover:bg-teal group-hover:text-navy transition-all shadow-xl shadow-teal/10">
+                  ▶
                 </span>
-              </motion.div>
+                <span className="text-teal font-mono uppercase tracking-widest text-xs px-3 py-1 rounded-full bg-navy/80 border border-teal/30">
+                  Watch 60-Sec Intro
+                </span>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -231,10 +230,10 @@ export default function Hero() {
             >
               <div className="flex flex-col items-center gap-3">
                 <div className="flex gap-2">
-                  <span className="w-3 h-12 bg-teal rounded-full" />
-                  <span className="w-3 h-12 bg-teal rounded-full" />
+                  <span className="w-3 h-10 bg-teal rounded-full" />
+                  <span className="w-3 h-10 bg-teal rounded-full" />
                 </div>
-                <span className="text-teal font-inter uppercase tracking-widest text-xs">
+                <span className="text-teal font-mono uppercase tracking-widest text-xs">
                   Paused
                 </span>
               </div>
@@ -249,153 +248,199 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0 z-20 flex items-center justify-center bg-[#080E1A]/40 cursor-pointer"
+              transition={{ duration: 0.4 }}
+              className="absolute inset-0 z-20 flex items-center justify-center bg-[#080E1A]/50 cursor-pointer"
               onClick={handleReplay}
             >
-              <motion.div
-                animate={{ opacity: [0.6, 1, 0.6] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-                className="flex flex-col items-center gap-3 select-none"
-              >
-                <span className="text-4xl">↻</span>
-                <span className="text-teal font-inter uppercase tracking-widest text-xs">
-                  Replay
+              <div className="flex flex-col items-center gap-3 select-none">
+                <span className="w-14 h-14 rounded-full bg-teal/20 border border-teal/50 text-teal flex items-center justify-center text-2xl hover:scale-110 hover:bg-teal hover:text-navy transition-all">
+                  ↻
                 </span>
-              </motion.div>
+                <span className="text-teal font-mono uppercase tracking-widest text-xs">
+                  Replay Intro
+                </span>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      {/* RIGHT COLUMN — TEXT */}
-      <div className="relative w-full md:w-[30%] lg:w-[28%] flex-1 md:h-full flex items-center py-5 md:py-0 z-[2]">
-        <div className="flex flex-col items-center md:items-start text-center md:text-left w-full px-4 md:px-5 lg:px-6">
+      {/* RIGHT COLUMN — RECRUITER VALUE PROPOSITION & IMMEDIATE CONTENT */}
+      <div className="relative w-full md:w-[35%] lg:w-[32%] flex-1 md:h-full flex items-center py-6 md:py-0 z-[2] bg-[#080E1A]/95 md:bg-transparent">
+        <div className="flex flex-col items-center md:items-start text-center md:text-left w-full px-5 sm:px-7 md:px-6 lg:px-8 space-y-4">
 
-          <div className="mb-3 flex flex-wrap items-center gap-1.5 rounded-full px-3 py-1 text-teal text-[10px] tracking-widest uppercase border border-teal/20 bg-teal/5">
-            <span className="leading-none whitespace-nowrap">• Software Developer · Python · AI/GenAI</span>
-          </div>
-          <div className="mb-4 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs tracking-wide border border-emerald-400/25 bg-emerald-400/5 text-emerald-300">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+          {/* Badges */}
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
+            <span className="rounded-full px-3 py-1 text-teal text-[11px] font-mono tracking-wider uppercase border border-teal/30 bg-teal/5">
+              Python Backend &amp; AI/GenAI
             </span>
-            Open to opportunities
+            <span className="flex items-center gap-1.5 rounded-full px-3 py-1 text-xs tracking-wide border border-emerald-400/30 bg-emerald-400/10 text-emerald-300">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              Available Immediately · Mumbai / Remote
+            </span>
           </div>
 
-          <h1
-            className="font-grotesk font-bold text-white-soft leading-tight mb-4"
-            style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
-          >
-            Nuzhat Khan
-          </h1>
+          {/* Name & Title */}
+          <div>
+            <h1 className="font-grotesk font-bold text-3xl sm:text-4xl text-white-soft leading-tight">
+              Nuzhat Khan
+            </h1>
+            <p className="text-teal font-mono text-xs sm:text-sm mt-1">
+              Software Developer · ~14 Months Experience
+            </p>
+          </div>
 
+          {/* Recruiter Summary Box (ALWAYS VISIBLE; switches to subtitle stream when video plays) */}
           <div 
             ref={textRef}
-            className="h-32 sm:h-44 md:h-64 mb-4 md:mb-6 w-full overflow-y-auto pr-2"
+            className="w-full max-h-48 sm:max-h-56 overflow-y-auto pr-1 text-xs sm:text-sm leading-relaxed p-4 rounded-xl bg-white/[0.02] border border-white/10 text-left"
             style={{
               scrollbarWidth: 'thin',
               scrollbarColor: '#00D4C8 #080E1A',
             }}
           >
-            {displayedText && (
-              <p
-                className="font-inter text-grey font-medium leading-relaxed"
-                style={{ fontSize: 'clamp(0.85rem, 1.3vw, 1.05rem)' }}
-              >
+            {hasStarted ? (
+              <p className="font-inter text-grey">
                 {displayedText}
                 <span className="inline-block w-2 h-4 ml-0.5 bg-teal animate-pulse align-middle" />
               </p>
+            ) : (
+              <div className="space-y-2 text-grey font-inter">
+                <p>
+                  <strong className="text-white-soft font-semibold">Enterprise BFSI &amp; RegTech Developer:</strong> Shipped 4 production platforms at Infomatics Services (June 2025 – 24 July 2026) using <span className="text-teal font-mono">FastAPI, PostgreSQL, Docker</span> handling trade pre-clearance, 67+ SEBI report maker-checker workflows, and financial document extraction (98% accuracy on 500+ statements/mo).
+                </p>
+                <p>
+                  <strong className="text-white-soft font-semibold">Applied AI &amp; Quantitative Engineering:</strong> Built multimodal search (<span className="text-teal font-mono">CLIP, Qdrant, LoRA</span>) and an algorithmic trading system backed by 37 automated pytest tests.
+                </p>
+              </div>
             )}
           </div>
 
-          <div className="flex flex-wrap gap-3 mb-4">
-            <a
-              href="#projects"
-              className="px-5 py-2.5 bg-teal text-navy rounded-full font-mono uppercase tracking-widest text-xs hover:bg-teal/90 transition-colors"
-            >
-              View Projects
-            </a>
-            <button
-              type="button"
-              onClick={() => setShowResume(true)}
-              className="px-5 py-2.5 border border-teal/40 text-teal rounded-full text-xs hover:bg-teal/10 transition-colors"
-            >
-              View Resume
-            </button>
-          </div>
-
-          <AnimatePresence>
-            {videoEnded && (
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="flex flex-wrap gap-3 w-full md:w-auto"
+          {/* PRIMARY RECRUITER ACTIONS: DUAL RESUME DOWNLOADS */}
+          <div className="w-full space-y-2.5 pt-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
+              {/* Primary Download: Python Backend Resume */}
+              <a
+                href="/resume-python.pdf"
+                download="Nuzhat_Khan_Python_Developer_Resume.pdf"
+                className="py-2.5 px-3 bg-teal hover:bg-teal/90 text-navy rounded-xl font-grotesk font-bold text-xs tracking-wide transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer text-center"
               >
-                <a
-                  href="#contact"
-                  className="px-5 py-2.5 border border-teal/40 text-teal rounded-full text-xs hover:bg-teal/10 transition-colors"
-                >
-                  Contact
-                </a>
-                <a
-                  href="https://github.com/Naazkn13"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-1.5 border border-teal/40 text-teal px-5 py-2.5 rounded-full text-xs hover:bg-teal/10 transition-colors"
-                >
-                  <GithubIcon className="w-3.5 h-3.5" />
-                  GitHub
-                </a>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                <Download size={14} />
+                Python Resume (PDF)
+              </a>
+
+              {/* Secondary Download: AI/GenAI Resume */}
+              <a
+                href="/resume-ai.pdf"
+                download="Nuzhat_Khan_AI_GenAI_Engineer_Resume.pdf"
+                className="py-2.5 px-3 border border-teal/40 hover:bg-teal/10 text-teal rounded-xl font-grotesk font-semibold text-xs tracking-wide transition-all flex items-center justify-center gap-1.5 cursor-pointer text-center"
+              >
+                <FileText size={14} />
+                AI/GenAI Resume
+              </a>
+            </div>
+
+            {/* Quick Navigation Links */}
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-1 text-xs">
+              <a
+                href="#projects"
+                className="px-3.5 py-1.5 rounded-lg border border-white/10 hover:border-teal/30 text-grey hover:text-white-soft font-mono transition-all text-[11px]"
+              >
+                Explore Projects ↓
+              </a>
+              <button
+                type="button"
+                onClick={() => setShowResumeModal(true)}
+                className="px-3.5 py-1.5 rounded-lg border border-white/10 hover:border-teal/30 text-grey hover:text-white-soft font-mono transition-all text-[11px] flex items-center gap-1 cursor-pointer"
+              >
+                <Eye size={12} className="text-teal" />
+                Preview in Browser
+              </button>
+              <a
+                href="https://github.com/Naazkn13"
+                target="_blank"
+                rel="noreferrer"
+                className="px-3 py-1.5 rounded-lg border border-white/10 hover:border-teal/30 text-grey hover:text-white-soft font-mono transition-all text-[11px] flex items-center gap-1"
+              >
+                <GithubIcon className="w-3 h-3 text-teal" />
+                GitHub
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Resume inline viewer */}
+      {/* DUAL RESUME INLINE PREVIEW MODAL */}
       <AnimatePresence>
-        {showResume && (
+        {showResumeModal && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[90] bg-navy/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 md:p-8"
+            className="fixed inset-0 z-[100] bg-navy/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 md:p-8"
           >
             <motion.div
               initial={{ scale: 0.98, opacity: 0, y: 10 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.98, opacity: 0, y: 10 }}
               transition={{ duration: 0.2 }}
-              className="w-full max-w-4xl h-[85vh] bg-[#0B1220] border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+              className="w-full max-w-4xl h-[90vh] bg-[#0B1220] border border-teal/30 rounded-2xl overflow-hidden shadow-2xl flex flex-col"
             >
-              <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-white/10 bg-[#0B1220]">
-                <div className="flex items-center gap-2.5 sm:gap-3">
-                  <span className="text-white-soft font-grotesk text-xs sm:text-sm font-semibold truncate max-w-[140px] sm:max-w-none">
-                    Nuzhat_Khan_Resume.pdf
-                  </span>
-                  <a
-                    href="/Nuzhat_Khan_Resume.pdf"
-                    download
-                    className="flex items-center gap-1.5 text-[11px] sm:text-xs bg-teal/15 hover:bg-teal/25 text-teal border border-teal/30 px-2.5 sm:px-3 py-1 rounded-full font-inter transition-all"
+              {/* Modal Bar */}
+              <div className="flex flex-wrap items-center justify-between px-4 sm:px-6 py-3 border-b border-white/10 bg-[#080E1A] gap-3">
+                {/* Tabs to select which resume to view */}
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setActiveResumeTab('PYTHON')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                      activeResumeTab === 'PYTHON'
+                        ? 'bg-teal text-navy font-bold'
+                        : 'text-grey hover:text-white-soft bg-white/5'
+                    }`}
                   >
-                    <Download size={12} />
-                    Download PDF
-                  </a>
+                    Python Backend Resume
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveResumeTab('AI')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                      activeResumeTab === 'AI'
+                        ? 'bg-teal text-navy font-bold'
+                        : 'text-grey hover:text-white-soft bg-white/5'
+                    }`}
+                  >
+                    AI / GenAI Resume
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setShowResume(false)}
-                  className="text-grey hover:text-white-soft text-xs uppercase tracking-widest px-2 py-1"
-                >
-                  Close
-                </button>
+
+                <div className="flex items-center gap-3">
+                  <a
+                    href={activeResumeTab === 'PYTHON' ? '/resume-python.pdf' : '/resume-ai.pdf'}
+                    download={activeResumeTab === 'PYTHON' ? 'Nuzhat_Khan_Python_Developer_Resume.pdf' : 'Nuzhat_Khan_AI_GenAI_Engineer_Resume.pdf'}
+                    className="flex items-center gap-1.5 text-xs bg-teal/15 hover:bg-teal/25 text-teal border border-teal/40 px-3 py-1.5 rounded-full font-inter transition-all"
+                  >
+                    <Download size={13} />
+                    Download Current ({activeResumeTab === 'PYTHON' ? 'Python' : 'AI'})
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setShowResumeModal(false)}
+                    className="text-grey hover:text-white-soft text-xs font-mono uppercase tracking-widest px-2 py-1"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
+
+              {/* Iframe View */}
               <iframe
-                src="/Nuzhat_Khan_Resume.pdf"
-                title="Resume"
+                src={activeResumeTab === 'PYTHON' ? '/resume-python.pdf' : '/resume-ai.pdf'}
+                title="Resume Preview"
                 className="w-full flex-1 bg-white"
               />
             </motion.div>

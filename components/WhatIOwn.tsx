@@ -6,21 +6,21 @@ import { ShieldCheck, Cpu, Fingerprint, FileText } from 'lucide-react'
 const capabilities = [
   {
     icon: Cpu,
-    label: 'AI/GenAI & RAG',
-    metric: 'LLM-backed applications',
-    body: 'RAG pipelines, semantic search, LLM integration, embeddings, vector search with Pinecone, FAISS, LangChain, and FastAPI.',
+    label: 'AI/GenAI & Vector Search',
+    metric: 'Multimodal & RAG',
+    body: 'RAG pipelines, multimodal semantic search with CLIP and Qdrant (HNSW tuned), Gemini API integration, embeddings, and LoRA fine-tuning.',
   },
   {
     icon: ShieldCheck,
-    label: 'Full-Stack Platforms',
-    metric: 'Production deployments',
-    body: 'End-to-end web applications with React, Next.js, Node.js, PostgreSQL, Docker, and CI/CD pipelines.',
+    label: 'RegTech & Backend Engineering',
+    metric: 'Production BFSI Systems',
+    body: 'High-compliance FastAPI microservices, indexed PostgreSQL schemas, SEBI report automation, and tamper-evident audit logging.',
   },
   {
     icon: Fingerprint,
-    label: 'Hardware & Mobile Integration',
-    metric: 'Live deployments',
-    body: 'Biometric device SDK integration, Android APK distribution, real-time systems, and mobile-first applications.',
+    label: 'Hardware & Biometric Integration',
+    metric: 'Live Deployment (12+ Staff)',
+    body: 'ZKTeco ADMS device protocol integration, Android APK check-in, real-time event queues, and automated 30-day payroll calculation.',
   },
   {
     icon: FileText,

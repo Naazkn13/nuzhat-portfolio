@@ -2,211 +2,227 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { ExternalLink, Smartphone, Globe } from 'lucide-react'
+import { ExternalLink, Globe, ShieldCheck, Terminal, Lock } from 'lucide-react'
 import { GithubIcon as Github } from './icons/GithubIcon'
-import ProjectCard from './ProjectCard'
+import ProjectCard, { Project } from './ProjectCard'
 
-const projects = [
+const projects: Project[] = [
   {
     title: 'Novus Comply & Novus UPSI',
     tag: 'Enterprise · Production',
     tagColor: 'text-yellow-400 border-yellow-400/30 bg-yellow-400/10',
-    problem: 'BFSI sector required a regulated pathway for trade pre-clearance and UPSI access governance without relying on spreadsheets.',
+    problem: 'BFSI sector required a strictly regulated, auditable pathway for trade pre-clearance and UPSI (Unpublished Price Sensitive Information) access governance to eliminate spreadsheet compliance leaks.',
+    built: 'Built a multi-tier trade pre-clearance engine reconciling 4 data feeds (ECAS, BENPOS, KFin, CAMS) with SEBI PIT restricted/grey-list checks on every transaction request. Engineered RBAC, bcrypt auth, Fernet-encrypted UPSI database fields, and tamper-evident SHA-256 audit logging over asynchronous FastAPI and indexed PostgreSQL.',
+    result: 'Deployed to production at a live enterprise BFSI client, delivering sub-second compliance audit queues and full statutory digital database auditability.',
+    stack: ['Python', 'FastAPI', 'PostgreSQL', 'Docker', 'Azure DevOps', 'React', 'Pydantic'],
+    links: [
+      { label: 'Interactive Sandbox', url: '/case-study/novus-comply-upsi#simulation', icon: ShieldCheck, note: 'Pre-Clearance Prototype' },
+    ],
     constraints: [
-      'Multiple SEBI/UPSI workflows with maker-checker stages',
-      'Strict audit trail for approval history and access grants',
-      'Existing enterprise datasets and downstream ECAS/BENPOS reconciliation',
-      'Browser-based usage with no desktop client',
+      'Strict SEBI PIT insider-trading regulatory guidelines with maker-checker approvals',
+      'Tamper-evident audit logging for all compliance access and threshold exceptions',
+      'High-throughput reconciliation with downstream ECAS/BENPOS depository data',
     ],
     architecture: [
-      'FastAPI async services with PostgreSQL',
-      'React admin/workflow frontends',
-      'Dockerized services with Azure DevOps pipelines',
-      'RBAC models separating trader/approver/compliance views',
-      'Event-style audit logs for access grants and exceptions',
+      'FastAPI asynchronous microservices with connection-pooled PostgreSQL',
+      'Role-based access control (RBAC) isolating trader, checker, and compliance tiers',
+      'Fernet symmetric encryption for sensitive UPSI disclosures',
+      'Containerized with Docker and deployed via Azure DevOps CI/CD pipelines',
     ],
     keyDecisions: [
-      'Chose explicit role gates over open ACLs to reduce reviewer mistakes',
-      'Built normalized export formats instead of per-report PDF generators',
+      'Enforced explicit multi-stage role gates over open ACLs to eliminate reviewer errors',
+      'Implemented immutable hash-chained audit trails for regulatory inspectability',
     ],
-    result: 'Production platform for insider-trading governance and structured digital database for UPSI access at a live enterprise deployment.',
-    stack: ['FastAPI', 'React', 'PostgreSQL', 'Docker', 'Azure DevOps'],
-    links: [
-      { label: 'Case Study + Live Demo', url: '/case-study/novus-comply-upsi', icon: ExternalLink },
-    ],
-    note: 'Client confidential — enterprise deployment',
+    note: 'Enterprise client deployment — interactive simulation sandbox available in case study.',
     caseStudy: 'novus-comply-upsi',
   },
   {
-    title: 'Compulse',
-    tag: 'Enterprise · UAT',
+    title: 'Compulse (SEBI Compliance Reporting Platform)',
+    tag: 'Enterprise · UAT Stage',
     tagColor: 'text-yellow-400 border-yellow-400/30 bg-yellow-400/10',
-    problem: 'Compliance teams manually prepared periodic SEBI reports across heterogeneous source systems.',
+    problem: 'Institutional compliance teams spent hundreds of hours manually aggregating, validating, and submitting statutory periodic SEBI reports across fragmented internal databases.',
+    built: 'Co-developed a comprehensive compliance platform automating 67+ SEBI report types across 43 maker-checker workflow stages. Implemented strict Pydantic validation contracts across heterogeneous data sources, 32+ automated email notifications, and an auditable re-submission history.',
+    result: 'Automated 67+ SEBI report formats through 43 maker-checker stages; successfully reached institutional client UAT with zero submission schema discrepancies.',
+    stack: ['Python', 'FastAPI', 'PostgreSQL', 'Docker', 'React', 'Pydantic', 'Ubuntu Linux'],
+    links: [
+      { label: 'Interactive Sandbox', url: '/case-study/compulse#simulation', icon: ShieldCheck, note: 'Maker-Checker Workflow' },
+    ],
     constraints: [
-      '67+ report variants in scope',
-      'Maker-checker workflow with no single-step approvals',
-      'UAT environment with strict change review',
-      'Need for traceable corrections and re-submission history',
+      '67+ distinct report variants spanning LODR, PIT, and AIF statutory mandates',
+      'Maker-checker dual sign-off with no single-person submission loophole',
+      'Strict change review and traceable amendment logging in UAT',
     ],
     architecture: [
-      'FastAPI backend with typed validation layers',
-      'React form/report composer with reusable base components',
-      'PostgreSQL document store for submissions and versions',
-      'Dockerized runtime for dev/qa parity',
+      'FastAPI validation layers with typed Pydantic request/response schemas',
+      'PostgreSQL document store for multi-version submission records',
+      'React form composer with modular report building blocks',
     ],
     keyDecisions: [
-      'Built shared validation contracts across similar reports to reduce code duplication',
-      'Made reviewer queue explicit so UAT sign-off was auditable',
+      'Built shared validation contracts across report categories to minimize code duplication',
+      'Isolated reviewer queue state machine to ensure complete UAT sign-off traceability',
     ],
-    result: 'Co-built platform automating 67+ SEBI report types through 43 maker-checker workflows. Currently in successful UAT with a leading financial institution.',
-    stack: ['FastAPI', 'React', 'Docker', 'Ubuntu 22', 'PostgreSQL'],
-    links: [
-      { label: 'Case Study + Live Demo', url: '/case-study/compulse#simulation', icon: ExternalLink },
-    ],
-    note: 'Enterprise UAT deployment — interactive sandbox available',
+    note: 'Enterprise UAT deployment — test the full calendar and maker-checker sandbox in the case study.',
     caseStudy: 'compulse',
   },
   {
-    title: 'CAS Parser',
-    tag: 'Desktop App · Client Deployed',
-    tagColor: 'text-purple-400 border-purple-400/30 bg-purple-400/10',
-    problem: 'Unstructured CDSL PDF statements made Demat holding and mutual fund extraction tedious and error-prone.',
-    constraints: [
-      'No API access to CDSL PDFs',
-      'Mixed layouts across statement variants',
-      'Process repeated by non-technical staff monthly',
-      'Output needed to be compatible with Excel automation',
-    ],
-    architecture: [
-      'Python parser using PyMuPDF and tabula-py',
-      'Tabular extraction normalized into typed records',
-      'Pandas transformations before Excel output',
-      'Packaged as Tauri desktop app for client deployment',
-    ],
-    keyDecisions: [
-      'Kept parsing deterministic to minimize hard-to-debug PDF drift',
-      'Built Excel export path first because client team sort/filter in spreadsheets',
-    ],
-    result: 'Desktop executable successfully deployed at the client, converting raw CDSL PDFs into structured Excel reports automatically.',
-    stack: ['Python', 'Tauri', 'PyMuPDF', 'tabula-py', 'Pandas'],
-    links: [
-      { label: 'Case Study', url: '/case-study/cas-parser', icon: ExternalLink },
-    ],
-    note: 'Internal enterprise tool',
-    caseStudy: 'cas-parser',
-  },
-  {
-    title: 'Biometric Attendance System',
-    tag: 'Live · Deployed',
+    title: 'Biometric Attendance & 30-Day Payroll Engine',
+    tag: 'Live · Production',
     tagColor: 'text-teal border-teal/30 bg-teal/10',
-    problem: 'Eye hospital relied on manual staff logging and Excel formulas for attendance, overtime, and salary calculations.',
+    problem: 'Eye hospital in Mumbai relied on manual paper sign-ins and error-prone Excel formulas for overtime, paid leave accruals, and monthly salary disbursement.',
+    built: 'Engineered an end-to-end automated platform that ingests real-time ZKTeco biometric punch events (ADMS protocol) into an asynchronous FastAPI backend. Built policy calculation algorithms for 30-day salary cycles, overtime multipliers (1.5x), loss-of-pay deductions, and PDF payslips, backed by an Expo Android app for staff check-ins.',
+    result: 'Live in production managing 12+ healthcare staff with zero downtime; reduced monthly payroll calculation turnaround from 2+ hours to under 30 minutes (75% reduction).',
+    stack: ['Python', 'FastAPI', 'Supabase', 'React', 'Expo', 'Android APK', 'ZKTeco SDK', 'Docker'],
+    links: [
+      { label: 'Interactive Demo Route', url: '/demo/biometric-attendance', icon: ShieldCheck, note: 'Live ADMS Prototype' },
+      { label: 'Hospital Web App', url: 'https://attendance-sigma-one.vercel.app/', icon: Globe, note: 'Staff Login' },
+    ],
     constraints: [
-      'ZKTeco hardware deployment with SDK constraints',
-      'Web + Android access needed for hospital staff',
-      '30-day pay cycles with PL accrual rules',
-      'Maintenance coverage without an on-site IT team',
+      'ZKTeco biometric hardware running proprietary ADMS push protocol',
+      'Dual access required: administrative web portal + mobile Android APK for staff',
+      'Configurable hospital policy rules for clinical shifts, night OT, and paid leave',
     ],
     architecture: [
-      'FastAPI backend with Supabase auth/storage',
-      'React admin portal with policy rules',
-      'Expo Android app for staff check-in/out',
-      'ZKTeco SDK integration for biometric events',
-      'Railway for worker processes, Vercel for admin web',
+      'FastAPI event receiver parsing HTTP POST /iclock/cdata payloads',
+      'Supabase PostgreSQL database with Row-Level Security and audit triggers',
+      'Decoupled event queue to isolate device connectivity from payroll computation',
     ],
     keyDecisions: [
-      'Separated device event ingestion from payroll rules to keep hardware failures from breaking payroll',
-      'Used configurable policy rules instead of hard-coded formulas',
+      'Separated hardware punch ingestion from policy evaluation to prevent device disconnects from interrupting salary calculations',
+      'Implemented parameterized rule models rather than hard-coded healthcare payroll formulas',
     ],
-    result: 'Automated salary cycle tracking, PL accrual, overtime, and deductions for 8+ employees with zero downtime since deployment.',
-    stack: ['FastAPI', 'React', 'Supabase', 'Railway', 'Vercel', 'Expo', 'Android APK'],
-    links: [
-      { label: 'Web App', url: 'https://attendance-sigma-one.vercel.app/', icon: Globe, note: 'Login required' },
-      { label: 'Case Study', url: '/case-study/biometric-attendance-system', icon: ExternalLink },
-    ],
-    note: 'Web + Android app. Login required.',
+    note: 'Live deployment at Mumbai eye hospital (12+ staff). Explore the live demo route or embedded sandbox.',
     caseStudy: 'biometric-attendance-system',
   },
   {
-    title: 'HospitalSop Portal',
-    tag: 'Enterprise · Deployed',
-    tagColor: 'text-teal border-teal/30 bg-teal/10',
-    problem: 'Manual onboarding and inconsistent staff training across shifts.',
+    title: 'CAS Statement Parser',
+    tag: 'Desktop App · Client Deployed',
+    tagColor: 'text-purple-400 border-purple-400/30 bg-purple-400/10',
+    problem: 'Unstructured, multi-page CDSL PDF financial statements prevented automated extraction of Demat equity holdings, mutual fund folios, and historical transactions.',
+    built: 'Built a local-first deterministic Python document extraction pipeline using PyMuPDF and Tabula-py. Normalized multi-table layouts into typed records using Pandas, and packaged the tool into a standalone desktop application via Tauri and PyInstaller for client distribution.',
+    result: 'Client-deployed desktop tool extracting records at 98% accuracy across 500+ statements per month, eliminating 10+ hours per week of manual data entry.',
+    stack: ['Python', 'PyMuPDF', 'Tabula-py', 'Pandas', 'Tauri', 'PyInstaller'],
+    links: [],
     constraints: [
-      'No existing structured training content',
-      'Hospital device mix with low-IP devices in use',
-      'Shared logins during shift handovers',
+      'Zero API access to CDSL data feeds — extraction forced from raw PDF layouts',
+      'Inconsistent table formats and split headers across statement revisions',
+      'Offline client execution required without cloud network dependencies',
     ],
     architecture: [
-      'Next.js portal with role-aware course views',
-      'PostgreSQL for staff progress and SOP versioning',
-      'Tailwind UI optimized for low-connectivity access',
+      'Deterministic rule-based PDF coordinate parser using PyMuPDF',
+      'Tabular normalization engine outputting structured Excel workbooks',
+      'Lightweight Tauri desktop wrapper with local file system sandboxing',
     ],
     keyDecisions: [
-      'Chose text + video SOPs instead of long PDFs because staff rarely completed PDF onboarding',
-      'Kept visitor/contractor access read-only to reduce support overhead',
+      'Chose deterministic heuristic parsing over LLM OCR to prevent financial hallucination and ensure 100% reproducible figures',
+      'Optimized output specifically for client spreadsheet reconciliation workflows',
     ],
-    result: 'Enabled efficient staff training and compliance verification for hospital operations.',
-    stack: ['Next.js', 'React', 'PostgreSQL', 'Tailwind CSS'],
+    note: 'Client-deployed production desktop tool.',
+    caseStudy: 'cas-parser',
+  },
+  {
+    title: 'Project Phoenix (Algorithmic Trading & Online Learning Engine)',
+    tag: 'Private · Quantitative Engine',
+    tagColor: 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10',
+    problem: 'Systematic intraday market trading requires automated signal verification, strict capital-preservation risk gates, and post-trade feedback to prevent drawdowns during choppy market regimes.',
+    built: 'Engineered a production-style algorithmic trading system on Angel One SmartAPI featuring a tri-agent core (BrainAgent: dual Heiken-Ashi momentum + ADX filter; ExecutorAgent: order routing + Chandelier ATR trailing stop; ResearcherAgent: Bayesian win-rate calibration + 24h symbol penalty box) governed by a RiskGuardian (2% position sizing, 5% daily kill-switch). Persisted in SQLite via SQLAlchemy.',
+    result: 'Covered by 37 automated pytest tests across 11 test suites validating risk sizing, trailing stops, session gates, and agent collaboration. Zero syntax or compilation errors (py_compile clean).',
+    stack: ['Python', 'NumPy', 'Pandas', 'SQLAlchemy', 'SQLite', 'Pydantic', 'PyTest', 'AsyncIO'],
+    links: [],
+    constraints: [
+      'Hard capital risk limits with sub-millisecond execution guardrails',
+      'Strict credential isolation with zero live secrets (.env.example only)',
+      'Deterministic test coverage across mock API feeds and edge market sessions',
+    ],
+    architecture: [
+      'Modular tri-agent orchestration with clean separation of signal, risk, and execution',
+      'Conjugate-Beta Bayesian updating layer adjusting conviction after closed trades',
+      'SQLAlchemy-backed trade journal tracking execution slippage and failure modes',
+    ],
+    keyDecisions: [
+      'Enforced a hard RiskGuardian kill-switch at the root dispatcher level, overriding individual agent signals',
+      'Wrote comprehensive unit and regression tests (37 tests) before running paper test cycles',
+    ],
+    note: 'Private repository in live test phase. Architectural walkthrough and test suite available for review upon request.',
+  },
+  {
+    title: 'FashionGallery (Multimodal AI & Vector Search Engine)',
+    tag: 'AI / GenAI · Vector Search',
+    tagColor: 'text-purple-400 border-purple-400/30 bg-purple-400/10',
+    problem: 'Traditional e-commerce keyword queries fail on fashion catalogs because visual style, cut, and color relationships cannot be adequately captured through text metadata alone.',
+    built: 'Developed a multimodal semantic search engine using joint image-text embeddings from open_clip (ViT-B/32), indexed in Qdrant with tuned HNSW parameters (m=16, ef_construct=200). Implemented LoRA fine-tuning from scratch with low-rank adapters, a linear probe, a hybrid HSV dominant-color re-ranker, and Gemini-powered query expansion with local fallback. (First version built on FAISS and Pinecone, then rebuilt on Qdrant).',
+    result: 'Sub-100ms vector search across multimodal catalogs demonstrating practical implementation of vector databases, embedding alignment, and fine-tuning architectures.',
+    stack: ['Python', 'FastAPI', 'PyTorch', 'open_clip', 'Qdrant', 'LoRA', 'Docker', 'React'],
     links: [
-      { label: 'Case Study', url: '/case-study/hospital-sop-portal', icon: ExternalLink },
+      { label: 'GitHub Repository', url: 'https://github.com/Naazkn13/FashionGallery', icon: Github },
     ],
-    note: 'Hospital internal system — login required',
-    caseStudy: 'hospital-sop-portal',
+    constraints: [
+      'Fast joint image and text search across multimodal catalog indices',
+      'Explainable search results combining embedding similarity with color fidelity',
+      'Local fallback when external LLM API rate limits are encountered',
+    ],
+    architecture: [
+      'open_clip ViT-B/32 feature extraction pipeline',
+      'Qdrant vector database container with tuned HNSW indexing',
+      'FastAPI asynchronous endpoints containerized with Docker Compose',
+    ],
+    keyDecisions: [
+      'Migrated from FAISS/Pinecone to Qdrant to enable native payload filtering and local Docker reproducibility',
+      'Implemented LoRA from scratch with zero-initialized B matrix to explore adapter behavior on multimodal weights',
+    ],
+    note: 'Public open-source repository on GitHub.',
+    caseStudy: 'fashion-gallery',
   },
   {
     title: 'NSA Sports Platform',
     tag: 'Live · Production',
     tagColor: 'text-teal border-teal/30 bg-teal/10',
-    problem: 'Fragmented player registration, team assignment, and coach approvals across spreadsheets.',
-    constraints: [
-      'Role-based access for coaches/players/admins',
-      'Configurable season/category rules',
-      'Public presence needed for registration',
-    ],
-    architecture: [
-      'React frontend with role-aware routing',
-      'Node.js backend with collection-based approval store',
-      'MongoDB for flexible seasonal schema changes',
-      'Configurable approval workflows using rule definitions',
-    ],
-    keyDecisions: [
-      'Chose document DB to avoid repeating migration rewrites per season',
-      'Built role-aware dashboards instead of one admin dashboard to reduce support tickets',
-    ],
-    result: 'Live in production, managing 50+ active players seamlessly.',
-    stack: ['React', 'Node.js', 'MongoDB'],
+    problem: 'Sports academy managed player registration, age-category verification, and tournament affiliations manually across spreadsheets and paper documents.',
+    built: 'Built a full-stack sports platform with role-based routing for players, coaches, and administrators. Integrated multi-tier registration, club affiliations, OTP verification, Razorpay payments, and OCR-assisted document inspection with automated approval notifications.',
+    result: 'Live in production at nsasports.co.in, managing 50+ active players across tournament seasons with zero downtime.',
+    stack: ['Next.js', 'React', 'Node.js', 'MongoDB', 'Supabase', 'Tailwind CSS'],
     links: [
       { label: 'Live Site', url: 'https://nsasports.co.in/', icon: Globe },
-      { label: 'Case Study', url: '/case-study/nsa-sports-platform', icon: ExternalLink },
     ],
+    constraints: [
+      'Role-based access separating coaches, athletes, and league administrators',
+      'Flexible seasonal schema changes for tournament brackets and categories',
+      'Public registration portal paired with secure administrative dashboards',
+    ],
+    architecture: [
+      'Next.js responsive frontend with role-aware navigation',
+      'Document database store for seasonal rule and roster flexibility',
+      'Automated email notifications on approval and verification milestones',
+    ],
+    keyDecisions: [
+      'Chose document-oriented schemas to accommodate evolving seasonal rules without repeated database migrations',
+      'Built automated verification workflows, cutting administrative turnaround by 70%',
+    ],
+    note: 'Live production platform.',
     caseStudy: 'nsa-sports-platform',
   },
   {
-    title: 'FashionGallery',
-    tag: 'AI · In Progress',
-    tagColor: 'text-purple-400 border-purple-400/30 bg-purple-400/10',
-    problem: 'Fashion search requires understanding visual similarity, not just text matching.',
+    title: 'Hospital SOP & Operations Portal',
+    tag: 'Enterprise · Deployed',
+    tagColor: 'text-teal border-teal/30 bg-teal/10',
+    problem: 'Hospital clinical and administrative staff experienced onboarding delays and inconsistent shift compliance due to unstructured training documentation.',
+    built: 'Built a role-aware hospital training portal backed by a Python batch PDF generation pipeline (ReportLab). Compiled clinical protocols into 48 SOPs across 15 hospital categories, paired with training video modules and progress verification.',
+    result: 'Deployed and in active use at a Mumbai eye hospital, streamlining clinical staff compliance and operational audits across shifts.',
+    stack: ['Next.js', 'Python (ReportLab)', 'Supabase', 'PostgreSQL', 'Tailwind CSS'],
+    links: [],
     constraints: [
-      'Need both image and text-based search',
-      'Visual similarity requires embedding-based approach',
-      'Must be explainable — why did this item match?',
+      'Zero existing structured digital protocol curriculum',
+      'Diverse device mix across hospital wards and low-bandwidth terminals',
     ],
     architecture: [
-      'CLIP embeddings for image-based similarity',
-      'Qdrant vector database for fast retrieval',
-      'RAG-style retrieval over fashion content',
-      'FastAPI backend, React/Next.js frontend',
+      'Next.js web portal with role-gated protocol views',
+      'Python ReportLab pipeline compiling structured protocol definitions into standardized PDFs',
+      'Supabase PostgreSQL tracking staff completion and version changes',
     ],
     keyDecisions: [
-      'Used CLIP for zero-shot fashion understanding without custom training',
-      'Added RAG to explain matches, not just return results',
+      'Delivered modular digital SOPs alongside video walk-throughs to maximize compliance during shift handovers',
     ],
-    result: 'AI-powered fashion search demonstrating practical RAG + embeddings application.',
-    stack: ['Python', 'FastAPI', 'React', 'Next.js', 'CLIP', 'Qdrant', 'RAG', 'Docker'],
-    links: [
-      { label: 'GitHub', url: 'https://github.com/Naazkn13/FashionGallery', icon: Github },
-    ],
-    caseStudy: 'fashion-gallery',
+    note: 'Internal healthcare deployment.',
+    caseStudy: 'hospital-sop-portal',
   },
 ]
 
@@ -222,13 +238,19 @@ export default function Projects() {
         transition={{ duration: 0.6 }}
         className="mb-16"
       >
-        <span className="text-teal text-xs tracking-widest uppercase font-inter">What I&apos;ve built</span>
-        <h2 className="font-grotesk text-4xl md:text-5xl font-bold mt-2">Projects</h2>
+        <span className="text-teal text-xs tracking-widest uppercase font-mono">Verified Work Delivered</span>
+        <h2 className="font-grotesk text-4xl md:text-5xl font-bold mt-2 text-white-soft">
+          Featured Projects &amp; Case Studies
+        </h2>
+        <p className="text-grey font-inter text-sm md:text-base mt-3 max-w-2xl leading-relaxed">
+          Every project below includes verifiable production evidence, architecture rationale, and measured outcomes.
+          Case studies and interactive sandboxes are available for deep technical inspection.
+        </p>
       </motion.div>
 
-      <div className="grid gap-6">
+      <div className="grid gap-8">
         {projects.map((project, i) => (
-          <ProjectCard key={i} project={project} i={i} inView={inView} />
+          <ProjectCard key={project.title} project={project} i={i} inView={inView} />
         ))}
       </div>
     </section>

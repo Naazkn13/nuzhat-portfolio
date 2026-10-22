@@ -65,12 +65,22 @@ export default function Contact() {
           </MagneticButton>
           <MagneticButton>
             <a
-              href="/Nuzhat_Khan_Resume.pdf"
-              download
+              href="/resume-python.pdf"
+              download="Nuzhat_Khan_Python_Developer_Resume.pdf"
               className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-2.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
             >
               <Download size={16} />
-              Resume
+              Python Resume
+            </a>
+          </MagneticButton>
+          <MagneticButton>
+            <a
+              href="/resume-ai.pdf"
+              download="Nuzhat_Khan_AI_GenAI_Engineer_Resume.pdf"
+              className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-2.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
+            >
+              <Download size={16} />
+              AI Resume
             </a>
           </MagneticButton>
           <MagneticButton>
@@ -81,17 +91,6 @@ export default function Contact() {
             >
               <Github size={16} />
               GitHub
-            </a>
-          </MagneticButton>
-          <MagneticButton>
-            <a
-              href="https://wa.me/919769149366"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center justify-center gap-2 border border-teal/30 text-teal px-8 py-2.5 rounded-full font-grotesk font-semibold hover:bg-teal/10 transition-all"
-            >
-              <MessageCircle size={16} />
-              WhatsApp
             </a>
           </MagneticButton>
         </motion.div>

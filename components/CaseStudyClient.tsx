@@ -5,6 +5,7 @@ import { ExternalLink, Globe, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
 import NovusSimulator from './NovusSimulator'
 import CompulseSimulator from './CompulseSimulator'
+import BiometricSimulator from './BiometricSimulator'
 
 type LinkItem = { label: string; url: string; icon: React.ComponentType<{ size?: number; className?: string }>; note?: string }
 type Project = {
@@ -48,7 +49,6 @@ const projects: Record<string, Project> = {
     stack: ['FastAPI', 'React', 'Docker', 'Ubuntu 22', 'PostgreSQL'],
     links: [
       { label: 'Interactive Sandbox', url: '#simulation', icon: ShieldCheck, note: 'Calendar & Maker-Checker' },
-      { label: 'Live Enterprise UAT', url: 'https://webapps.cloud-infomatics.co.in/compulse/', icon: Globe, note: 'Enterprise Restricted / Client SSO' },
     ],
     note: 'Enterprise UAT deployment — explore full workflows in the interactive sandbox below.',
   },
@@ -74,12 +74,14 @@ const projects: Record<string, Project> = {
       'Separated device event ingestion from payroll rules to keep hardware failures from breaking payroll',
       'Used configurable policy rules instead of hard-coded formulas',
     ],
-    result: 'Automated salary cycle tracking, PL accrual, overtime, and deductions for 8+ employees with zero downtime since deployment.',
+    result: 'Automated salary cycle tracking, PL accrual, overtime, and deductions for 12+ hospital staff with zero downtime since deployment.',
     stack: ['FastAPI', 'React', 'Supabase', 'Railway', 'Vercel', 'Expo', 'Android APK'],
     links: [
-      { label: 'Web App', url: 'https://attendance-sigma-one.vercel.app/', icon: Globe, note: 'Login required' },
+      { label: 'Interactive Sandbox', url: '#simulation', icon: ShieldCheck, note: 'Hardware ADMS & 30-Day Payroll' },
+      { label: 'Full Demo Route', url: '/demo/biometric-attendance', icon: ExternalLink, note: 'Dedicated Interactive Prototype' },
+      { label: 'Live Web App', url: 'https://attendance-sigma-one.vercel.app/', icon: Globe, note: 'Hospital Portal (Staff Login)' },
     ],
-    note: 'Web + Android app. Login required.',
+    note: 'Live deployment at Mumbai eye hospital (12+ staff). Explore the interactive sandbox below.',
   },
   'novus-comply-upsi': {
     title: 'Novus Comply & Novus UPSI',
@@ -184,10 +186,10 @@ const projects: Record<string, Project> = {
       'Kept parsing deterministic to minimize hard-to-debug PDF drift',
       'Built Excel export path first because client team sort/filter in spreadsheets',
     ],
-    result: 'Desktop executable successfully deployed at the client, converting raw CDSL PDFs into structured Excel reports automatically.',
+    result: 'Desktop executable successfully deployed at the client, extracting Demat holdings and mutual fund transactions from unstructured CDSL statements at 98% accuracy on 500+ statements per month, saving 10+ hours per week.',
     stack: ['Python', 'Tauri', 'PyMuPDF', 'tabula-py', 'Pandas'],
     links: [],
-    note: 'Internal enterprise tool',
+    note: 'Internal enterprise tool — production deployed at client',
   },
 }
 
@@ -228,7 +230,7 @@ export default function CaseStudyClient({ slug }: { slug: string }) {
         <h1 className="font-grotesk text-5xl md:text-6xl font-bold text-white-soft mt-4 leading-tight">
           {project.title}
         </h1>
-        {(slug === 'novus-comply-upsi' || slug === 'compulse') && (
+        {(slug === 'novus-comply-upsi' || slug === 'compulse' || slug === 'biometric-attendance-system') && (
           <div className="mt-5 flex items-center gap-3">
             <a
               href="#simulation"
@@ -238,7 +240,9 @@ export default function CaseStudyClient({ slug }: { slug: string }) {
               <span>
                 {slug === 'novus-comply-upsi'
                   ? 'Interactive RegTech Sandbox Available'
-                  : 'Interactive Compliance Calendar Sandbox Available'}
+                  : slug === 'compulse'
+                  ? 'Interactive Compliance Calendar Sandbox Available'
+                  : 'Interactive Biometric & 30-Day Payroll Sandbox Available'}
               </span>
               <span className="group-hover:translate-y-0.5 transition-transform">↓</span>
             </a>
@@ -290,6 +294,12 @@ export default function CaseStudyClient({ slug }: { slug: string }) {
         {slug === 'compulse' && (
           <div id="simulation" className="scroll-mt-20">
             <CompulseSimulator />
+          </div>
+        )}
+
+        {slug === 'biometric-attendance-system' && (
+          <div id="simulation" className="scroll-mt-20">
+            <BiometricSimulator />
           </div>
         )}
 

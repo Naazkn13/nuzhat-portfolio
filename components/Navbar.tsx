@@ -10,6 +10,7 @@ const internalLinks = [
   { label: 'About', href: '/#about' },
   { label: 'Projects', href: '/#projects' },
   { label: 'Case Studies', href: '/case-study' },
+  { label: 'Live Demo', href: '/demo/biometric-attendance' },
   { label: 'Skills', href: '/#skills' },
   { label: 'Contact', href: '/#contact' },
 ]
@@ -48,13 +49,13 @@ export default function Navbar() {
       </Link>
 
       {/* Desktop navigation */}
-      <div className="hidden md:flex items-center gap-8">
+      <div className="hidden md:flex items-center gap-7">
         {internalLinks.map((link, i) => (
           <motion.div
             key={link.label}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
+            transition={{ delay: i * 0.08 }}
           >
             <Link
               href={link.href}
@@ -65,15 +66,26 @@ export default function Navbar() {
           </motion.div>
         ))}
         <motion.a
+          href="/resume-python.pdf"
+          download="Nuzhat_Khan_Python_Developer_Resume.pdf"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.35 }}
+          className="flex items-center gap-1.5 bg-teal text-navy px-3.5 py-1.5 rounded-full text-xs font-grotesk font-bold hover:bg-teal/90 transition-all shadow-sm"
+        >
+          <Download size={13} />
+          Resume
+        </motion.a>
+        <motion.a
           href="https://github.com/Naazkn13"
           target="_blank"
           rel="noreferrer"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="flex items-center gap-2 border border-teal/30 text-teal px-4 py-1.5 rounded-full text-sm hover:bg-teal/10 transition-all"
+          className="flex items-center gap-1.5 border border-teal/30 text-teal px-3.5 py-1.5 rounded-full text-xs hover:bg-teal/10 transition-all"
         >
-          <Github size={14} />
+          <Github size={13} />
           GitHub
         </motion.a>
         <motion.a
@@ -82,10 +94,10 @@ export default function Navbar() {
           rel="noreferrer"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="flex items-center gap-2 border border-teal/30 text-teal px-4 py-1.5 rounded-full text-sm hover:bg-teal/10 transition-all"
+          transition={{ delay: 0.45 }}
+          className="flex items-center gap-1.5 border border-teal/30 text-teal px-3.5 py-1.5 rounded-full text-xs hover:bg-teal/10 transition-all"
         >
-          <Linkedin size={14} />
+          <Linkedin size={13} />
           LinkedIn
         </motion.a>
       </div>
@@ -124,12 +136,19 @@ export default function Navbar() {
 
             <div className="pt-3 flex flex-wrap items-center gap-2.5">
               <a
-                href="/Nuzhat_Khan_Resume.pdf"
-                download
+                href="/resume-python.pdf"
+                download="Nuzhat_Khan_Python_Developer_Resume.pdf"
                 className="flex items-center gap-1.5 bg-teal text-navy px-4 py-2 rounded-full text-xs font-grotesk font-semibold hover:bg-teal/90 transition-all"
               >
                 <Download size={13} />
-                Resume
+                Python Resume
+              </a>
+              <a
+                href="/resume-ai.pdf"
+                download="Nuzhat_Khan_AI_GenAI_Engineer_Resume.pdf"
+                className="flex items-center gap-1.5 border border-teal/30 text-teal px-3.5 py-2 rounded-full text-xs font-grotesk hover:bg-teal/10 transition-all"
+              >
+                AI Resume
               </a>
               <a
                 href="https://github.com/Naazkn13"

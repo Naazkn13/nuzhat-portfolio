@@ -4,13 +4,71 @@ import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 
 const skills = {
-  'Languages': ['Python', 'TypeScript', 'JavaScript', 'SQL', 'Java'],
-  'Frontend': ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'Expo'],
-  'Backend': ['FastAPI', 'Node.js', 'REST APIs'],
-  'AI / GenAI': ['RAG', 'Embeddings', 'Vector Search', 'LLM Integration', 'Prompt Engineering', 'Pinecone', 'FAISS', 'LangChain', 'OpenAI API', 'Gemini API'],
-  'Data & DB': ['PostgreSQL', 'Supabase', 'MongoDB', 'Pandas'],
-  'DevOps': ['Docker', 'Linux (Ubuntu/Fedora)', 'Railway', 'Vercel', 'Azure DevOps', 'CI/CD', 'Git', 'GitHub Actions'],
-  'Data & Parsing': ['PyMuPDF', 'tabula-py', 'PDF Processing'],
+  'Backend & APIs': [
+    'Python',
+    'FastAPI',
+    'RESTful APIs',
+    'Pydantic',
+    'SQLAlchemy',
+    'AsyncIO',
+    'PyTest',
+    'JWT & RBAC Auth',
+    'Microservices',
+  ],
+  'AI / GenAI & Vector Search': [
+    'RAG Architecture',
+    'Vector Search',
+    'Qdrant (HNSW Tuning)',
+    'CLIP (open_clip ViT-B/32)',
+    'LoRA Fine-Tuning',
+    'Text & Image Embeddings',
+    'LLM API Integration (Gemini)',
+    'Hybrid Re-ranking',
+    'FAISS & Pinecone',
+  ],
+  'Databases & Storage': [
+    'PostgreSQL',
+    'Supabase',
+    'SQLite',
+    'Redis (Caching)',
+    'MongoDB',
+    'Database Indexing',
+  ],
+  'Data & Document Pipelines': [
+    'Pandas',
+    'NumPy',
+    'PyMuPDF',
+    'Tabula-py',
+    'ReportLab (PDF Engine)',
+    'Structured Layout Parsing',
+    'Financial Statement Extraction',
+  ],
+  'DevOps & Cloud': [
+    'Docker & Docker Compose',
+    'Azure DevOps CI/CD',
+    'GitHub Actions',
+    'Linux (Ubuntu/Fedora)',
+    'Git',
+    'Postman API Testing',
+    'Vercel & Railway',
+  ],
+  'Frontend & Mobile': [
+    'React',
+    'Next.js',
+    'TypeScript',
+    'JavaScript',
+    'Tailwind CSS',
+    'Expo (React Native)',
+    'Framer Motion',
+  ],
+  'Domain & RegTech Security': [
+    'SEBI Compliance (PIT & LODR)',
+    'Maker-Checker Workflows',
+    'UPSI Governance & SDD',
+    'Tamper-Evident Audit Trails',
+    'Fernet & Bcrypt Encryption',
+    'BFSI Reconciliation (ECAS/BENPOS)',
+  ],
 }
 
 export default function Skills() {
@@ -25,8 +83,11 @@ export default function Skills() {
         transition={{ duration: 0.6 }}
         className="mb-16"
       >
-        <span className="text-teal text-xs tracking-widest uppercase font-inter">My toolkit</span>
-        <h2 className="font-grotesk text-4xl md:text-5xl font-bold mt-2">Skills</h2>
+        <span className="text-teal text-xs tracking-widest uppercase font-mono">Core Competencies</span>
+        <h2 className="font-grotesk text-4xl md:text-5xl font-bold mt-2 text-white-soft">Technical Skills</h2>
+        <p className="text-grey font-inter text-sm md:text-base mt-2 max-w-2xl">
+          Categorized technical skills backed by production code, client deployments, and verified open-source projects.
+        </p>
       </motion.div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -35,17 +96,18 @@ export default function Skills() {
             key={category}
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="p-6 rounded-xl glass hover:bg-teal/5 transition-all group"
+            transition={{ duration: 0.5, delay: i * 0.08 }}
+            className="p-6 rounded-2xl glass hover:bg-teal/5 transition-all group border border-white/5 hover:border-teal/20"
           >
-            <h4 className="font-grotesk font-semibold text-teal text-sm mb-4 tracking-wide">
-              {category}
+            <h4 className="font-grotesk font-bold text-teal text-sm mb-4 tracking-wide flex items-center justify-between">
+              <span>{category}</span>
+              <span className="text-[10px] font-mono text-grey/60">({items.length})</span>
             </h4>
             <div className="flex flex-wrap gap-2">
               {items.map((skill) => (
                 <span
                   key={skill}
-                  className="text-xs text-grey border border-white/10 rounded-full px-3 py-1 glass-subtle font-mono hover:text-white-soft hover:border-teal/30 transition-all"
+                  className="text-xs text-grey border border-white/10 rounded-lg px-2.5 py-1 glass-subtle font-mono hover:text-white-soft hover:border-teal/30 transition-all"
                 >
                   {skill}
                 </span>

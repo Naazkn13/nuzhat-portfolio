@@ -18,7 +18,7 @@ const caseStudies = [
     title: 'Biometric Attendance System',
     tag: 'Live · Deployed',
     tagColor: 'text-teal border-teal/30 bg-teal/10',
-    description: 'Live at a Mumbai eye hospital — automated salary cycles, PL accrual, overtime, and biometric hardware integration.',
+    description: 'Live at a Mumbai eye hospital (12+ staff) — automated salary cycles, PL accrual, overtime, and biometric hardware integration. Features interactive simulation sandbox.',
     stack: ['FastAPI', 'React', 'Supabase', 'Expo', 'ZKTeco SDK'],
   },
   {
